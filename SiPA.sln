@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiPA.Common", "SiPA.Common\SiPA.Common.csproj", "{9228B974-24F0-40EE-84D5-13B8DB9911D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiPA.Web", "SiPA.Web\SiPA.Web.csproj", "{A67F562E-892C-43B8-88F9-B8A3C7371C12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9228B974-24F0-40EE-84D5-13B8DB9911D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9228B974-24F0-40EE-84D5-13B8DB9911D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9228B974-24F0-40EE-84D5-13B8DB9911D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9228B974-24F0-40EE-84D5-13B8DB9911D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A67F562E-892C-43B8-88F9-B8A3C7371C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67F562E-892C-43B8-88F9-B8A3C7371C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A67F562E-892C-43B8-88F9-B8A3C7371C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A67F562E-892C-43B8-88F9-B8A3C7371C12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E95DB471-4FDC-460A-A59C-E72E20DFB68B}
+	EndGlobalSection
+EndGlobal
