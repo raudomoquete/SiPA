@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace SiPA.Web.Data.Entities
 {
-    public class Sacrament
+    public class RequestType
     {
         public int Id { get; set; }
 
-        [Display(Name = "Sacrament Name")]
+        [Display(Name = "Service Type")]
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string Name { get; set; }
-        public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public Parishioner Parishioner { get; set; }
+
     }
 }

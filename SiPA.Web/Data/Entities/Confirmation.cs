@@ -10,6 +10,8 @@ namespace SiPA.Web.Data.Entities
     {
         public int Id { get; set; }
 
+        public Sacrament Sacrament { get; set; }
+
         [Display(Name = "Name of the Confirmed")]
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string Name { get; set; }
