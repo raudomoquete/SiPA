@@ -15,7 +15,5 @@ namespace SiPA.Web.Data.Entities
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string Name { get; set; }
 
-        public Parishioner Parishioner { get; set; }
-
     }
 }

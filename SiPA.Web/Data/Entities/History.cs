@@ -9,7 +9,7 @@ namespace SiPA.Web.Data.Entities
     public class History
     {
         public int Id { get; set; }
-        public RequestType RequestType { get; set; }
+        public Request Request { get; set; }
 
         [Display(Name = "Descrption")]
         [MaxLength(100, ErrorMessage = "The {0} field can not have more than {1} characters.")]
