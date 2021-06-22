@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SiPA.Web.Data.Entities;
+using SiPA.Web.Models;
 using System.Threading.Tasks;
 
 namespace SiPA.Web.Helpers
@@ -11,5 +12,7 @@ namespace SiPA.Web.Helpers
         Task CheckRoleAsync(string roleName);
         Task AddUserToRoleAsync(User user, string roleName);
         Task<bool> IsUserInRoleAsync(User user, string roleName);
+        Task<SignInResult> LoginAsync(LoginViewModel model);
+        Task LogoutAsync();
     }
 }

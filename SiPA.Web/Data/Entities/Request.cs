@@ -16,7 +16,7 @@ namespace SiPA.Web.Data.Entities
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd H:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
-        public User User { get; set; }
+        public Parishioner Parishioner { get; set; }
 
         public RequestType RequestType { get; set; }
         

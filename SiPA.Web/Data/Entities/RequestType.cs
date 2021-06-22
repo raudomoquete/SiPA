@@ -10,9 +10,9 @@ namespace SiPA.Web.Data.Entities
     {
         public int Id { get; set; }
 
-        [Display(Name = "Service Type")]
-        [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
-        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        [Display(Name = "Tipo de Solicitud")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        [Required(ErrorMessage = "El campo {0} es Obligatorio.")]
         public string Name { get; set; }
 
     }

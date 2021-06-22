@@ -7,13 +7,13 @@ namespace SiPA.Web.Data.Entities
     public class User : IdentityUser
     {
 
-        [Required(ErrorMessage = "El campo {0} is obligatorio.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         [MaxLength(30, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "The field {0} is mandatory.")]
-        [MaxLength(30, ErrorMessage = "The {0} field can not have more than {1} characters.")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
+        [MaxLength(30, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         [Display(Name = "Apellido")]
         public string LastName { get; set; }
 
@@ -22,13 +22,15 @@ namespace SiPA.Web.Data.Entities
         public string Identification { get; set; }
 
         [Display(Name = "Fecha de Nacimiento")]
-        [MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        [MaxLength(20, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
+
+        [Display(Name = "Nacionalidad")]
         public string Nationality { get; set; }
 
         [MaxLength(100, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string Address { get; set; }       
+        public string Address { get; set; }
 
         [Display(Name = "Ha recibido algun sacramento?")]
         public bool ReceivedSacraments { get; set; }

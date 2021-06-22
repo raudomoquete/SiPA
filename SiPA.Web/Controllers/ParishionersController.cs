@@ -2,27 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SiPA.Web.Data;
 using SiPA.Web.Data.Entities;
+using SiPA.Web.Helpers;
+using SiPA.Web.Models;
 
 namespace SiPA.Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ParishionersController : Controller
     {
         private readonly DataContext _context;
+        private readonly IUserHelper _userHelper;
 
-        public ParishionersController(DataContext context)
+        public ParishionersController(DataContext context,
+            IUserHelper userHelper)
         {
             _context = context;
+            _userHelper = userHelper;
         }
 
         // GET: Parishioners
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Parishioners.ToListAsync());
+            return View(_context.Parishioners
+                .Include(o => o.User)
+                .Include(o => o.Sacraments));
+            //(await _context.Parishioners.ToListAsync());
         }
 
         // GET: Parishioners/Details/5
@@ -34,7 +45,11 @@ namespace SiPA.Web.Controllers
             }
 
             var parishioner = await _context.Parishioners
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(p => p.User)
+                .Include(p => p.Sacraments)
+                .ThenInclude(p => p.Parishioner)
+                .Include(p => p.Histories)                
+                .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (parishioner == null)
             {
                 return NotFound();
@@ -54,15 +69,57 @@ namespace SiPA.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CreatedAt,UpdatedAt")] Parishioner parishioner)
+        public async Task<IActionResult> Create(AddUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(parishioner);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = new User
+                {
+                    Address = model.Address,
+                    Email = model.UserName,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Identification = model.Identification,
+                    DateOfBirth = model.DateOfBirth,
+                    Nationality = model.Nationality,
+                    ReceivedSacraments = model.ReceivedSacraments,
+                    PhoneNumber = model.PhoneNumber,
+                    CivilStatus = model.CivilStatus,
+                    UserName = model.UserName
+                };
+
+                var response = await _userHelper.AddUserAsync(user, model.Password);
+                if (response.Succeeded)
+                {
+                    var userInDB = await _userHelper.GetUserByEmailAsync(model.UserName);
+                    await _userHelper.AddUserToRoleAsync(userInDB, "Customer");
+
+
+                    var parishioner = new Parishioner
+                    {
+                        Requests = new List<Request>(),
+                        Sacraments = new List<Sacrament>(),
+                        User = userInDB
+                    };
+
+                    _context.Parishioners.Add(parishioner);
+
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError(string.Empty, ex.ToString());
+                        return View(model);
+                    }
+                }
+
+                ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
             }
-            return View(parishioner);
+
+            return View(model);
         }
 
         // GET: Parishioners/Edit/5
@@ -86,7 +143,7 @@ namespace SiPA.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedAt,UpdatedAt")] Parishioner parishioner)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] Parishioner parishioner)
         {
             if (id != parishioner.Id)
             {

@@ -23,12 +23,13 @@ namespace SiPA.Web.Data
         {
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRoles();
-            var manager = await CheckUserAsync("Raudo", "Moquete", "sanchezz1ero@gmail.com", "829 305 6303", "Manzana 6 #19", "Administrator");
-            var customer = await CheckUserAsync("Adoni", "Montero", "adonimontero20@gmail.com", "829 381 6410", "Manzana 6 #19", "Customer");
-            await CheckParishionerAsync(customer);
-            await CheckManagerAsync(manager);
+            var manager = await CheckUserAsync("Raudo","Moquete","sanchezz1ero@gmail.com","829 305 6303","Manzana 6 #19,El Brisal","Administrator");
+            var customer = await CheckUserAsync("Adoni", "Montero", "adonimontero20@gmail.com", "829 381 6410", "Calle Luna calle sol","Customer");
+            await CheckRequestTypesAsync();
+            await CheckParishionersAsync(customer);
+            await CheckManagersAsync(manager);
             await CheckSacramentsAsync();
-            await CheckRequetsAsync();
+            await CheckRequestsAsync();
         }
 
         private async Task CheckRoles()
@@ -65,16 +66,42 @@ namespace SiPA.Web.Data
             return user;
         }
 
-        private async Task CheckParishionerAsync(User user)
+        private async Task CheckRequestTypesAsync()
         {
-            if (!_dataContext.Parishioners.Any())
+            if (!_dataContext.RequestTypes.Any())
             {
-                _dataContext.Parishioners.Add(new Parishioner { User = user });
+                _dataContext.RequestTypes.Add(new RequestType { Name = "Acta de Bautismal" });
+                _dataContext.RequestTypes.Add(new RequestType { Name = "Certificado de Primera Comunión" });
+                _dataContext.RequestTypes.Add(new RequestType { Name = "Certificado de Confirmación" });
+                _dataContext.RequestTypes.Add(new RequestType { Name = "Acta de Matrimonio" });
                 await _dataContext.SaveChangesAsync();
             }
         }
 
-        private async Task CheckManagerAsync(User user)
+        //private async Task CheckParishionersAsync()
+        //{
+        //    if (!_dataContext.Parishioners.Any())
+        //    {
+        //        AddParishioner("Borgia", "Sanchez", "809 594 1990", "829 906 2954", "Manzana 6 #19, El Brisal");
+        //        AddParishioner("Adriana", "Ramos", "809 594 1990", "829 906 2954", "Manzana 6 #19, El Brisal");
+        //        AddParishioner("Ariadna", "Ramos", "809 594 1990", "829 906 2954", "Manzana 6 #19, El Brisal");
+        //        await _dataContext.SaveChangesAsync();
+        //    }
+        //}
+
+        //private void AddParishioner(string firstName, string lastName, string fixedPhone, string cellPhone, string address)
+        //{
+        //    _dataContext.Parishioners.Add(new Parishioner
+        //    {
+        //        FirstName = firstName,
+        //        LastName = lastName,
+        //        FixedPhone = fixedPhone,
+        //        CellPhone = cellPhone,
+        //        Address = address
+        //    });
+        //}
+
+        private async Task CheckManagersAsync(User user)
         {
             if (!_dataContext.Managers.Any())
             {
@@ -83,19 +110,28 @@ namespace SiPA.Web.Data
             }
         }
 
-        private async Task CheckSacramentsAsync()
+        private async Task CheckParishionersAsync(User user)
         {
-            if (!_dataContext.Sacraments.Any())
+            if (!_dataContext.Parishioners.Any())
             {
-                _dataContext.Sacraments.Add(new Sacrament { Name = "Christening" });
-                _dataContext.Sacraments.Add(new Sacrament { Name = "First Communion" });
-                _dataContext.Sacraments.Add(new Sacrament { Name = "Confirmation" });
-                _dataContext.Sacraments.Add(new Sacrament { Name = "Wedding" });
+                _dataContext.Parishioners.Add(new Parishioner { User = user });
                 await _dataContext.SaveChangesAsync();
             }
         }
 
-        private async Task CheckRequetsAsync()
+        private async Task CheckSacramentsAsync()
+        {
+            if (!_dataContext.Sacraments.Any())
+            {
+                _dataContext.Sacraments.Add(new Sacrament { Name = "Bautizo" });
+                _dataContext.Sacraments.Add(new Sacrament { Name = "Primera Comunión" });
+                _dataContext.Sacraments.Add(new Sacrament { Name = "Confirmación" });
+                _dataContext.Sacraments.Add(new Sacrament { Name = "Matrimonio" });
+                await _dataContext.SaveChangesAsync();
+            }
+        }
+
+        private async Task CheckRequestsAsync()
         {
             if (!_dataContext.Requests.Any())
             {
@@ -103,10 +139,10 @@ namespace SiPA.Web.Data
                 var finalDate = initialDate.AddYears(1);
                 while (initialDate < finalDate)
                 {
-                    if(initialDate.DayOfWeek != DayOfWeek.Sunday)
+                    if (initialDate.DayOfWeek != DayOfWeek.Sunday)
                     {
                         var finalDate2 = initialDate.AddHours(10);
-                        while(initialDate < finalDate2)
+                        while (initialDate < finalDate2)
                         {
                             _dataContext.Requests.Add(new Request
                             {
