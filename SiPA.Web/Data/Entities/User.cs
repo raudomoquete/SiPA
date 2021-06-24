@@ -37,7 +37,7 @@ namespace SiPA.Web.Data.Entities
         [Display(Name = "Estado Civil")]
         [MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string CivilStatus { get; set; }
-        public string FullName => $"{FirstName}{LastName}";
+        public string FullName => $"{FirstName} {LastName}";
 
     }
 }
