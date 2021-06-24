@@ -138,12 +138,29 @@ namespace SiPA.Web.Controllers
                 return NotFound();
             }
 
-            var parishioner = await _context.Parishioners.FindAsync(id);
+            var parishioner = await _context.Parishioners
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.Id == id.Value);
             if (parishioner == null)
             {
                 return NotFound();
             }
-            return View(parishioner);
+
+            var model = new EditUserViewModel
+            {
+                FirstName = parishioner.User.FirstName,
+                LastName = parishioner.User.LastName,
+                Identification = parishioner.User.Identification,
+                DateOfBirth = parishioner.User.DateOfBirth,
+                Nationality = parishioner.User.Nationality,
+                Address = parishioner.User.Address,
+                ReceivedSacraments = parishioner.User.ReceivedSacraments,
+                Id = parishioner.Id,
+                CivilStatus = parishioner.User.CivilStatus,
+                PhoneNumber = parishioner.User.PhoneNumber
+            };
+
+            return View(model);
         }
 
         // POST: Parishioners/Edit/5
@@ -151,34 +168,28 @@ namespace SiPA.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Parishioner parishioner)
+        public async Task<IActionResult> Edit(EditUserViewModel view)
         {
-            if (id != parishioner.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(parishioner);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ParishionerExists(parishioner.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                var parishioner = await _context.Parishioners
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.Id == view.Id);
+                parishioner.User.FirstName = view.FirstName;
+                parishioner.User.LastName = view.LastName;
+                parishioner.User.Identification = view.Identification;
+                parishioner.User.DateOfBirth = view.DateOfBirth;
+                parishioner.User.Nationality = view.Nationality;
+                parishioner.User.Address = view.Address;
+                parishioner.User.ReceivedSacraments = view.ReceivedSacraments;
+                parishioner.User.CivilStatus = view.CivilStatus;
+                parishioner.User.PhoneNumber = view.PhoneNumber;
+
+                await _userHelper.UpdateUserAsync(parishioner.User);
                 return RedirectToAction(nameof(Index));
             }
-            return View(parishioner);
+
+            return View(view);
         }
 
         // GET: Parishioners/Delete/5
@@ -190,13 +201,17 @@ namespace SiPA.Web.Controllers
             }
 
             var parishioner = await _context.Parishioners
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.Id == id.Value);
             if (parishioner == null)
             {
                 return NotFound();
             }
 
-            return View(parishioner);
+            _context.Parishioners.Remove(parishioner);
+            await _context.SaveChangesAsync();
+            await _userHelper.DeleteUserAsync(parishioner.User.Email);
+            return RedirectToAction($"{nameof(Index)}");
         }
 
         // POST: Parishioners/Delete/5
