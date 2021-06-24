@@ -23,5 +23,9 @@ namespace SiPA.Web.Data
         public DbSet<Group> Groups { get; set; }
         public DbSet<Community> Communities { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Christening> Christenings { get; set; }
+        public DbSet<Confirmation> Confirmations { get; set; }
+        public DbSet<FirstCommunion> FirstCommunions { get; set; }
+        public DbSet<Wedding> Weddings { get; set; }
     }
 }

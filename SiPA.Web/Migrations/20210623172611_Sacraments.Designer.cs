@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiPA.Web.Data;
 
 namespace SiPA.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210623172611_Sacraments")]
+    partial class Sacraments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -523,16 +525,11 @@ namespace SiPA.Web.Migrations
                     b.Property<int?>("RequestTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SacramentId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ParishionerId");
 
                     b.HasIndex("RequestTypeId");
-
-                    b.HasIndex("SacramentId");
 
                     b.ToTable("Histories");
                 });
@@ -999,15 +996,9 @@ namespace SiPA.Web.Migrations
                         .WithMany()
                         .HasForeignKey("RequestTypeId");
 
-                    b.HasOne("SiPA.Web.Data.Entities.Sacrament", "Sacrament")
-                        .WithMany("Histories")
-                        .HasForeignKey("SacramentId");
-
                     b.Navigation("Parishioner");
 
                     b.Navigation("RequestType");
-
-                    b.Navigation("Sacrament");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Manager", b =>
@@ -1076,11 +1067,6 @@ namespace SiPA.Web.Migrations
                     b.Navigation("Requests");
 
                     b.Navigation("Sacraments");
-                });
-
-            modelBuilder.Entity("SiPA.Web.Data.Entities.Sacrament", b =>
-                {
-                    b.Navigation("Histories");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,6 +17,9 @@ namespace SiPA.Web.Data.Entities
 
         public Parishioner Parishioner { get; set; }
 
+        public ICollection<History> Histories { get; set; }
+
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }

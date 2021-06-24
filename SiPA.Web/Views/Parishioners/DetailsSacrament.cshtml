@@ -1,0 +1,123 @@
+﻿@model SiPA.Web.Data.Entities.Sacrament
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Sacramento</h2>
+
+<div>
+    <h4>Detalles</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    Feligres
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Parishioner.User.FullName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="EditSacrament" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="AddHistory" asp-route-id="@Model.Id" class="btn btn-primary">Agregar Historia</a>
+    <a asp-action="Details" asp-route-id="@Model.Parishioner.Id" class="btn btn-success">Volver al Feligres</a>
+</div>
+<h4>History</h4>
+<hr />
+@if (Model.Histories.Count == 0)
+{
+    <h5>Aun no tiene Historias Agregadas</h5>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Histories.FirstOrDefault().Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Histories.FirstOrDefault().RequestType.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Histories.FirstOrDefault().Description)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Histories)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="EditHistory" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Borrar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<!--Delete Item-->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete the record?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" id="btnYesDelete">Borrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //Delete item
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Parishioners/DeleteHistory/' + item_to_delete;
+            });
+        });
+    </script>
+<!--Implementar metodo DeleteHistory en ParishionersController-->
+}

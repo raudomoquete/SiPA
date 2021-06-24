@@ -22,7 +22,6 @@ namespace SiPA.Web.Data.Entities
         public string Identification { get; set; }
 
         [Display(Name = "Fecha de Nacimiento")]
-        [MaxLength(20, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime DateOfBirth { get; set; }
 
