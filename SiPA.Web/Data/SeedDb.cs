@@ -121,12 +121,12 @@ namespace SiPA.Web.Data
 
         private async Task CheckSacramentsAsync()
         {
-            if (!_dataContext.Sacraments.Any())
+            if (!_dataContext.SacramentTypes.Any())
             {
-                _dataContext.Sacraments.Add(new Sacrament { Name = "Bautizo" });
-                _dataContext.Sacraments.Add(new Sacrament { Name = "Primera Comunión" });
-                _dataContext.Sacraments.Add(new Sacrament { Name = "Confirmación" });
-                _dataContext.Sacraments.Add(new Sacrament { Name = "Matrimonio" });
+                _dataContext.SacramentTypes.Add(new SacramentType { SacramentName = "Bautizo" });
+                _dataContext.SacramentTypes.Add(new SacramentType { SacramentName = "Primera Comunión" });
+                _dataContext.SacramentTypes.Add(new SacramentType { SacramentName = "Confirmación" });
+                _dataContext.SacramentTypes.Add(new SacramentType { SacramentName = "Matrimonio" });
                 await _dataContext.SaveChangesAsync();
             }
         }

@@ -24,7 +24,7 @@ namespace SiPA.Web.Helpers
         {
             var sacrament = new Sacrament
             {
-                Name = model.Name,
+                SacramentName = model.SacramentName,
                 Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId)
             };
 
@@ -35,11 +35,11 @@ namespace SiPA.Web.Helpers
         {
             return new SacramentViewModel
             {
-                Name = sacrament.Name,
+                SacramentName = sacrament.SacramentName,
                 Parishioner = sacrament.Parishioner,
-                Id = sacrament.Id,
+                SacramentId = sacrament.SacramentId,
                 ParishionerId = sacrament.Parishioner.Id,
-                Sacraments = _combosHelper.GetComboSacraments()
+                SacramentTypes = _combosHelper.GetComboSacraments()
             };
         }
 
@@ -62,7 +62,7 @@ namespace SiPA.Web.Helpers
                 Date = history.Date,
                 Description = history.Description,
                 Id = history.Id,
-                SacramentId = history.Sacrament.Id,
+                SacramentId = history.Sacrament.SacramentId,
                 RequestTypeId = history.RequestType.Id,
                 RequestTypes = _combosHelper.GetComboRequestTypes()
             };

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using SiPA.Web.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SiPA.Web.Data.Entities
+namespace SiPA.Web.Models
 {
-    public class Wedding
+    public class AddWeddingViewModel : SacramentViewModel
     {
         public int Id { get; set; }
 
@@ -31,7 +32,7 @@ namespace SiPA.Web.Data.Entities
 
         [Display(Name = "Fecha de la Boda")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime WeddingDate { get; set; }
 
         [Display(Name = "Nombre del Padre de la Novia")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
@@ -67,7 +68,7 @@ namespace SiPA.Web.Data.Entities
 
         [Display(Name = "Fecha de la Boda")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime DateLocal => Date.ToLocalTime();
+        public DateTime WeddingDateLocal => WeddingDate.ToLocalTime();
 
         public Certificate Certificate { get; set; }
     }

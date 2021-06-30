@@ -1,0 +1,38 @@
+﻿@model SiPA.Web.Models.AddChristeningViewModel
+
+@{ 
+    ViewData["Title"] = "Create";
+} 
+
+<h2>Crear</h2>
+
+<h4>Bautizo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <label asp-for="FirstName" class="form-control"></label>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <label asp-for="LastName" class="form-control"></label>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ChristeningDate" class="control-label"></label>
+                <label asp-for="ChristeningDate" class="form-control"></label>
+                <span asp-validation-for="ChristeningDate" class="text-danger"></span>
+            </div>
+
+            <partial name="_Sacrament" />
+
+        </form>
+    </div>
+</div>

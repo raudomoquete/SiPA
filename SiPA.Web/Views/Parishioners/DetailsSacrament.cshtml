@@ -19,18 +19,18 @@
                     @Html.DisplayFor(model => model.Parishioner.User.FullName)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayNameFor(model => model.SacramentName)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model => model.Name)
+                    @Html.DisplayFor(model => model.SacramentName)
                 </dd>
             </dl>
         </div>
     </div>
 </div>
 <div>
-    <a asp-action="EditSacrament" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
-    <a asp-action="AddHistory" asp-route-id="@Model.Id" class="btn btn-primary">Agregar Historia</a>
+    <a asp-action="EditSacrament" asp-route-id="@Model.SacramentId" class="btn btn-warning">Editar</a>
+    <a asp-action="AddHistory" asp-route-id="@Model.SacramentId" class="btn btn-primary">Agregar Historia</a>
     <a asp-action="Details" asp-route-id="@Model.Parishioner.Id" class="btn btn-success">Volver al Feligres</a>
 </div>
 <h4>History</h4>

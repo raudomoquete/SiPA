@@ -19,6 +19,12 @@ namespace SiPA.Web.Data
         public DbSet<Sacrament> Sacraments { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<Request> Requests { get; set; }
+
+        internal Task<Sacrament> FindAsync(string sacramentName)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Community> Communities { get; set; }
@@ -27,5 +33,6 @@ namespace SiPA.Web.Data
         public DbSet<Confirmation> Confirmations { get; set; }
         public DbSet<FirstCommunion> FirstCommunions { get; set; }
         public DbSet<Wedding> Weddings { get; set; }
+        public DbSet<SacramentType> SacramentTypes { get; set; }   
     }
 }

@@ -1,0 +1,107 @@
+﻿@model SiPA.Web.Data.Entities.Christening
+
+@{ 
+    ViewData["Title"] = "Details";
+}
+
+<h2>Bautizo</h2>
+
+<div>
+    <h4>Detalles</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChristeningDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChristeningDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FatherName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FatherName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MotherName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MotherName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GodfatherName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GodfatherName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GodmotherName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GodmotherName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CeremonialCelebrant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CeremonialCelebrant)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.SacramentId" class="btn btn-warning">Edit</a>
+    <a asp-action="AddSacrament" asp-route-id="@Model.SacramentId" class="btn btn-primary">Agregar Sacramento</a>
+    <button data-id="@Model.SacramentId" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Borrar</button>
+
+    <a asp-action="Index" class="btn btn-success">Volver a la Lista</a>
+</div>
+
+<partial name="_DeleteDialog" />
+
+@section Scripts{ 
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Christenings/DeleteChristening/' + item_to_delete;
+            });
+        });
+    </script>
+}

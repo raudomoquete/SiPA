@@ -85,7 +85,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().Name)
+                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().SacramentName)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().Parishioner)
@@ -101,7 +101,7 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.SacramentName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Parishioner.User.FullName)
@@ -110,9 +110,9 @@
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
             <td>
-                <a asp-action="EditParishioner" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
-                <a asp-action="DetailsParishioner" asp-route-id="@item.Id" class="btn btn-info">Detalles</a>
-                <a asp-action="DeleteParishioner" asp-route-id="@item.Id" class="btn btn-danger">Borrar</a>
+                <a asp-action="EditParishioner" asp-route-id="@item.SacramentId" class="btn btn-warning">Editar</a>
+                <a asp-action="DetailsParishioner" asp-route-id="@item.SacramentId" class="btn btn-info">Detalles</a>
+                <a asp-action="DeleteParishioner" asp-route-id="@item.SacramentId" class="btn btn-danger">Borrar</a>
             </td>
         </tr>
         }

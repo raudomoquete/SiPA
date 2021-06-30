@@ -17,9 +17,9 @@ namespace SiPA.Web.Helpers
         }
         public IEnumerable<SelectListItem> GetComboSacraments()
         {
-            var list = _dataContext.Sacraments.Select(st => new SelectListItem
+            var list = _dataContext.SacramentTypes.Select(st => new SelectListItem
             {
-                Text = st.Name,
+                Text = st.SacramentName,
                 Value = $"{st.Id}"
             })
                 .OrderBy(st => st.Text)

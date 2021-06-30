@@ -246,7 +246,7 @@ namespace SiPA.Web.Controllers
             var model = new SacramentViewModel
             {
                 ParishionerId = parishioner.Id,
-                Sacraments = _combosHelper.GetComboSacraments()
+                SacramentTypes = _combosHelper.GetComboSacraments()
             };
 
             return View(model);
@@ -264,7 +264,7 @@ namespace SiPA.Web.Controllers
                 return RedirectToAction($"Details/{model.ParishionerId}");
             }
 
-            model.Sacraments = _combosHelper.GetComboSacraments();
+            model.SacramentTypes = _combosHelper.GetComboSacraments();
             return View(model);
         }
 
@@ -277,7 +277,7 @@ namespace SiPA.Web.Controllers
 
             var sacrament = await _context.Sacraments
                 .Include(s => s.Parishioner)
-                .FirstOrDefaultAsync(s => s.Id == id);
+                .FirstOrDefaultAsync(s => s.SacramentId == id);
             if (sacrament == null)
             {
                 return NotFound();
@@ -297,7 +297,7 @@ namespace SiPA.Web.Controllers
                 return RedirectToAction($"Details/{model.ParishionerId}");
             }
 
-            model.Sacraments = _combosHelper.GetComboSacraments();
+            model.SacramentTypes = _combosHelper.GetComboSacraments();
             return View(model);
         }
 
@@ -314,7 +314,7 @@ namespace SiPA.Web.Controllers
                 .Include(s => s.Parishioner)
                 .ThenInclude(s => s.Histories)
                 .ThenInclude(h => h.RequestType)               
-                .FirstOrDefaultAsync(o => o.Id == id.Value);
+                .FirstOrDefaultAsync(o => o.SacramentId == id.Value);
             if (sacrament == null)
             {
                 return NotFound();
@@ -339,7 +339,7 @@ namespace SiPA.Web.Controllers
             var model = new HistoryViewModel
             {
                 Date = DateTime.Now,
-                SacramentId = sacrament.Id,
+                SacramentId = sacrament.SacramentId,
                 RequestTypes = _combosHelper.GetComboSacraments(),
             };
 
@@ -412,7 +412,7 @@ namespace SiPA.Web.Controllers
 
             _context.Histories.Remove(history);
             await _context.SaveChangesAsync();
-            return RedirectToAction($"{nameof(DetailsSacrament)}/{history.Sacrament.Id}");
+            return RedirectToAction($"{nameof(DetailsSacrament)}/{history.Sacrament.SacramentId}");
         }
     }
 }
