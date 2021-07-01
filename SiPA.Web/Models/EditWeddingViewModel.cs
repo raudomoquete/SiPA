@@ -15,20 +15,30 @@ namespace SiPA.Web.Models
 
         [Display(Name = "Nombre de la Novia")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string BrideName { get; set; }
-        [Display(Name = "Cédula de la novia")]
+        public string BrideFirstName { get; set; }
+
+        [Display(Name = "Apellido de la Novia")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        public string BrideLastName { get; set; }
+
+        [Display(Name = "Cédula de la Novia")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string BrideId { get; set; }
 
         [Display(Name = "Nombre del Novio")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string BridegroomName { get; set; }
+        public string BridegroomFirstName { get; set; }
+
+        [Display(Name = "Apellido del Novio")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        public string BridegroomLastName { get; set; }
+
         [Display(Name = "Cédula del Novio")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string BridegroomId { get; set; }
 
         [Display(Name = "Novios")]
-        public string WeddingGrooms => $"{BrideName} {BridegroomName}";
+        public string WeddingGrooms => $"{BrideFirstName} {BridegroomFirstName}";
 
         [Display(Name = "Fecha de la Boda")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]

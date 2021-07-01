@@ -15,10 +15,17 @@ namespace SiPA.Web.Models
 
         [Display(Name = "Nombre del Confirmado")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        [Display(Name = "Nombre del Confirmado")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        public string LastName { get; set; }
 
         [Display(Name = "Fecha de la Confirmación")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime ConfirmationDate { get; set; }
+
+        public Certificate Certificate { get; set; }
+
     }
 }

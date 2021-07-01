@@ -13,6 +13,12 @@ namespace SiPA.Web.Models
 
         [Display(Name = "Nombre")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+
+        [Display(Name = "Apellido")]
+        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        public string LastName { get; set; }
+
+        public Certificate Certificate { get; set; }
     }
 }

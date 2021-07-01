@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SiPA.Web.Data.Entities
 {
-    public class Confirmation
+    public class Confirmation : Sacrament
     {
         public int Id { get; set; }
         public Sacrament Sacrament { get; set; }
@@ -21,11 +21,11 @@ namespace SiPA.Web.Data.Entities
 
         [Display(Name = "Fecha de la Confirmación")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime ConfirmationDate { get; set; }
 
         [Display(Name = "Fecha de la Confirmación")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime DateLocal => Date.ToLocalTime();
+        public DateTime ConfirmationDateLocal => ConfirmationDate.ToLocalTime();
         public Certificate Certificate { get; set; }
     }
 }

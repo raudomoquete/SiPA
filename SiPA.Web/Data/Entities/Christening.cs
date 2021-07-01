@@ -8,6 +8,8 @@ namespace SiPA.Web.Data.Entities
 {
     public class Christening : Sacrament
     {
+        public int Id { get; set; }
+
         public Sacrament Sacrament { get; set; }
 
         [Display(Name = "Nombre del Bautizado")]
