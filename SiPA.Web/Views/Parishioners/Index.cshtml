@@ -13,10 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.LastName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().User.ParishionerFullName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().User.Address)
@@ -39,9 +36,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().User.PhoneNumber)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.ReceivedSacraments)
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -49,10 +43,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.User.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.LastName)
+                    @Html.DisplayFor(modelItem => item.User.ParishionerFullName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.User.Address)
@@ -74,9 +65,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.User.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.ReceivedSacraments)
                 </td>
 
                 <td>

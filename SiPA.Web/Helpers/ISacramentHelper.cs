@@ -10,7 +10,10 @@ namespace SiPA.Web.Helpers
     {
         //Task UpdateSacramentAsync(Sacrament sacrament);
 
-        Task<Sacrament> GetSacramentByNameAsync(string sacramentName);
+        //object GetSacramentByName<T>(T obj, string sacramentName);        
+        //Task <Sacrament> AddChristeningAsync(Christening christening);
+
+
         //Task<bool> DeleteSacramentAsync(string sacramentName);
 
     }

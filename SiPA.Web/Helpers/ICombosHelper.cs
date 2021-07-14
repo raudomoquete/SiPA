@@ -11,5 +11,7 @@ namespace SiPA.Web.Helpers
         IEnumerable<SelectListItem> GetComboSacraments();
 
         IEnumerable<SelectListItem> GetComboRequestTypes();
+
+        IEnumerable<SelectListItem> GetComboParishioners();
     }
 }

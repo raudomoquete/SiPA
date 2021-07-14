@@ -34,9 +34,6 @@ namespace SiPA.Web.Models
         [MaxLength(100, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string Address { get; set; }
 
-        [Display(Name = "Ha recibido algun sacramento?")]
-        public bool ReceivedSacraments { get; set; }
-
         [Display(Name = "Estado Civil")]
         [MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string CivilStatus { get; set; }

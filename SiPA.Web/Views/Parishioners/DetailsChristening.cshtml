@@ -1,0 +1,55 @@
+﻿@model SiPA.Web.Data.Entities.Christening
+@{ 
+    ViewData["Title"] = "DetailsChristening";
+} 
+
+<h2>Bautizo</h2>
+
+<div>
+    <h4>Detalles</h4>
+    <hr />
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+            <dt>
+                Feligres
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Parishioner.User.FullName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BaptizedParents)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BaptizedParents)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BaptizedGodParents)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BaptizedGodParents)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CeremonialCelebrant)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CeremonialCelebrant)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ChristeningDateLocal)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ChristeningDateLocal)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div>
+    <a asp-action="EditChristening" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning">Volver al Feligres</a>
+</div>

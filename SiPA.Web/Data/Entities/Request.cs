@@ -11,10 +11,9 @@ namespace SiPA.Web.Data.Entities
         public int Id { get; set; }
 
         [Display(Name = "Fecha")]
-        [Required(ErrorMessage = "El Campo {0} es Obligatorio.")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd H:mm tt}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public Parishioner Parishioner { get; set; }
 

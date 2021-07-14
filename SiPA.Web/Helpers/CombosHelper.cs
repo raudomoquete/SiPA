@@ -49,5 +49,22 @@ namespace SiPA.Web.Helpers
             });
             return list;
         }
+
+        public IEnumerable<SelectListItem> GetComboParishioners()
+        {
+            var list = _dataContext.Users.Select(p => new SelectListItem
+            {
+                Text = p.FirstName,
+                Value = $"{p.Id}"
+            }).OrderBy(u => u.Text)
+            .ToList();
+            list.Insert(0, new SelectListItem
+            {
+                Text = "[Selecciona un Feligrés...]",
+                Value = "0"
+            });
+
+            return list;
+        }
     }
 }

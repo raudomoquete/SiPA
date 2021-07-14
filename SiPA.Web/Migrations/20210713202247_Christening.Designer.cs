@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiPA.Web.Data;
 
 namespace SiPA.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210713202247_Christening")]
+    partial class Christening
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -286,14 +288,9 @@ namespace SiPA.Web.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("SacramentTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ParishionerId");
-
-                    b.HasIndex("SacramentTypeId");
 
                     b.ToTable("Christenings");
                 });
@@ -581,6 +578,9 @@ namespace SiPA.Web.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("ReceivedSacraments")
+                        .HasColumnType("bit");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -704,13 +704,7 @@ namespace SiPA.Web.Migrations
                         .WithMany()
                         .HasForeignKey("ParishionerId");
 
-                    b.HasOne("SiPA.Web.Data.Entities.SacramentType", "SacramentType")
-                        .WithMany()
-                        .HasForeignKey("SacramentTypeId");
-
                     b.Navigation("Parishioner");
-
-                    b.Navigation("SacramentType");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.History", b =>

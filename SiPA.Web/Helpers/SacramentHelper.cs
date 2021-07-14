@@ -3,6 +3,7 @@ using SiPA.Web.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace SiPA.Web.Helpers
@@ -16,21 +17,18 @@ namespace SiPA.Web.Helpers
             _dataContext = dataContext;
         }
 
-        //public async Task<bool> DeleteSacramentAsync(string sacramentName)
+        //public async Task<Sacrament> AddChristeningAsync(Christening christening)
         //{
-        //    var sacrament = await GetSacramentByNameAsync(sacramentName);
-        //    if (sacrament == null)
-        //    {
-        //        return true;
-        //    }
-
-        //    return await _dataContext.Remove(sacrament);
-        //    //return response.Succeeded;
+        //     return await _dataContext.SaveChangesAsync(christening);
         //}
 
-        public async Task<Sacrament> GetSacramentByNameAsync(string sacramentName)
-        {
-            return await _dataContext.FindAsync(sacramentName);
-        }
+
+
+        //public object GetSacramentByName<T>(T obj, string sacramentName)
+        //{
+        //    PropertyInfo propInfo = typeof(T).GetProperty(sacramentName);
+
+        //    return propInfo.GetValue(obj);
+        //}
     }
 }

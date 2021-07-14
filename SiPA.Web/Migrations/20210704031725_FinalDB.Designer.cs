@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiPA.Web.Data;
 
 namespace SiPA.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210704031725_FinalDB")]
+    partial class FinalDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,15 +232,12 @@ namespace SiPA.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BaptizedGodParents")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("BaptizedParents")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CeremonialCelebrant")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("CertificateId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ChristeningDate")
                         .HasColumnType("datetime2");
@@ -248,32 +247,40 @@ namespace SiPA.Web.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("FatherId")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("FatherName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("GodFatherId")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("GodFatherName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("GodMotherId")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
                     b.Property<string>("GodMotherName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("GodmMotherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("MotherId")
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("MotherName")
                         .HasMaxLength(50)
@@ -286,14 +293,11 @@ namespace SiPA.Web.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("SacramentTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ParishionerId");
+                    b.HasIndex("CertificateId");
 
-                    b.HasIndex("SacramentTypeId");
+                    b.HasIndex("ParishionerId");
 
                     b.ToTable("Christenings");
                 });
@@ -320,6 +324,144 @@ namespace SiPA.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Communities");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.Confirmation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CeremonialCelebrant")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("CertificateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comments")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("ConfirmationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FatherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodFatherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodFatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodMotherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodMotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("MotherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("MotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ParishionerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlaceofEvent")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CertificateId");
+
+                    b.HasIndex("ParishionerId");
+
+                    b.ToTable("Confirmations");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.FirstCommunion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CeremonialCelebrant")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("CertificateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comments")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("FatherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("FirstCommunionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("MotherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("MotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ParishionerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlaceofEvent")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CertificateId");
+
+                    b.HasIndex("ParishionerId");
+
+                    b.ToTable("FirstCommunions");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Group", b =>
@@ -466,7 +608,7 @@ namespace SiPA.Web.Migrations
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Sacrament", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("SacramentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -474,19 +616,39 @@ namespace SiPA.Web.Migrations
                     b.Property<int?>("ChristeningId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ConfirmationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FirstCommunionId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ParishionerId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SacramentName")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<int?>("SacramentTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("WeddingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SacramentId");
 
                     b.HasIndex("ChristeningId");
+
+                    b.HasIndex("ConfirmationId");
+
+                    b.HasIndex("FirstCommunionId");
 
                     b.HasIndex("ParishionerId");
 
                     b.HasIndex("SacramentTypeId");
+
+                    b.HasIndex("WeddingId");
 
                     b.ToTable("Sacraments");
                 });
@@ -569,9 +731,6 @@ namespace SiPA.Web.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("ParishionerFullName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -579,6 +738,9 @@ namespace SiPA.Web.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ReceivedSacraments")
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
@@ -602,6 +764,103 @@ namespace SiPA.Web.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.Wedding", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BrideFatherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrideFatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrideFirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrideId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrideLastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrideMotherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BrideMotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BridegroomFatherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BridegroomFatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BridegroomFirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BridegroomId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BridegroomLastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BridegroomMotherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BridegroomMotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("CertificateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GodfatherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodfatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodmotherId")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("GodmotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ParishionerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("WeddingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CertificateId");
+
+                    b.HasIndex("ParishionerId");
+
+                    b.ToTable("Weddings");
                 });
 
             modelBuilder.Entity("CommunityParishioner", b =>
@@ -692,7 +951,7 @@ namespace SiPA.Web.Migrations
                         .HasForeignKey("ParishionerId");
 
                     b.HasOne("SiPA.Web.Data.Entities.Sacrament", "Sacrament")
-                        .WithMany("Certificates")
+                        .WithMany()
                         .HasForeignKey("SacramentId");
 
                     b.Navigation("Sacrament");
@@ -700,17 +959,47 @@ namespace SiPA.Web.Migrations
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Christening", b =>
                 {
+                    b.HasOne("SiPA.Web.Data.Entities.Certificate", "Certificate")
+                        .WithMany()
+                        .HasForeignKey("CertificateId");
+
                     b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
                         .WithMany()
                         .HasForeignKey("ParishionerId");
 
-                    b.HasOne("SiPA.Web.Data.Entities.SacramentType", "SacramentType")
-                        .WithMany()
-                        .HasForeignKey("SacramentTypeId");
+                    b.Navigation("Certificate");
 
                     b.Navigation("Parishioner");
+                });
 
-                    b.Navigation("SacramentType");
+            modelBuilder.Entity("SiPA.Web.Data.Entities.Confirmation", b =>
+                {
+                    b.HasOne("SiPA.Web.Data.Entities.Certificate", "Certificate")
+                        .WithMany()
+                        .HasForeignKey("CertificateId");
+
+                    b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
+                        .WithMany()
+                        .HasForeignKey("ParishionerId");
+
+                    b.Navigation("Certificate");
+
+                    b.Navigation("Parishioner");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.FirstCommunion", b =>
+                {
+                    b.HasOne("SiPA.Web.Data.Entities.Certificate", "Certificate")
+                        .WithMany()
+                        .HasForeignKey("CertificateId");
+
+                    b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
+                        .WithMany()
+                        .HasForeignKey("ParishionerId");
+
+                    b.Navigation("Certificate");
+
+                    b.Navigation("Parishioner");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.History", b =>
@@ -773,19 +1062,50 @@ namespace SiPA.Web.Migrations
                         .WithMany()
                         .HasForeignKey("ChristeningId");
 
+                    b.HasOne("SiPA.Web.Data.Entities.Confirmation", "Confirmation")
+                        .WithMany()
+                        .HasForeignKey("ConfirmationId");
+
+                    b.HasOne("SiPA.Web.Data.Entities.FirstCommunion", "FirstCommunion")
+                        .WithMany()
+                        .HasForeignKey("FirstCommunionId");
+
                     b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
                         .WithMany("Sacraments")
                         .HasForeignKey("ParishionerId");
 
-                    b.HasOne("SiPA.Web.Data.Entities.SacramentType", "SacramentType")
+                    b.HasOne("SiPA.Web.Data.Entities.SacramentType", null)
                         .WithMany("Sacraments")
                         .HasForeignKey("SacramentTypeId");
 
+                    b.HasOne("SiPA.Web.Data.Entities.Wedding", "Wedding")
+                        .WithMany()
+                        .HasForeignKey("WeddingId");
+
                     b.Navigation("Christening");
+
+                    b.Navigation("Confirmation");
+
+                    b.Navigation("FirstCommunion");
 
                     b.Navigation("Parishioner");
 
-                    b.Navigation("SacramentType");
+                    b.Navigation("Wedding");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.Wedding", b =>
+                {
+                    b.HasOne("SiPA.Web.Data.Entities.Certificate", "Certificate")
+                        .WithMany()
+                        .HasForeignKey("CertificateId");
+
+                    b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
+                        .WithMany()
+                        .HasForeignKey("ParishionerId");
+
+                    b.Navigation("Certificate");
+
+                    b.Navigation("Parishioner");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Parishioner", b =>
@@ -797,11 +1117,6 @@ namespace SiPA.Web.Migrations
                     b.Navigation("Requests");
 
                     b.Navigation("Sacraments");
-                });
-
-            modelBuilder.Entity("SiPA.Web.Data.Entities.Sacrament", b =>
-                {
-                    b.Navigation("Certificates");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.SacramentType", b =>

@@ -4,118 +4,93 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Detalles</h1>
+<h2>Feligrés</h2>
 
-<div>
-    <h4>Feligres</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Nationality)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.Nationality)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.CivilStatus)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.CivilStatus)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.ReceivedSacraments)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.ReceivedSacraments)
-        </dd>
-        <dt>
-            Sacramentos
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Sacraments.Count)
-        </dd>
-    </dl>
-    
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
-    <a asp-action="AddSacrament" asp-route-id="@Model.Id" class="btn btn-primary">Agregar Sacramento</a>
-    <a asp-action="Index" class="btn btn-success">Volver a la Lista</a>
-
-</div>
-
-<h4>Sacramentos</h4>
-@if (Model.Sacraments.Count == 0)
- {
-     <h5>Aun no ha agregado Sacramentos</h5>
- }
- else
- {
-    <table class="table">
+    <div>
+        <h4>Detalles</h4>
+        <hr />
+        <dl class="dl-horinzontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.User.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.FullName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.Address)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.Address)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.PhoneNumber)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a> |
+        <a asp-action="AddChristening" asp-route-id="@Model.Id" class="btn btn-primary">Bautizo</a> |
+        <a asp-action="Index" class="btn btn-success">Volver a la Lista</a>
+    </div>
+    @*<table class="table table-responsive">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().SacramentName)
+                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().SacramentType.SacramentName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().Parishioner)
+                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().Christening.ChristeningDate)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().CreatedAt)
-                </th>
-                <th></th>
             </tr>
         </thead>
-    <tbody>
-        @foreach (var item in Model.Sacraments)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SacramentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Parishioner.User.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                <a asp-action="EditParishioner" asp-route-id="@item.SacramentId" class="btn btn-warning">Editar</a>
-                <a asp-action="DetailsParishioner" asp-route-id="@item.SacramentId" class="btn btn-info">Detalles</a>
-                <a asp-action="DeleteParishioner" asp-route-id="@item.SacramentId" class="btn btn-danger">Borrar</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-    </table>
- }
+        <tbody>
+            @foreach (var item in Model.Sacraments)
+            {
+                <tr>
+                    <td>
+                      @Html.DisplayFor(modelItem => item.SacramentType.SacramentName)
+                    </td>
+                    <td>
+                       @Html.DisplayFor(modelItem => item.Christening.ChristeningDateLocal)
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        <a asp-action="EditChristening" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="DetailsChristening" asp-route-id="@item.Id" class="btn btn-info">Detalles</a>
+                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Borrar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+    <partial name="_DeleteDialog" />
+
+    @section Scripts{
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var item_to_delete;
+
+                $('.deleteItem').click((e) => {
+                    item_to_delete = e.currentTarget.dataset.id;
+                });
+
+                $("#btnYesDelete").click(function () {
+                    window.location.href = '/Owners/DeletePet/' + item_to_delete;
+                });
+            });
+        </script>
+    }

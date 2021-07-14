@@ -10,8 +10,11 @@ namespace SiPA.Web.Data.Entities
 
         public User User { get; set; }
 
-        public ICollection<Group> Groups { get; set; }
+        //public int? SacramentId { get; set; }
 
+        //public Sacrament Sacrament { get; set; }
+
+        public ICollection<Group> Groups { get; set; }
         public ICollection<Sacrament> Sacraments { get; set; }
 
         public ICollection<Community> Communities { get; set; }

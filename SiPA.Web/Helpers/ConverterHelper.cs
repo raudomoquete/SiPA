@@ -20,26 +20,48 @@ namespace SiPA.Web.Helpers
             _dataContext = dataContext;
             _combosHelper = combosHelper;
         }
-        public async Task<Sacrament> ToSacramentAsync(SacramentViewModel model, bool isNew)
+        public async Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew)
         {
-            var sacrament = new Sacrament
+            var christening = new Christening
             {
-                SacramentName = model.SacramentName,
+                ChristeningDate = model.ChristeningDate,
+                Id = isNew ? 0 : model.Id,
+                PlaceofEvent = model.PlaceofEvent,
+                FatherName = model.FatherName,
+                FatherId = model.FatherId,
+                MotherName = model.MotherName,
+                MotherId = model.MotherId,
+                GodFatherName = model.GodFatherName,
+                GodFatherId = model.GodFatherId,
+                GodMotherName = model.GodMotherName,
+                GodMotherId = model.GodMotherId,
+                Comments = model.Comments,
+                CeremonialCelebrant = model.CeremonialCelebrant,
                 Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId)
             };
 
-            return sacrament;
+            return christening;
         }
 
-        public SacramentViewModel ToSacramentViewModel(Sacrament sacrament)
+        public ChristeningViewModel ToChristeningViewModel(Christening christening)
         {
-            return new SacramentViewModel
+            return new ChristeningViewModel
             {
-                SacramentName = sacrament.SacramentName,
-                Parishioner = sacrament.Parishioner,
-                SacramentId = sacrament.SacramentId,
-                ParishionerId = sacrament.Parishioner.Id,
-                SacramentTypes = _combosHelper.GetComboSacraments()
+                ChristeningDate = christening.ChristeningDate,
+                Id = christening.Id,
+                PlaceofEvent = christening.PlaceofEvent,
+                Parishioner = christening.Parishioner,
+                FatherName = christening.FatherName,
+                FatherId = christening.FatherId,
+                MotherName = christening.MotherName,
+                MotherId = christening.MotherId,
+                GodFatherName = christening.GodFatherName,
+                GodFatherId = christening.GodFatherId,
+                GodMotherName = christening.GodMotherName,
+                GodMotherId = christening.GodMotherId,
+                Comments = christening.Comments,
+                CeremonialCelebrant = christening.CeremonialCelebrant,
+                ParishionerId = christening.Parishioner.Id,
             };
         }
 
@@ -47,7 +69,6 @@ namespace SiPA.Web.Helpers
         {
             return new History
             {
-                Date = model.Date.ToUniversalTime(),
                 Description = model.Description,
                 Id = isNew ? 0 : model.Id, 
                 Sacrament = await _dataContext.Sacraments.FindAsync(model.SacramentId), 
@@ -55,17 +76,64 @@ namespace SiPA.Web.Helpers
             };
         }
 
-        public HistoryViewModel ToHistoryViewModel(History history)
-        {
-            return new HistoryViewModel
-            {
-                Date = history.Date,
-                Description = history.Description,
-                Id = history.Id,
-                SacramentId = history.Sacrament.SacramentId,
-                RequestTypeId = history.RequestType.Id,
-                RequestTypes = _combosHelper.GetComboRequestTypes()
-            };
-        }
+        //public HistoryViewModel ToHistoryViewModel(History history)
+        //{
+        //    return new HistoryViewModel
+        //    {
+        //        Date = history.Date,
+        //        Description = history.Description,
+        //        Id = history.Id,
+        //        SacramentId = history.Sacrament.SacramentId,
+        //        RequestTypeId = history.RequestType.Id,
+        //        RequestTypes = _combosHelper.GetComboRequestTypes()
+        //    };
+        //}
+
+        //public async Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew)
+        //{
+        //    var christening = new Christening
+        //    {
+        //        ChristeningDate = model.ChristeningDate,
+        //        Certificate = model.Certificate,
+        //        Id = isNew ? 0 : model.Id,
+        //        PlaceofEvent = model.PlaceofEvent,
+        //        FatherName = model.FatherName,
+        //        FatherId = model.FatherId,
+        //        MotherName = model.MotherName,
+        //        MotherId = model.MotherId,
+        //        GodFatherName = model.GodFatherName,
+        //        GodFatherId = model.GodFatherId,
+        //        GodMotherName = model.GodMotherName,
+        //        GodMotherId = model.GodMotherId,
+        //        Comments = model.Comments,
+        //        CeremonialCelebrant = model.CeremonialCelebrant,
+        //        Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId)
+        //    };
+
+        //    return christening;
+        //}
+
+        //public ChristeningViewModel ToChristeningViewModel(Christening christening)
+        //{
+        //    return new ChristeningViewModel
+        //    {
+        //        ChristeningDate = christening.ChristeningDate,
+        //        Certificate = christening.Certificate,
+        //        Id = christening.Id,
+        //        PlaceofEvent = christening.PlaceofEvent,
+        //        FatherName = christening.FatherName,
+        //        FatherId = christening.FatherId,
+        //        MotherName = christening.MotherName,
+        //        MotherId = christening.MotherId,
+        //        GodFatherName = christening.GodFatherName,
+        //        GodFatherId = christening.GodFatherId,
+        //        GodMotherName = christening.GodMotherName,
+        //        GodMotherId = christening.GodMotherId,
+        //        Comments = christening.Comments,
+        //        CeremonialCelebrant = christening.CeremonialCelebrant,
+        //        Parishioner = christening.Parishioner,
+        //        ParishionerId = christening.Parishioner.Id
+        //    };
+        //}
     }
 }

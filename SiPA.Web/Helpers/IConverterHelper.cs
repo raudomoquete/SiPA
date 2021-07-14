@@ -9,12 +9,17 @@ namespace SiPA.Web.Helpers
 {
     public interface IConverterHelper
     {
-        Task<Sacrament> ToSacramentAsync(SacramentViewModel model, bool isNew);
+        Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew);
 
-        SacramentViewModel ToSacramentViewModel(Sacrament sacrament);
+        ChristeningViewModel ToChristeningViewModel(Christening christening);
 
         Task<History> ToHistoryAsync(HistoryViewModel model, bool isNew);
 
-        HistoryViewModel ToHistoryViewModel(History history);
+        //HistoryViewModel ToHistoryViewModel(History history);
+
+        //Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew);
+
+        //ChristeningViewModel ToChristeningViewModel(Christening christening);
+
     }
 }

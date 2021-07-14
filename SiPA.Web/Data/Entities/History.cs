@@ -19,7 +19,7 @@ namespace SiPA.Web.Data.Entities
         [Display(Name = "Fecha")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public Parishioner Parishioner { get; set; }
 
@@ -27,6 +27,6 @@ namespace SiPA.Web.Data.Entities
 
         [Display(Name = "Fecha")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime DateLocal => Date.ToLocalTime();
+        public DateTime? DateLocal => Date?.ToLocalTime();
     }
 }

@@ -35,9 +35,6 @@ namespace SiPA.Web.Models
         [Display(Name = "Nacionalidad")]
         public string Nationality { get; set; }
 
-        [Display(Name = "Ha recibido algun sacramento?")]
-        public bool ReceivedSacraments { get; set; }
-
         [MaxLength(100, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string Address { get; set; }
 

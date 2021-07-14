@@ -6,83 +6,156 @@ using System.Threading.Tasks;
 
 namespace SiPA.Web.Data.Entities
 {
-    public class Sacrament
+    public class Sacrament 
     {
-        public int SacramentId { get; set; }
+        public int Id { get; set; }
 
-        [Display(Name = "Nombre del Sacramento")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        public string SacramentName { get; set; }
+        public Christening Christening { get; set; }
 
-        [Display(Name = "Fecha del Evento")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime Date { get; set; }
+        //[Display(Name = "Nombre de la Novia")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BrideFirstName { get; set; }
 
-        [Display(Name = "Lugar del Evento")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string PlaceofEvent { get; set; }
+        //[Display(Name = "Apellido de la Novia")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BrideLastName { get; set; }
 
-        [Display(Name = "Nombre del Padre")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string FatherName { get; set; }
+        //public string BrideFullName
+        //{
+        //    get
+        //    {
+        //        return BrideFirstName + " " + BrideLastName;
+        //    }
+        //    set
+        //    {
+        //        BrideFirstName = value;
+        //        BrideLastName = value;
+        //    }
+        //}
 
-        [Display(Name = "Cédula del Padre")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string FatherId { get; set; }
+        //[Display(Name = "Cédula de la novia")]
+        //[MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BrideId { get; set; }
 
-        [Display(Name = "Nombre de la Madre")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string MotherName { get; set; }
+        //[Display(Name = "Nombre del Novio")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BridegroomFirstName { get; set; }
 
-        [Display(Name = "Cédula de la Madre")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string MotherId { get; set; }
+        //[Display(Name = "Apellido del novio")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BridegroomLastName { get; set; }
 
-        [Display(Name = "Nombre del Padrino")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string GodfatherName { get; set; }
+        //public string BridegroomFullName
+        //{
+        //    get
+        //    {
+        //        return BridegroomFirstName + " " + BridegroomLastName;
+        //    }
 
-        [Display(Name = "Cédula del Padrino")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string GodfatherId { get; set; }
+        //    set
+        //    {
+        //        BridegroomFirstName = value;
+        //        BridegroomLastName = value;
+        //    }
+        //}
 
-        [Display(Name = "Nombre de la Madrina")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string GodmotherName { get; set; }
+        //[Display(Name = "Cédula del Novio")]
+        //[MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BridegroomId { get; set; }
 
-        [Display(Name = "Cédula de la Madrina")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string GodmotherId { get; set; }
+        //[Display(Name = "Novios")]
+        //public string WeddingGrooms
+        //{
+        //    get
+        //    {
+        //        return BrideFullName + " " + BridegroomFullName;
+        //    }
 
-        [Display(Name = "Comentario")]
-        [MaxLength(200, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string Comments { get; set; }
+        //    set
+        //    {
+        //        BrideFullName = value;
+        //        BridegroomFullName = value;
+        //    }
+        //}
 
-        [Display(Name = "Celebrante")]
-        [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
-        public string CeremonialCelebrant { get; set; }
+        //[Display(Name = "Nombre del Padre de la Novia")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BrideFatherName { get; set; }
 
-        [Display(Name = "Fecha del Evento")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime DateLocal => Date.ToLocalTime();
+        //[Display(Name = "Cédula del Padre de la Novia")]
+        //[MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BrideFatherId { get; set; }
+
+        //[Display(Name = "Nombre de la  Madre de la Novia")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BrideMotherName { get; set; }
+
+        //[Display(Name = "Cédula de la madre de la Novia")]
+        //[MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BrideMotherId { get; set; }
+
+        //public string WeddingBrideParents
+        //{
+        //    get
+        //    {
+        //        return BrideFatherName + " " + BrideMotherName;
+        //    }
+
+        //    set
+        //    {
+        //        BrideFatherName = value;
+        //        BrideMotherName = value;
+        //    }
+        //}
+
+        //[Display(Name = "Nombre del Padre del Novio")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BridegroomFatherName { get; set; }
+
+        //[Display(Name = "Cédula del Padre del Novio")]
+        //[MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BridegroomFatherId { get; set; }
+
+        //[Display(Name = "Nombre de la  Madre del Novio")]
+        //[MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BridegroomMotherName { get; set; }
+
+        //[Display(Name = "Cédula de la madre del Novio")]
+        //[MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
+        //public string BridegroomMotherId { get; set; }
+
+        //public string WeddingBridegroomParents
+        //{
+        //    get
+        //    {
+        //        return BridegroomFatherName + " " + BridegroomMotherName;
+        //    }
+
+        //    set
+        //    {
+        //        BridegroomFatherName = value;
+        //        BridegroomMotherName = value;
+        //    }
+        //}
+
+        //public string WeddingGodParents
+        //{
+        //    get
+        //    {
+        //        return GodFatherName + " " + GodMotherName;
+        //    }
+        //    set
+        //    {
+        //        GodFatherName = value;
+        //        GodMotherName = value;
+        //    }
+        //}
 
         public Parishioner Parishioner { get; set; }
 
-        public ICollection<History> Histories { get; set; }
+        public SacramentType SacramentType { get; set; }
 
-
-        public DateTime CreatedAt { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime DateN => CreatedAt.ToLocalTime();
-        
-
-        public DateTime UpdatedAt { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
-
-        public DateTime DateY => UpdatedAt.ToLocalTime();
-
+        public ICollection<Certificate> Certificates { get; set; }
     }
 }
+
