@@ -37,7 +37,8 @@ namespace SiPA.Web.Helpers
                 GodMotherId = model.GodMotherId,
                 Comments = model.Comments,
                 CeremonialCelebrant = model.CeremonialCelebrant,
-                Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId)
+                Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId),
+                SacramentType = await _dataContext.SacramentTypes.FindAsync(model.SacramentTypeId)
             };
 
             return christening;
@@ -62,6 +63,8 @@ namespace SiPA.Web.Helpers
                 Comments = christening.Comments,
                 CeremonialCelebrant = christening.CeremonialCelebrant,
                 ParishionerId = christening.Parishioner.Id,
+                SacramentTypeId = christening.SacramentType.Id,
+                SacramentTypes = _combosHelper.GetComboSacraments()
             };
         }
 
@@ -71,7 +74,7 @@ namespace SiPA.Web.Helpers
             {
                 Description = model.Description,
                 Id = isNew ? 0 : model.Id, 
-                Sacrament = await _dataContext.Sacraments.FindAsync(model.SacramentId), 
+               // SacramentType = await _dataContext.SacramentTypes.FindAsync(model.SacramentId), 
                 RequestType = await _dataContext.RequestTypes.FindAsync(model.RequestTypeId)
             };
         }

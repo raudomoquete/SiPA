@@ -25,7 +25,7 @@ namespace SiPA.Web.Controllers
         public IActionResult Index()
         {
             return View(_context.SacramentTypes
-                .Include(st => st.Sacraments));
+                .Include(st => st.Christenings));
         }
     }
 }

@@ -27,8 +27,27 @@ namespace SiPA.Web.Helpers
 
             list.Insert(0, new SelectListItem
             {
-                Text = "[Selecciona un tipo de Sacramento...]",
+                Text = "Selecciona un tipo de Sacramento...",
                 Value = "0"
+            });
+
+            return list;
+        }
+
+        public IEnumerable<SelectListItem> GetChristening()
+        {
+            var list = _dataContext.SacramentTypes.Select(st => new SelectListItem
+            {
+                Text = st.SacramentName,
+                Value = $"{st.Id}"
+            })
+                .OrderBy(st => st.Text)
+                .ToList();
+
+            list.Insert(4, new SelectListItem
+            {
+                Text = "Bautizo",
+                Value = "4"
             });
 
             return list;

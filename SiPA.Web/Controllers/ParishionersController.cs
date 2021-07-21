@@ -42,8 +42,9 @@ namespace SiPA.Web.Controllers
         public IActionResult Index()
         {
             return View(_context.Parishioners
-                .Include(o => o.User)
-                .Include(o => o.Sacraments));
+                .Include(p => p.User)
+                .Include(p => p.Christenings));
+
             //(await _context.Parishioners.ToListAsync());
         }
 
@@ -56,14 +57,10 @@ namespace SiPA.Web.Controllers
             }
 
             var parishioner = await _context.Parishioners
-                .Include(p => p.Histories)
                 .Include(p => p.User)
-                .Include(p => p.Sacraments)
-                .ThenInclude(s => s.SacramentType)
-                .Include(p => p.Sacraments)
-                .ThenInclude(s => s.Christening)                
+                .Include(p => p.Christenings)
                 .FirstOrDefaultAsync(m => m.Id == id);
-              
+
             if (parishioner == null)
             {
                 return NotFound();
@@ -78,9 +75,7 @@ namespace SiPA.Web.Controllers
             return View();
         }
 
-        // POST: Parishioners/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddUserViewModel model)
@@ -111,7 +106,7 @@ namespace SiPA.Web.Controllers
                     var parishioner = new Parishioner
                     {
                         Requests = new List<Request>(),
-                        Sacraments = new List<Sacrament>(),
+                        SacramentTypes = new List<SacramentType>(),
                         User = userInDB
                     };
 
@@ -167,9 +162,6 @@ namespace SiPA.Web.Controllers
             return View(model);
         }
 
-        // POST: Parishioners/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditUserViewModel view)
@@ -205,15 +197,14 @@ namespace SiPA.Web.Controllers
 
             var parishioner = await _context.Parishioners
                 .Include(p => p.User)
-                .Include(p => p.Sacraments)
-                .ThenInclude(s => s.Christening)
+                .Include(p => p.Christenings)
                 .FirstOrDefaultAsync(p => p.Id == id.Value);
             if (parishioner == null)
             {
                 return NotFound();
             }
 
-            if (parishioner.Sacraments.Count > 0)
+            if (parishioner.SacramentTypes.Count > 0)
             {
                 ModelState.AddModelError(string.Empty, "El Feligrés no puede ser borrado porque tiene records relacionados.");
                 return RedirectToAction(nameof(Index));
@@ -237,6 +228,7 @@ namespace SiPA.Web.Controllers
                 return NotFound();
             }
 
+
             var parishioner = await _context.Parishioners.FindAsync(id.Value);
 
             if (parishioner == null)
@@ -244,11 +236,21 @@ namespace SiPA.Web.Controllers
                 return NotFound();
             }
 
+            var feligres = await _context.Parishioners
+                .Include(p => p.Christenings)
+                .FirstOrDefaultAsync(p => p.Id == id);
+            
+            if (feligres.Christenings.Count > 0)
+            {
+                ModelState.AddModelError(string.Empty, "Solo puede agregar un bautizo por Feligrés.");
+                return RedirectToAction(nameof(Index));
+            }
+
             var model = new ChristeningViewModel
             {
                 CreatedAt = DateTime.Today,
                 ParishionerId = parishioner.Id,
-                //SacramentTypes = _combosHelper.GetComboSacraments()
+                SacramentTypes = _combosHelper.GetChristening()
             };
 
             return View(model);
@@ -256,15 +258,16 @@ namespace SiPA.Web.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddChristening(ChristeningViewModel model)
-        {
+        {         
             if (ModelState.IsValid)
             {
                 var christening = await _converterHelper.ToChristeningAsync(model, true);
                 _context.Christenings.Add(christening);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"Details/{model.ParishionerId}");
+                return RedirectToAction($"{nameof(Details)}/{model.ParishionerId}");               
             }
 
+            model.SacramentTypes = _combosHelper.GetChristening();
             return View(model);
         }
 
@@ -279,7 +282,7 @@ namespace SiPA.Web.Controllers
                 .Include(c => c.Parishioner)
                 .Include(c => c.SacramentType)
                 .FirstOrDefaultAsync(c => c.Id == id);
-               
+
             if (christening == null)
             {
                 return NotFound();
@@ -299,7 +302,7 @@ namespace SiPA.Web.Controllers
                 return RedirectToAction($"Details/{model.ParishionerId}");
             }
 
-            model.SacramentTypes = _combosHelper.GetComboSacraments();
+            //model.SacramentTypes = _combosHelper.GetComboSacraments("Bautizo");
             return View(model);
         }
 
@@ -315,7 +318,7 @@ namespace SiPA.Web.Controllers
                 .ThenInclude(o => o.User)
                 .Include(s => s.Parishioner)
                 .ThenInclude(s => s.Histories)
-                .ThenInclude(h => h.RequestType)               
+                .ThenInclude(h => h.RequestType)
                 .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (christening == null)
             {
@@ -323,6 +326,26 @@ namespace SiPA.Web.Controllers
             }
 
             return View(christening);
+        }
+
+        public async Task<IActionResult> DeleteChristening(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var christening = await _context.Christenings
+                .Include(c => c.Parishioner)
+                .FirstOrDefaultAsync(c => c.Id == id.Value);
+            if (christening == null)
+            {
+                return NotFound();
+            }
+
+            _context.Christenings.Remove(christening);
+            await _context.SaveChangesAsync();
+            return RedirectToAction($"Details/{christening.Parishioner.Id}");
         }
 
         //public async Task<IActionResult> AddHistory(int? id)
@@ -417,94 +440,6 @@ namespace SiPA.Web.Controllers
         //    return RedirectToAction($"{nameof(DetailsSacrament)}/{history.Sacrament.SacramentId}");
         //}
 
-        //public async Task<IActionResult> AddChristening(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var parishioner = await _context.Parishioners.FindAsync(id.Value);
-        //    if (parishioner == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var model = new ChristeningViewModel
-        //    {
-        //        ChristeningDate = DateTime.Today,
-        //        ParishionerId = parishioner.Id,
-        //        Parishioners = _combosHelper.GetComboParishioners()
-        //    };
-
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddChristening(ChristeningViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var christening = await _converterHelper.ToChristeningAsync(model, true);
-        //        _context.Christenings.Add(christening);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction($"Details/{model.ParishionerId}");
-        //    }
-
-        //    model.Parishioners = _combosHelper.GetComboParishioners();
-        //    return View(model);
-        //}
-
-        //public async Task<IActionResult> EditChristening(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var christening = await _context.Christenings
-        //        .Include(c => c.Parishioner)
-        //        .FirstOrDefaultAsync(c => c.Id == id);
-        //    if (christening == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(_converterHelper.ToChristeningViewModel(christening));
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> EditChristening(ChristeningViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var christening = await _converterHelper.ToChristeningAsync(model, false);
-        //        _context.Christenings.Update(christening);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction($"Details/{model.ParishionerId}");
-        //    }
-
-        //    model.Parishioners = _combosHelper.GetComboParishioners();
-        //    return View(model);
-        //}
-
-        //public async Task<IActionResult> DetailsChristening(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var christening = await _context.Christenings
-        //        .Include(c => c.Parishioner)
-        //        .ThenInclude(p => p.User)
-        //        .FirstOrDefaultAsync(p => p.Id == id.Value);
-        //    if (christening == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(christening);
-        //}
+        
     }
 }

@@ -17,14 +17,11 @@ namespace SiPA.Web.Data
 
         public DbSet<Parishioner> Parishioners { get; set; }
         public DbSet<RequestType> RequestTypes { get; set; }
-        public DbSet<Sacrament> Sacraments { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Manager> Managers { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Community> Communities { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Christening> Christenings { get; set; }
-        public DbSet<SacramentType> SacramentTypes { get; set; }   
+        public DbSet<SacramentType> SacramentTypes { get; set; }
     }
 }

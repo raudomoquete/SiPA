@@ -12,8 +12,7 @@ namespace SiPA.Web.Models
     {
         public int ParishionerId { get; set; }
 
-        public int? SacramentId { get; set; }
-
+        [Display(Name = "Sacramento")]
         public int? SacramentTypeId { get; set; }
 
         public ICollection<History> Histories { get; set; }

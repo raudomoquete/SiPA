@@ -10,11 +10,13 @@ namespace SiPA.Web.Data.Entities
     {
         public int Id { get; set; }
 
+        public int SacramentId { get; set; }
+
         [Display(Name = "Tipo de Sacramento")]
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters")]
         [Required(ErrorMessage = "The field {0} is mandatory.")]
         public string SacramentName { get; set; }
-        
-        public ICollection<Sacrament> Sacraments { get; set; }
+
+        public ICollection<Christening> Christenings { get; set; }
     }
 }

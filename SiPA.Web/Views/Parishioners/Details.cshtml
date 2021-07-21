@@ -6,64 +6,97 @@
 
 <h2>Feligrés</h2>
 
-    <div>
-        <h4>Detalles</h4>
-        <hr />
-        <dl class="dl-horinzontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.User.FullName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.User.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.User.Email)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.User.Address)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.User.Address)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.User.PhoneNumber)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.User.PhoneNumber)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a> |
-        <a asp-action="AddChristening" asp-route-id="@Model.Id" class="btn btn-primary">Bautizo</a> |
-        <a asp-action="Index" class="btn btn-success">Volver a la Lista</a>
-    </div>
-    @*<table class="table table-responsive">
+<div>
+    <h4>Detalles</h4>
+    <hr />
+    <dl class="dl-horinzontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a> |
+    <a asp-action="AddChristening" asp-route-id="@Model.Id" data-toggle="modal" data-target="#duplicateDialog" class="btn btn-primary">Bautizo</a> |
+    <a asp-action="Index" class="btn btn-success">Volver a la Lista</a>
+</div>
+
+@if (Model.Christenings.Count > 0)
+{
+    <partial name="_DuplicateDialog" />
+}
+
+@if (Model.Christenings.Count == 0)
+{
+    <h4>No hay Bautizos Agregados</h4>
+}
+else
+{
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().SacramentType.SacramentName)
+                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().BaptizedParents)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Sacraments.FirstOrDefault().Christening.ChristeningDate)
+                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().BaptizedGodParents)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().CeremonialCelebrant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().ChristeningDateLocal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().SacramentType.SacramentName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().Comments)
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Sacraments)
+            @foreach (var item in Model.Christenings)
             {
                 <tr>
                     <td>
-                      @Html.DisplayFor(modelItem => item.SacramentType.SacramentName)
+                        @Html.DisplayFor(modelItem => item.BaptizedParents)
                     </td>
                     <td>
-                       @Html.DisplayFor(modelItem => item.Christening.ChristeningDateLocal)
+                        @Html.DisplayFor(modelItem => item.BaptizedGodParents)
                     </td>
                     <td>
-                        
+                        @Html.DisplayFor(modelItem => item.CeremonialCelebrant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChristeningDateLocal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SacramentType.SacramentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comments)
                     </td>
                     <td>
                         <a asp-action="EditChristening" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
@@ -73,24 +106,25 @@
                 </tr>
             }
         </tbody>
-    </table>*@
+    </table>
+}
 
-    <partial name="_DeleteDialog" />
+<partial name="_DeleteDialog" />
 
-    @section Scripts{
-        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                var item_to_delete;
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var item_to_delete;
 
-                $('.deleteItem').click((e) => {
-                    item_to_delete = e.currentTarget.dataset.id;
-                });
-
-                $("#btnYesDelete").click(function () {
-                    window.location.href = '/Owners/DeletePet/' + item_to_delete;
-                });
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
             });
-        </script>
-    }
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Parishioners/DeleteChristening/' + item_to_delete;
+            });
+        });
+    </script>
+}

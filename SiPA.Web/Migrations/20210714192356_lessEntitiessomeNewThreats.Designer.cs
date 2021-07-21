@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiPA.Web.Data;
 
 namespace SiPA.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210714192356_lessEntitiessomeNewThreats")]
+    partial class lessEntitiessomeNewThreats
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -386,9 +388,6 @@ namespace SiPA.Web.Migrations
                     b.Property<int?>("ParishionerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SacramentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SacramentName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -560,7 +559,7 @@ namespace SiPA.Web.Migrations
             modelBuilder.Entity("SiPA.Web.Data.Entities.Christening", b =>
                 {
                     b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
-                        .WithMany("Christenings")
+                        .WithMany()
                         .HasForeignKey("ParishionerId");
 
                     b.HasOne("SiPA.Web.Data.Entities.SacramentType", "SacramentType")
@@ -630,8 +629,6 @@ namespace SiPA.Web.Migrations
             modelBuilder.Entity("SiPA.Web.Data.Entities.Parishioner", b =>
                 {
                     b.Navigation("Certificates");
-
-                    b.Navigation("Christenings");
 
                     b.Navigation("Histories");
 

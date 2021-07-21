@@ -11,7 +11,7 @@
     <div class="col-md-4">
         <dl class="dl-horizontal">
             <dt>
-                Feligres
+                Feligrés
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.Parishioner.User.FullName)
@@ -46,10 +46,16 @@
             <dd>
                 @Html.DisplayFor(model => model.Comments)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PlaceofEvent)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PlaceofEvent)
+            </dd>
         </dl>
     </div>
 </div>
 <div>
     <a asp-action="EditChristening" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
-    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-warning">Volver al Feligres</a>
+    <a asp-action="Details" asp-route-id="@Model.Parishioner.Id" class="btn btn-warning">Volver al Feligrés</a>
 </div>

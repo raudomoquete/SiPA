@@ -10,7 +10,6 @@ namespace SiPA.Web.Data.Entities
     {
         public int Id { get; set; }
         public string Document { get; set; }
-        public Sacrament Sacrament { get; set; }
 
         [Display(Name = "Nombre")]
         public string Name { get; set; }
@@ -22,7 +21,8 @@ namespace SiPA.Web.Data.Entities
         public string Comments { get; set; }
 
         [Display(Name = "Fecha en que se expide")]
-        public DateTime? issuedDate{get;set;}
+        public DateTime? issuedDate { get; set; }
+        public Parishioner Parishioner { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
     }
