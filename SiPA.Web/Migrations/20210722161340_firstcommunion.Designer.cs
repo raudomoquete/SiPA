@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SiPA.Web.Data;
 
 namespace SiPA.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210722161340_firstcommunion")]
+    partial class firstcommunion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,6 +171,9 @@ namespace SiPA.Web.Migrations
                     b.Property<string>("Document")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("FirstCommunionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -182,6 +187,8 @@ namespace SiPA.Web.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FirstCommunionId");
 
                     b.HasIndex("ParishionerId");
 
@@ -278,6 +285,9 @@ namespace SiPA.Web.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FatherId")
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
@@ -297,9 +307,6 @@ namespace SiPA.Web.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("ParishionerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ParishionerParents")
                         .HasColumnType("nvarchar(max)");
 
@@ -310,9 +317,10 @@ namespace SiPA.Web.Migrations
                     b.Property<int?>("SacramentTypeId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("ParishionerId");
+                    b.HasKey("Id");
 
                     b.HasIndex("SacramentTypeId");
 
@@ -374,10 +382,15 @@ namespace SiPA.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("FirstCommunionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FirstCommunionId");
 
                     b.HasIndex("UserId");
 
@@ -606,6 +619,10 @@ namespace SiPA.Web.Migrations
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Certificate", b =>
                 {
+                    b.HasOne("SiPA.Web.Data.Entities.FirstCommunion", null)
+                        .WithMany("Certificates")
+                        .HasForeignKey("FirstCommunionId");
+
                     b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
                         .WithMany("Certificates")
                         .HasForeignKey("ParishionerId");
@@ -630,17 +647,9 @@ namespace SiPA.Web.Migrations
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.FirstCommunion", b =>
                 {
-                    b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
-                        .WithMany("FirstCommunions")
-                        .HasForeignKey("ParishionerId");
-
-                    b.HasOne("SiPA.Web.Data.Entities.SacramentType", "SacramentType")
+                    b.HasOne("SiPA.Web.Data.Entities.SacramentType", null)
                         .WithMany("FirstCommunions")
                         .HasForeignKey("SacramentTypeId");
-
-                    b.Navigation("Parishioner");
-
-                    b.Navigation("SacramentType");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.History", b =>
@@ -669,9 +678,15 @@ namespace SiPA.Web.Migrations
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Parishioner", b =>
                 {
+                    b.HasOne("SiPA.Web.Data.Entities.FirstCommunion", "FirstCommunion")
+                        .WithMany("Parishioners")
+                        .HasForeignKey("FirstCommunionId");
+
                     b.HasOne("SiPA.Web.Data.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("FirstCommunion");
 
                     b.Navigation("User");
                 });
@@ -698,13 +713,18 @@ namespace SiPA.Web.Migrations
                         .HasForeignKey("ParishionerId");
                 });
 
+            modelBuilder.Entity("SiPA.Web.Data.Entities.FirstCommunion", b =>
+                {
+                    b.Navigation("Certificates");
+
+                    b.Navigation("Parishioners");
+                });
+
             modelBuilder.Entity("SiPA.Web.Data.Entities.Parishioner", b =>
                 {
                     b.Navigation("Certificates");
 
                     b.Navigation("Christenings");
-
-                    b.Navigation("FirstCommunions");
 
                     b.Navigation("Histories");
 

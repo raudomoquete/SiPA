@@ -23,5 +23,6 @@ namespace SiPA.Web.Data
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Christening> Christenings { get; set; }
         public DbSet<SacramentType> SacramentTypes { get; set; }
+        public DbSet<FirstCommunion> FirstCommunions { get; set; }
     }
 }

@@ -1,21 +1,5 @@
 ﻿@model SiPA.Web.Models.ChristeningViewModel
 
-@*<div class="form-group">
-    <label asp-for="SacramentType" class="control-label"></label>
-    <select  asp-for="SacramentType.Id"
-            class="form-control"
-            onchange="onSacramentTypeSelected(this.value)"
-            asp-items="@(new SelectList(Model.SacramentTypes, "Id", "Bautizo"))">
-    </select>
-    <span asp-validation-for="SacramentTypeId" class="text-danger"></span>
-</div>*@
-
-@*<div class="form-group">
-    <label asp-for="SacramentTypeId" class="control-label"></label>
-    <input asp-for="SacramentType.SacramentName" value="Bautizo" class="form-control" />
-    <span asp-validation-for="SacramentTypeId" class="text-danger"></span>
-</div>*@
-
 <div class="form-group">
     <label asp-for="SacramentTypeId" class="control-label"></label>
     <select asp-for="SacramentTypeId" asp-items="Model.SacramentTypes" class="form-control"></select>

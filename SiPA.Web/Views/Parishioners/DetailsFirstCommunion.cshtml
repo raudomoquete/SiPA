@@ -1,0 +1,55 @@
+﻿@model SiPA.Web.Data.Entities.FirstCommunion
+@{ 
+    ViewData["Title"] = "DetailsFirstCommunion";
+}
+
+<h2>Primera Comunión</h2>
+
+<div>
+    <h4>Detalles</h4>
+    <hr />
+    <div class="col-md-4">
+        <dl class="dl-horizantal">
+            <dt>
+                Feligrés
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Parishioner.User.FullName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ParishionerParents)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ParishionerParents)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CeremonialCelebrant)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CeremonialCelebrant)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PlaceofEvent)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PlaceofEvent)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstCommunionDateLocal)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstCommunionDateLocal)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div>
+    <a asp-action="EditFirstCommunion" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Details" asp-route-id="@Model.Parishioner.Id" class="btn btn-warning">Volver al Feligrés</a>
+</div>

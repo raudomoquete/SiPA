@@ -20,6 +20,7 @@ namespace SiPA.Web.Helpers
             _dataContext = dataContext;
             _combosHelper = combosHelper;
         }
+
         public async Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew)
         {
             var christening = new Christening
@@ -64,6 +65,44 @@ namespace SiPA.Web.Helpers
                 CeremonialCelebrant = christening.CeremonialCelebrant,
                 ParishionerId = christening.Parishioner.Id,
                 SacramentTypeId = christening.SacramentType.Id,
+                SacramentTypes = _combosHelper.GetComboSacraments()
+            };
+        }
+
+        public async Task<FirstCommunion> ToFirstCommunionAsync(FirstCommunionViewModel model, bool isNew)
+        {
+            var firstCommunion = new FirstCommunion
+            {
+                FirstCommunionDate = model.FirstCommunionDate,
+                Id = isNew ? 0 : model.Id,
+                PlaceofEvent = model.PlaceofEvent,
+                FatherName = model.FatherName,
+                FatherId = model.FatherId,
+                MotherName = model.MotherId,
+                Comments = model.Comments,
+                CeremonialCelebrant = model.CeremonialCelebrant,
+                Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId),
+                SacramentType = await _dataContext.SacramentTypes.FindAsync(model.SacramentTypeId)
+            };
+
+            return firstCommunion;
+        }
+
+        public FirstCommunionViewModel ToFirstCommunionViewModel(FirstCommunion firstCommunion)
+        {
+            return new FirstCommunionViewModel
+            {
+                FirstCommunionDate = firstCommunion.FirstCommunionDate,
+                Id = firstCommunion.Id,
+                PlaceofEvent = firstCommunion.PlaceofEvent,
+                Parishioner = firstCommunion.Parishioner,
+                FatherName = firstCommunion.FatherName,
+                FatherId = firstCommunion.FatherId,
+                MotherName = firstCommunion.MotherName,
+                MotherId = firstCommunion.MotherId,
+                Comments = firstCommunion.Comments,
+                CeremonialCelebrant = firstCommunion.CeremonialCelebrant,
+                SacramentTypeId = firstCommunion.SacramentType.Id,
                 SacramentTypes = _combosHelper.GetComboSacraments()
             };
         }

@@ -13,6 +13,10 @@ namespace SiPA.Web.Helpers
 
         ChristeningViewModel ToChristeningViewModel(Christening christening);
 
+        Task<FirstCommunion> ToFirstCommunionAsync(FirstCommunionViewModel model, bool isNew);
+
+        FirstCommunionViewModel ToFirstCommunionViewModel(FirstCommunion firstCommunion);
+
         Task<History> ToHistoryAsync(HistoryViewModel model, bool isNew);
 
         //HistoryViewModel ToHistoryViewModel(History history);

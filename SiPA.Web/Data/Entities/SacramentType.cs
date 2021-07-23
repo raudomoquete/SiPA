@@ -18,5 +18,6 @@ namespace SiPA.Web.Data.Entities
         public string SacramentName { get; set; }
 
         public ICollection<Christening> Christenings { get; set; }
+        public ICollection<FirstCommunion> FirstCommunions { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace SiPA.Web.Helpers
             });
 
             return list;
-        }
+        }      
 
         public IEnumerable<SelectListItem> GetChristening()
         {

@@ -39,6 +39,7 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a> |
     <a asp-action="AddChristening" asp-route-id="@Model.Id" data-toggle="modal" data-target="#duplicateDialog" class="btn btn-primary">Bautizo</a> |
+    <a asp-action="AddFirstCommunion" asp-route-id="@Model.Id" class="btn btn-primary">Primera Comunión</a> |
     <a asp-action="Index" class="btn btn-success">Volver a la Lista</a>
 </div>
 
@@ -46,10 +47,9 @@
 {
     <partial name="_DuplicateDialog" />
 }
-
 @if (Model.Christenings.Count == 0)
 {
-    <h4>No hay Bautizos Agregados</h4>
+    <h4>No hay Bautizo Agregado.</h4>
 }
 else
 {
@@ -109,6 +109,62 @@ else
     </table>
 }
 
+@if (Model.FirstCommunions.Count == 0)
+{
+    <h4>No hay registros de Primera Comunión </h4>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().ParishionerParents)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().CeremonialCelebrant)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().FirstCommunionDateLocal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().SacramentType.SacramentName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().Comments)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.FirstCommunions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParishionerParents)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CeremonialCelebrant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstCommunionDateLocal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SacramentType.SacramentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comments)
+                    </td>
+                    <td>
+                        <a asp-action="EditFirstCommunion" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="DetailsFirstCommunion" asp-route-id="@item.Id" class="btn btn-info">Detalles</a>
+                        <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Borrar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 <partial name="_DeleteDialog" />
 
 @section Scripts{
@@ -124,6 +180,14 @@ else
 
             $("#btnYesDelete").click(function () {
                 window.location.href = '/Parishioners/DeleteChristening/' + item_to_delete;
+            });
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Parishioners/DeleteFirstCommunion/' + item_to_delete;
             });
         });
     </script>
