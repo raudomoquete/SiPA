@@ -263,6 +263,78 @@ namespace SiPA.Web.Migrations
                     b.ToTable("Christenings");
                 });
 
+            modelBuilder.Entity("SiPA.Web.Data.Entities.Confirmation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CeremonialCelebrant")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Comments")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime?>("ConfirmationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConfirmedParents")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FatherId")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("FatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("GodFatherId")
+                        .HasMaxLength(13)
+                        .HasColumnType("int");
+
+                    b.Property<string>("GodFatherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("GodMotherId")
+                        .HasMaxLength(13)
+                        .HasColumnType("int");
+
+                    b.Property<string>("GodMotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("MotherId")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("MotherName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ParishionerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlaceofEvent")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("SacramentTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParishionerId");
+
+                    b.HasIndex("SacramentTypeId");
+
+                    b.ToTable("Confirmations");
+                });
+
             modelBuilder.Entity("SiPA.Web.Data.Entities.FirstCommunion", b =>
                 {
                     b.Property<int>("Id")
@@ -628,6 +700,21 @@ namespace SiPA.Web.Migrations
                     b.Navigation("SacramentType");
                 });
 
+            modelBuilder.Entity("SiPA.Web.Data.Entities.Confirmation", b =>
+                {
+                    b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
+                        .WithMany("Confirmations")
+                        .HasForeignKey("ParishionerId");
+
+                    b.HasOne("SiPA.Web.Data.Entities.SacramentType", "SacramentType")
+                        .WithMany("Confirmations")
+                        .HasForeignKey("SacramentTypeId");
+
+                    b.Navigation("Parishioner");
+
+                    b.Navigation("SacramentType");
+                });
+
             modelBuilder.Entity("SiPA.Web.Data.Entities.FirstCommunion", b =>
                 {
                     b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
@@ -704,6 +791,8 @@ namespace SiPA.Web.Migrations
 
                     b.Navigation("Christenings");
 
+                    b.Navigation("Confirmations");
+
                     b.Navigation("FirstCommunions");
 
                     b.Navigation("Histories");
@@ -716,6 +805,8 @@ namespace SiPA.Web.Migrations
             modelBuilder.Entity("SiPA.Web.Data.Entities.SacramentType", b =>
                 {
                     b.Navigation("Christenings");
+
+                    b.Navigation("Confirmations");
 
                     b.Navigation("FirstCommunions");
                 });

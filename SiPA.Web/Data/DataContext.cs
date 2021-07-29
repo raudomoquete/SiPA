@@ -24,5 +24,6 @@ namespace SiPA.Web.Data
         public DbSet<Christening> Christenings { get; set; }
         public DbSet<SacramentType> SacramentTypes { get; set; }
         public DbSet<FirstCommunion> FirstCommunions { get; set; }
+        public DbSet<Confirmation> Confirmations { get; set; }
     }
 }

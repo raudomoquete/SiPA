@@ -32,22 +32,41 @@ namespace SiPA.Web.Helpers
             });
 
             return list;
-        }      
+        }
+
+        public IEnumerable<SelectListItem> GetConfirmation()
+        {
+            var list = _dataContext.SacramentTypes.Select(st => new SelectListItem
+            {
+                Text = st.SacramentName,
+                Value = st.Id.ToString(),
+                Selected = (st.Id == 2)
+            });
+
+            return list;
+        }
+
+
+        public IEnumerable<SelectListItem> GetFirstCommunion()
+        {
+            var list = _dataContext.SacramentTypes.Select(st => new SelectListItem
+            {
+                Text = st.SacramentName,
+                Value = st.Id.ToString(),
+                Selected = (st.Id == 3)
+            });
+
+            return list;
+        }
 
         public IEnumerable<SelectListItem> GetChristening()
         {
             var list = _dataContext.SacramentTypes.Select(st => new SelectListItem
             {
                 Text = st.SacramentName,
-                Value = $"{st.Id}"
-            })
-                .OrderBy(st => st.Text)
-                .ToList();
-
-            list.Insert(4, new SelectListItem
-            {
-                Text = "Bautizo",
-                Value = "4"
+                Value = st.Id.ToString(),
+                Selected = (st.Id == 4)
+          
             });
 
             return list;

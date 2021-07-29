@@ -17,6 +17,11 @@ namespace SiPA.Web.Helpers
 
         FirstCommunionViewModel ToFirstCommunionViewModel(FirstCommunion firstCommunion);
 
+        Task<Confirmation> ToConfirmationAsync(ConfirmationViewModel model, bool isNew);
+
+        ConfirmationViewModel ToConfirmationViewModel(Confirmation confirmation);
+
+
         Task<History> ToHistoryAsync(HistoryViewModel model, bool isNew);
 
         //HistoryViewModel ToHistoryViewModel(History history);

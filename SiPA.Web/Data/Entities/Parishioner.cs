@@ -10,6 +10,8 @@ namespace SiPA.Web.Data.Entities
 
         public User User { get; set; }
 
+        public ICollection<Confirmation> Confirmations { get; set; }
+
         public ICollection<FirstCommunion> FirstCommunions { get; set; }
 
         public ICollection<Christening> Christenings { get; set; }

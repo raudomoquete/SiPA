@@ -35,10 +35,11 @@ namespace SiPA.Web.Models
         [Display(Name = "Nacionalidad")]
         public string Nationality { get; set; }
 
+        [Display(Name = "Dirección")]
         [MaxLength(100, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string Address { get; set; }
 
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Número Teléfono")]
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         public string PhoneNumber { get; set; }
 

@@ -26,7 +26,7 @@ namespace SiPA.Web.Models
 
         [Display(Name = "Fecha de Nacimiento")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [Display(Name = "Nacionalidad")]
         public string Nationality { get; set; }
@@ -38,7 +38,7 @@ namespace SiPA.Web.Models
         [MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string CivilStatus { get; set; }
 
-        [Display(Name = "Numero de Telefono")]
+        [Display(Name = "Numero de Teléfono")]
         [MaxLength(50, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string PhoneNumber { get; set; }
     }

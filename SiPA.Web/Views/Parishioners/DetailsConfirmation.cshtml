@@ -1,0 +1,80 @@
+﻿@model SiPA.Web.Data.Entities.Confirmation
+
+@{ 
+    ViewData["Title"] = "DetailsConfirmation";
+}
+
+<h2>Confirmación</h2>
+
+<div>
+    <h4>Detalles</h4>
+    <hr />
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+                    Feligrés
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Parishioner.User.FullName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ConfirmedParents)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ConfirmedParents)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GodFatherName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GodFatherName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GodFatherId)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GodFatherId)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GodMotherName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GodMotherName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GodMotherId)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GodMotherId)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Comments)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CeremonialCelebrant)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CeremonialCelebrant)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ConfirmationDateLocal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ConfirmationDateLocal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PlaceofEvent)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.PlaceofEvent)
+                </dd>
+            </dl>
+        </div>
+    </div>
+<div>
+    <a asp-action="EditConfirmation" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Details" asp-route-id="@Model.Parishioner.Id" class="btn btn-warning">Volver al Feligrés</a>
+</div>

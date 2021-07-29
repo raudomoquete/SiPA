@@ -12,6 +12,9 @@ namespace SiPA.Web.Helpers
 
         IEnumerable<SelectListItem> GetChristening();
 
+        IEnumerable<SelectListItem> GetFirstCommunion();
+
+        IEnumerable<SelectListItem> GetConfirmation();
 
         IEnumerable<SelectListItem> GetComboRequestTypes();
 

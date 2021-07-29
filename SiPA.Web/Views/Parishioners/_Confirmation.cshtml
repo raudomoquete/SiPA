@@ -1,5 +1,5 @@
-﻿@model SiPA.Web.Models.FirstCommunionViewModel
- 
+﻿@model SiPA.Web.Models.ConfirmationViewModel
+
 <div class="form-group">
     <label asp-for="SacramentTypeId" class="control-label"></label>
     <select asp-for="SacramentTypeId" asp-items="Model.SacramentTypes" class="form-control"></select>
@@ -7,9 +7,9 @@
 </div>
 
 <div class="form-group">
-    <label asp-for="FirstCommunionDate" class="control-label"></label>
-    <input asp-for="FirstCommunionDate" class="form-control" />
-    <span asp-validation-for="FirstCommunionDate" class="text-danger"></span>
+    <label asp-for="ConfirmationDate" class="control-label"></label>
+    <input asp-for="ConfirmationDate" class="form-control" />
+    <span asp-validation-for="ConfirmationDate" class="text-danger"></span>
 </div>
 
 <div class="form-group">
@@ -40,6 +40,30 @@
     <label asp-for="MotherId" class="control-label"></label>
     <input asp-for="MotherId" class="form-control" />
     <span asp-validation-for="MotherId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GodFatherName" class="control-label"></label>
+    <input asp-for="GodFatherName" class="form-control" />
+    <span asp-validation-for="GodFatherName" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GodFatherId" class="control-label"></label>
+    <input asp-for="GodFatherId" class="form-control" />
+    <span asp-validation-for="GodFatherId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GodMotherName" class="control-label"></label>
+    <input asp-for="GodMotherName" class="form-control" />
+    <span asp-validation-for="GodMotherName" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="GodMotherId" class="control-label"></label>
+    <input asp-for="GodMotherId" class="form-control" />
+    <span asp-validation-for="GodMotherId" class="text-danger"></span>
 </div>
 
 <div class="form-group">

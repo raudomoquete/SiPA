@@ -107,6 +107,53 @@ namespace SiPA.Web.Helpers
             };
         }
 
+        public async Task<Confirmation> ToConfirmationAsync(ConfirmationViewModel model, bool isNew)
+        {
+            var confirmation = new Confirmation
+            {
+                PlaceofEvent = model.PlaceofEvent,
+                Id = isNew ? 0 : model.Id,
+                FatherName = model.FatherName,
+                FatherId = model.FatherId,
+                MotherName = model.MotherId,
+                MotherId = model.MotherId,
+                GodFatherName = model.GodFatherName,
+                GodFatherId = model.GodFatherId,
+                GodMotherName = model.GodMotherName,
+                GodMotherId = model.GodMotherId,
+                Comments = model.Comments,
+                CeremonialCelebrant = model.CeremonialCelebrant,
+                ConfirmationDate = model.ConfirmationDate,
+                Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId),
+                SacramentType = await _dataContext.SacramentTypes.FindAsync(model.SacramentTypeId)
+            };
+
+            return confirmation;
+        }
+
+        public ConfirmationViewModel ToConfirmationViewModel(Confirmation confirmation)
+        {
+            return new ConfirmationViewModel
+            {
+                PlaceofEvent = confirmation.PlaceofEvent,
+                Id = confirmation.Id,
+                FatherName = confirmation.FatherName,
+                FatherId = confirmation.FatherId,
+                MotherName = confirmation.MotherName,
+                MotherId = confirmation.MotherId,
+                GodFatherName = confirmation.GodFatherName,
+                GodFatherId = confirmation.GodFatherId,
+                GodMotherName = confirmation.GodMotherName,
+                GodMotherId = confirmation.GodMotherId,
+                Comments = confirmation.Comments,
+                CeremonialCelebrant = confirmation.CeremonialCelebrant,
+                ConfirmationDate = confirmation.ConfirmationDate,
+                ParishionerId = confirmation.Parishioner.Id,
+                SacramentTypeId = confirmation.SacramentType.Id,
+                SacramentTypes = _combosHelper.GetComboSacraments()
+            };
+        }
+
         public async Task<History> ToHistoryAsync(HistoryViewModel model, bool isNew)
         {
             return new History

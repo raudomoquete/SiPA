@@ -39,7 +39,8 @@ namespace SiPA.Web.Data.Entities
 
         [Display(Name = "Nacionalidad")]
         public string Nationality { get; set; }
-
+        
+        [Display(Name = "Dirección")]
         [MaxLength(100, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string Address { get; set; }
 
