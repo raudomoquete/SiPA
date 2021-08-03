@@ -21,6 +21,7 @@ namespace SiPA.Web.Helpers
             _combosHelper = combosHelper;
         }
 
+       
         public async Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew)
         {
             var christening = new Christening
@@ -151,6 +152,62 @@ namespace SiPA.Web.Helpers
                 ParishionerId = confirmation.Parishioner.Id,
                 SacramentTypeId = confirmation.SacramentType.Id,
                 SacramentTypes = _combosHelper.GetComboSacraments()
+            };
+        }
+
+        public async Task<Wedding> ToWeddingAsync(WeddingVM model, bool isNew)
+        {
+            var wedding = new Wedding
+            {
+                WeedingDate = model.WeedingDate,
+                Id = isNew ? 0 : model.Id,
+                PlaceOfEvent = model.PlaceOfEvent,
+                BrideFatherName = model.BrideFatherName,
+                BrideFatherId = model.BrideFatherId,
+                BrideMotherName = model.BrideMotherName,
+                BrideMotherId = model.BrideMotherId,
+                BrideGroomFatherName = model.BrideGroomFatherName,
+                BrideGroomFatherId = model.BrideGroomFatherId,
+                BrideGroomMotherName = model.BrideGroomMotherName,
+                BrideGroomMotherId = model.BrideGroomMotherId,
+                GodMother = model.GodMother,
+                GodMotherId = model.GodMotherId,
+                GodFather = model.GodFather,
+                GoFatherId = model.GoFatherId,
+                Comments = model.Comments,
+                CeremonialCelebrant = model.CeremonialCelebrant,
+                Parishioners = await _dataContext.Parishioners.FindAsync(model.ParishionerId),
+                SacramentType = await _dataContext.SacramentTypes.FindAsync(model.SacramentTypeId)
+            };
+
+            return wedding;
+        }
+
+        public WeddingVM ToWeddingVM(Wedding wedding)
+        {
+            return new WeddingVM
+            {
+                WeedingDate = wedding.WeedingDate,
+                Id = wedding.Id,
+                PlaceOfEvent = wedding.PlaceOfEvent,
+                Parishioners = wedding.Parishioners,
+                BrideFatherName = wedding.BrideFatherName,
+                BrideFatherId = wedding.BrideFatherId,
+                BrideMotherName = wedding.BrideMotherName,
+                BrideMotherId = wedding.BrideMotherId,
+                BrideGroomFatherName = wedding.BrideGroomFatherName,
+                BrideGroomFatherId = wedding.BrideGroomFatherId,
+                BrideGroomMotherName = wedding.BrideGroomMotherName,
+                BrideGroomMotherId = wedding.BrideGroomMotherId,
+                GodMother = wedding.GodMother,
+                GodMotherId = wedding.GodMotherId,
+                GodFather = wedding.GodFather,
+                GoFatherId = wedding.GoFatherId,
+                Comments = wedding.Comments,
+                CeremonialCelebrant = wedding.CeremonialCelebrant,
+                ParishionerId = wedding.Parishioners.Id,
+                SacramentTypeId = wedding.SacramentType.Id,
+                SacramentTypes = _combosHelper.GetWedding()
             };
         }
 

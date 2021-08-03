@@ -43,7 +43,14 @@
     @Html.ValidationMessageFor(Model => Model.Christenings)
 
     <a asp-action="AddFirstCommunion" asp-route-id="@Model.Id" class="btn btn-primary">Primera Comunión</a> |
-    <a asp-action="AddConfirmation" asp-route-id="@Model.Id" class="btn btn-primary">Confirmación</a>
+    @Html.ValidationMessageFor(Model => Model.FirstCommunions)
+
+    <a asp-action="AddConfirmation" asp-route-id="@Model.Id" class="btn btn-primary">Confirmación</a> |
+    @Html.ValidationMessageFor(Model => Model.Confirmations)
+
+    <a asp-action="AddWedding" asp-route-id="@Model.Id" class="btn btn-primary">Matrimonio</a>
+    @Html.ValidationMessageFor(Model => Model.Weddings)
+
     <a asp-action="Index" class="btn btn-success">Volver a la Lista</a>
 </div>
 
@@ -69,9 +76,6 @@ else
                     @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().ChristeningDateLocal)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().SacramentType.SacramentName)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().Comments)
                 </th>
             </tr>
@@ -91,9 +95,6 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ChristeningDateLocal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SacramentType.SacramentName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Comments)
@@ -128,9 +129,6 @@ else
                     @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().FirstCommunionDateLocal)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().SacramentType.SacramentName)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().Comments)
                 </th>
             </tr>
@@ -147,9 +145,6 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FirstCommunionDateLocal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SacramentType.SacramentName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Comments)
@@ -184,9 +179,6 @@ else
                     @Html.DisplayNameFor(model => model.Confirmations.FirstOrDefault().ConfirmationDateLocal)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Confirmations.FirstOrDefault().SacramentType.SacramentName)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Confirmations.FirstOrDefault().Comments)
                 </th>
             </tr>
@@ -205,9 +197,6 @@ else
                         @Html.DisplayFor(modelItem => item.ConfirmationDateLocal)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SacramentType.SacramentName)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Comments)
                     </td>
                     <td>
@@ -215,6 +204,49 @@ else
                         <a asp-action="DetailsConfirmation" asp-route-id="@item.Id" class="btn btn-info">Detalles</a>
                         <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Borrar</button>
                     </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (Model.Weddings.Count == 0)
+{
+    <h4>No Hay registros de Matrimonio</h4>
+}
+else
+{
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weddings.FirstOrDefault().BrideAndGroomParents)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weddings.FirstOrDefault().WeedingGodParents)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weddings.FirstOrDefault().WeedingDateLocal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Weddings.FirstOrDefault().Comments)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Weddings)
+            {
+                <tr>
+                    @Html.DisplayFor(modelItem => item.BrideAndGroomParents)
+                </tr>
+                <tr>
+                    @Html.DisplayFor(modelItem => item.WeedingGodParents)
+                </tr>
+                <tr>
+                    @Html.DisplayFor(modelItem => item.WeedingDateLocal)
+                </tr>
+                <tr>
+                    @Html.DisplayFor(modelItem => item.Comments)
                 </tr>
             }
         </tbody>

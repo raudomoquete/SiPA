@@ -34,6 +34,18 @@ namespace SiPA.Web.Helpers
             return list;
         }
 
+        public IEnumerable<SelectListItem> GetWedding()
+        {
+            var list = _dataContext.SacramentTypes.Select(st => new SelectListItem
+            {
+                Text = st.SacramentName,
+                Value = st.Id.ToString(),
+                Selected = (st.Id == 1)
+            });
+
+            return list;
+        }
+
         public IEnumerable<SelectListItem> GetConfirmation()
         {
             var list = _dataContext.SacramentTypes.Select(st => new SelectListItem
@@ -45,7 +57,6 @@ namespace SiPA.Web.Helpers
 
             return list;
         }
-
 
         public IEnumerable<SelectListItem> GetFirstCommunion()
         {

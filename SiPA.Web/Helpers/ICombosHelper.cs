@@ -16,6 +16,8 @@ namespace SiPA.Web.Helpers
 
         IEnumerable<SelectListItem> GetConfirmation();
 
+        IEnumerable<SelectListItem> GetWedding();
+
         IEnumerable<SelectListItem> GetComboRequestTypes();
 
         IEnumerable<SelectListItem> GetComboParishioners();

@@ -1,0 +1,25 @@
+﻿@model SiPA.Web.Models.WeddingVM 
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Crear</h2>
+
+<h4>Matrimonio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddWedding">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ParishionerId" />
+
+            <partial name="_Wedding" />
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.ParishionerId" class="btn btn-success">Volver al Feligres</a>
+            </div>
+        </form>
+    </div>
+</div>

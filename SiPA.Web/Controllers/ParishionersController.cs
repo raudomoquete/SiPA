@@ -25,7 +25,6 @@ namespace SiPA.Web.Controllers
         private readonly IConverterHelper _converterHelper;
         private readonly ISacramentHelper _sacramentHelper;
 
-
         public ParishionersController(
             DataContext context,
             IUserHelper userHelper,
@@ -47,7 +46,8 @@ namespace SiPA.Web.Controllers
                 .Include(p => p.User)
                 .Include(p => p.Christenings)
                 .Include(p => p.FirstCommunions)
-                .Include(p => p.Confirmations));
+                .Include(p => p.Confirmations)
+                .Include(p => p.Weddings));
 
             //(await _context.Parishioners.ToListAsync());
         }
@@ -65,6 +65,7 @@ namespace SiPA.Web.Controllers
                 .Include(p => p.Christenings)
                 .Include(p => p.FirstCommunions)
                 .Include(p => p.Confirmations)
+                .Include(p => p.Weddings)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (parishioner == null)
@@ -75,14 +76,11 @@ namespace SiPA.Web.Controllers
             return View(parishioner);
         }
 
-
-
         // GET: Parishioners/Create
         public IActionResult Create()
         {
             return View();
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -229,7 +227,7 @@ namespace SiPA.Web.Controllers
         {
             return _context.Parishioners.Any(e => e.Id == id);
         }
-
+     
         [HttpGet]
         [RestoreModelStateFromTempData]
         public async Task<IActionResult> AddChristening(int? id)
@@ -509,6 +507,15 @@ namespace SiPA.Web.Controllers
                 return NotFound();
             }
 
+            var feligres = await _context.Parishioners
+                .Include(p => p.Confirmations)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (feligres.Confirmations.Count > 0)
+            {
+                ModelState.AddModelError("", "Solo puede agregar una Confirmación por Feligrés");
+            }
+
             var model = new ConfirmationViewModel
             {
                 ConfirmationDate = DateTime.Today,
@@ -520,6 +527,7 @@ namespace SiPA.Web.Controllers
         }
 
         [HttpPost]
+        [SetTempDataModelState]
         public async Task<IActionResult> AddConfirmation(ConfirmationViewModel model)
         {
             if (ModelState.IsValid)
@@ -609,6 +617,130 @@ namespace SiPA.Web.Controllers
             _context.Confirmations.Remove(confirmation);
             await _context.SaveChangesAsync();
             return RedirectToAction($"{nameof(Details)}/{confirmation.Parishioner.Id}");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddWedding(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var parishioner = await _context.Parishioners.FindAsync(id.Value);
+
+            if (parishioner == null)
+            {
+                return NotFound();
+            }
+
+            var feligres = await _context.Parishioners
+                .Include(p => p.Weddings)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (feligres.Weddings.Count > 0)
+            {
+                ModelState.AddModelError("", "Solo puede agregar un Matrimonio por Feligrés");
+            }
+
+            var model = new WeddingVM
+            {
+                CreatedAt = DateTime.Today,
+                ParishionerId = parishioner.Id,
+                SacramentTypes = _combosHelper.GetWedding()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddWedding(WeddingVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var wedding = await _converterHelper.ToWeddingAsync(model, true);
+                _context.Weddings.Add(wedding);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"{nameof(Details)}/{model.ParishionerId}");
+            }
+
+            model.SacramentTypes = _combosHelper.GetWedding();
+            return View(model);
+        }
+
+        public async Task<IActionResult> EditWedding(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var wedding = await _context.Weddings
+                .Include(w => w.Parishioners)
+                .Include(w => w.SacramentType)
+                .FirstOrDefaultAsync(w => w.Id == id);
+            if (wedding == null)
+            {
+                return NotFound();
+            }
+
+            return View(_converterHelper.ToWeddingVM(wedding));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditWedding(WeddingVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var wedding = await _converterHelper.ToWeddingAsync(model, false);
+                _context.Weddings.Update(wedding);
+                await _context.SaveChangesAsync();
+                return RedirectToAction($"Details/{model.ParishionerId}");
+            }
+
+            model.SacramentTypes = _combosHelper.GetWedding();
+            return View(model);
+        }
+        public async Task<IActionResult> DetailsWedding(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var wedding = await _context.Weddings
+                .Include(w => w.Parishioners)
+                .ThenInclude(p => p.User)
+                .Include(w => w.Parishioners)
+                .ThenInclude(w => w.Histories)
+                .FirstOrDefaultAsync(w => w.Id == id.Value);
+            if (wedding == null)
+            {
+                return NotFound();
+            }
+
+            return View(wedding);
+        }
+
+        public async Task<IActionResult> DeleteWedding(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var wedding = await _context.Weddings
+                .Include(w => w.Parishioners)
+                .FirstOrDefaultAsync(w => w.Id == id.Value);
+
+            if (wedding == null)
+            {
+                return NotFound();
+            }
+
+            _context.Weddings.Remove(wedding);
+            await _context.SaveChangesAsync();
+            return RedirectToAction($"{nameof(Details)}/{wedding.Parishioners.Id}");
         }
 
 

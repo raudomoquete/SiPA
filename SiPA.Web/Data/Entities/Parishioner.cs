@@ -18,7 +18,9 @@ namespace SiPA.Web.Data.Entities
 
         public ICollection<SacramentType> SacramentTypes { get; set; }
 
-        public ICollection<Certificate> Certificates { get; set; }         
+        public ICollection<Certificate> Certificates { get; set; }  
+        
+        public ICollection<Wedding> Weddings { get; set; }
 
         public ICollection<History> Histories { get; set; }
 

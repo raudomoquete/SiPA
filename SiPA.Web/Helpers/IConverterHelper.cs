@@ -21,6 +21,10 @@ namespace SiPA.Web.Helpers
 
         ConfirmationViewModel ToConfirmationViewModel(Confirmation confirmation);
 
+        Task<Wedding> ToWeddingAsync(WeddingVM model, bool isNew);
+
+        WeddingVM ToWeddingVM(Wedding wedding);
+
 
         Task<History> ToHistoryAsync(HistoryViewModel model, bool isNew);
 
