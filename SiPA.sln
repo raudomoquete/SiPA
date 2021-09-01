@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiPA.Common", "SiPA.Common\SiPA.Common.csproj", "{9228B974-24F0-40EE-84D5-13B8DB9911D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiPA.Common", "SiPA.Common\SiPA.Common.csproj", "{9228B974-24F0-40EE-84D5-13B8DB9911D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiPA.Web", "SiPA.Web\SiPA.Web.csproj", "{A67F562E-892C-43B8-88F9-B8A3C7371C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiPA.Web", "SiPA.Web\SiPA.Web.csproj", "{A67F562E-892C-43B8-88F9-B8A3C7371C12}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiPA.Prism", "SiPA.Prism\SiPA.Prism\SiPA.Prism.csproj", "{F61E43FC-E7A9-4B97-A7A0-DF33A45CF868}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiPA.Prism.Android", "SiPA.Prism\SiPA.Prism.Android\SiPA.Prism.Android.csproj", "{5C8E9D14-2529-4F6E-B2B6-7E1A56E57CDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,16 @@ Global
 		{A67F562E-892C-43B8-88F9-B8A3C7371C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A67F562E-892C-43B8-88F9-B8A3C7371C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A67F562E-892C-43B8-88F9-B8A3C7371C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F61E43FC-E7A9-4B97-A7A0-DF33A45CF868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61E43FC-E7A9-4B97-A7A0-DF33A45CF868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61E43FC-E7A9-4B97-A7A0-DF33A45CF868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61E43FC-E7A9-4B97-A7A0-DF33A45CF868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C8E9D14-2529-4F6E-B2B6-7E1A56E57CDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C8E9D14-2529-4F6E-B2B6-7E1A56E57CDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C8E9D14-2529-4F6E-B2B6-7E1A56E57CDE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5C8E9D14-2529-4F6E-B2B6-7E1A56E57CDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C8E9D14-2529-4F6E-B2B6-7E1A56E57CDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C8E9D14-2529-4F6E-B2B6-7E1A56E57CDE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

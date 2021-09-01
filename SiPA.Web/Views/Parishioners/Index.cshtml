@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Feligreses</h1>
@@ -15,27 +16,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().User.ParishionerFullName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.CivilStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.DateOfBirth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.Identification)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.Nationality)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().User.PhoneNumber)
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -45,28 +25,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.User.ParishionerFullName)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.CivilStatus)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.DateOfBirth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Identification)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Nationality)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.PhoneNumber)
-                </td>
-
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Detalles</a>

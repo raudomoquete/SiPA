@@ -222,6 +222,50 @@ namespace SiPA.Web.Helpers
             };
         }
 
+        public async Task<Request> ToRequestAsync(RequestVM model, bool isNew)
+        {
+            var request = new Request
+            {
+                Histories = model.Histories,
+                RequestDate = model.RequestDate,
+                Id = isNew ? 0 : model.Id,
+                Identification = model.Identification,
+                Email = model.Parishioner.User.Email,
+                PrintingDate = model.PrintingDate,
+                PrintedBy = model.Parishioner.User.FirstName,
+                ShippingDate = model.ShippingDate,
+                SentBy = model.SentBy,
+                Finished = model.Finished,
+                FinishedBy = model.Parishioner.User.FirstName,
+                CertificatesTypes = await _dataContext.CertificatesTypes.FindAsync(model.CertificateId),
+                RequestType = await _dataContext.RequestTypes.FindAsync(model.RequestTypeId),
+                Parishioner = await _dataContext.Parishioners.FindAsync(model.Parishioner)
+            };
+
+            return request;
+        }
+
+        public RequestVM ToRequestVM(Request request)
+        {
+            return new RequestVM
+            {
+                RequestDate = request.RequestDate,
+                Histories = request.Histories,
+                Id = request.Id,
+                Identification = request.Identification,
+                Email = request.Parishioner.User.Email,
+                PrintingDate = request.PrintingDate,
+                PrintedBy = request.Parishioner.User.FirstName,
+                ShippingDate = request.ShippingDate,
+                SentBy = request.Parishioner.User.FirstName,
+                Finished = request.Finished,
+                FinishedBy = request.Parishioner.User.FirstName,
+                CertificateId = request.CertificatesTypes.Id,
+                ParishionerId = request.Parishioner.Id,
+                RequestTypes = _combosHelper.GetComboRequestTypes()
+            };
+        }
+
         //public HistoryViewModel ToHistoryViewModel(History history)
         //{
         //    return new HistoryViewModel

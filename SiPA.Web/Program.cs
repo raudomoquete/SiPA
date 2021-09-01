@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SiPA.Web.Data;
+using System.IO;
 
 namespace SiPA.Web
 {
@@ -24,9 +26,20 @@ namespace SiPA.Web
             }
         }
 
+        //public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+        //            webBuilder.UseWebRoot("wwwroot");
+        //            webBuilder.UseStartup<Startup>();
+        //        });
+
+
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
+            return WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
         }
         //public static void Main(string[] args)
         //{

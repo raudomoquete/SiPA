@@ -7,9 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using SiPA.Web.Data;
 using SiPA.Web.Data.Entities;
 using SiPA.Web.Helpers;
+using System.Text;
 
 namespace SiPA.Web
 {
@@ -49,6 +51,17 @@ namespace SiPA.Web
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            //services.AddAuthentication()
+            //    .AddCookie()
+            //    .AddJwtBearer(cfg => 
+            //    {
+            //        cfg.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidIssuer = Configuration["Tokens:Issuer"],
+            //            ValidAudience = Configuration["Token:Audience"],
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+            //        };
+            //    });
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<ICombosHelper, CombosHelper>();

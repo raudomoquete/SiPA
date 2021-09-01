@@ -29,7 +29,7 @@ namespace SiPA.Web.Data
             //await CheckParishionersAsync(customer);
             await CheckManagersAsync(manager);
             await CheckSacramentsAsync();
-            await CheckRequestsAsync();
+            //await CheckRequestsAsync();
         }
 
         private async Task CheckRoles()
@@ -131,39 +131,38 @@ namespace SiPA.Web.Data
             }
         }
 
-        private async Task CheckRequestsAsync()
-        {
-            if (!_dataContext.Requests.Any())
-            {
-                var initialDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
-                var finalDate = initialDate.AddYears(1);
-                while (initialDate < finalDate)
-                {
-                    if (initialDate.DayOfWeek != DayOfWeek.Sunday)
-                    {
-                        var finalDate2 = initialDate.AddHours(10);
-                        while (initialDate < finalDate2)
-                        {
-                            _dataContext.Requests.Add(new Request
-                            {
-                                Date = initialDate.ToUniversalTime(),
-                                IsAvailable = true
-                            });
+        //private async Task CheckRequestsAsync()
+        //{
+        //    if (!_dataContext.Requests.Any())
+        //    {
+        //        var initialDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0);
+        //        var finalDate = initialDate.AddYears(1);
+        //        while (initialDate < finalDate)
+        //        {
+        //            if (initialDate.DayOfWeek != DayOfWeek.Sunday)
+        //            {
+        //                var finalDate2 = initialDate.AddHours(10);
+        //                while (initialDate < finalDate2)
+        //                {
+        //                    _dataContext.Requests.Add(new Request
+        //                    {
+        //                        RequestDate = initialDate.ToUniversalTime(),
+        //                    });
 
-                            initialDate = initialDate.AddMinutes(30);
-                        }
+        //                    initialDate = initialDate.AddMinutes(30);
+        //                }
 
-                        initialDate = initialDate.AddHours(14);
+        //                initialDate = initialDate.AddHours(14);
 
-                    }
-                    else
-                    {
-                        initialDate = initialDate.AddDays(1);
-                    }
-                }
+        //            }
+        //            else
+        //            {
+        //                initialDate = initialDate.AddDays(1);
+        //            }
+        //        }
 
-                await _dataContext.SaveChangesAsync();
-            }
-        }
+        //        await _dataContext.SaveChangesAsync();
+        //    }
+        //}
     }
 }

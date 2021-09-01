@@ -157,6 +157,9 @@ namespace SiPA.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CertificatesTypesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Comments")
                         .HasColumnType("nvarchar(max)");
 
@@ -174,9 +177,26 @@ namespace SiPA.Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CertificatesTypesId");
+
                     b.HasIndex("ParishionerId");
 
                     b.ToTable("Certificates");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.CertificatesTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CertificatesTypes");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Christening", b =>
@@ -401,12 +421,17 @@ namespace SiPA.Web.Migrations
                     b.Property<int?>("ParishionerId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("RequestTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParishionerId");
+
+                    b.HasIndex("RequestId");
 
                     b.HasIndex("RequestTypeId");
 
@@ -454,22 +479,48 @@ namespace SiPA.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment")
+                    b.Property<int?>("CertificatesTypesId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsAvailable")
+                    b.Property<bool>("Finished")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FinishedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Identification")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<int?>("ParishionerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PrintedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PrintingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RequestDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("RequestTypeId")
                         .HasColumnType("int");
 
+                    b.Property<string>("SentBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ShippingDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CertificatesTypesId");
 
                     b.HasIndex("ParishionerId");
 
@@ -754,9 +805,15 @@ namespace SiPA.Web.Migrations
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Certificate", b =>
                 {
+                    b.HasOne("SiPA.Web.Data.Entities.CertificatesTypes", "CertificatesTypes")
+                        .WithMany("Certificates")
+                        .HasForeignKey("CertificatesTypesId");
+
                     b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
                         .WithMany("Certificates")
                         .HasForeignKey("ParishionerId");
+
+                    b.Navigation("CertificatesTypes");
 
                     b.Navigation("Parishioner");
                 });
@@ -812,6 +869,10 @@ namespace SiPA.Web.Migrations
                         .WithMany("Histories")
                         .HasForeignKey("ParishionerId");
 
+                    b.HasOne("SiPA.Web.Data.Entities.Request", null)
+                        .WithMany("Histories")
+                        .HasForeignKey("RequestId");
+
                     b.HasOne("SiPA.Web.Data.Entities.RequestType", "RequestType")
                         .WithMany()
                         .HasForeignKey("RequestTypeId");
@@ -841,13 +902,19 @@ namespace SiPA.Web.Migrations
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.Request", b =>
                 {
+                    b.HasOne("SiPA.Web.Data.Entities.CertificatesTypes", "CertificatesTypes")
+                        .WithMany()
+                        .HasForeignKey("CertificatesTypesId");
+
                     b.HasOne("SiPA.Web.Data.Entities.Parishioner", "Parishioner")
                         .WithMany("Requests")
                         .HasForeignKey("ParishionerId");
 
                     b.HasOne("SiPA.Web.Data.Entities.RequestType", "RequestType")
-                        .WithMany()
+                        .WithMany("Requests")
                         .HasForeignKey("RequestTypeId");
+
+                    b.Navigation("CertificatesTypes");
 
                     b.Navigation("Parishioner");
 
@@ -876,6 +943,11 @@ namespace SiPA.Web.Migrations
                     b.Navigation("SacramentType");
                 });
 
+            modelBuilder.Entity("SiPA.Web.Data.Entities.CertificatesTypes", b =>
+                {
+                    b.Navigation("Certificates");
+                });
+
             modelBuilder.Entity("SiPA.Web.Data.Entities.Parishioner", b =>
                 {
                     b.Navigation("Certificates");
@@ -893,6 +965,16 @@ namespace SiPA.Web.Migrations
                     b.Navigation("SacramentTypes");
 
                     b.Navigation("Weddings");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.Request", b =>
+                {
+                    b.Navigation("Histories");
+                });
+
+            modelBuilder.Entity("SiPA.Web.Data.Entities.RequestType", b =>
+                {
+                    b.Navigation("Requests");
                 });
 
             modelBuilder.Entity("SiPA.Web.Data.Entities.SacramentType", b =>

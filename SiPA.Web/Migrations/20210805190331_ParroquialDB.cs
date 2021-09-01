@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SiPA.Web.Migrations
 {
-    public partial class CompleteDB : Migration
+    public partial class ParroquialDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,16 +55,16 @@ namespace SiPA.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RequestTypes",
+                name: "CertificatesTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RequestTypes", x => x.Id);
+                    table.PrimaryKey("PK_CertificatesTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,19 +212,36 @@ namespace SiPA.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RequestTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CertificatesTypesId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RequestTypes_CertificatesTypes_CertificatesTypesId",
+                        column: x => x.CertificatesTypesId,
+                        principalTable: "CertificatesTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Certificates",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Document = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParishionerId = table.Column<int>(type: "int", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    issuedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ParishionerId = table.Column<int>(type: "int", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    issuedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,63 +250,6 @@ namespace SiPA.Web.Migrations
                         name: "FK_Certificates_Parishioners_ParishionerId",
                         column: x => x.ParishionerId,
                         principalTable: "Parishioners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Histories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RequestTypeId = table.Column<int>(type: "int", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ParishionerId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Histories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Histories_Parishioners_ParishionerId",
-                        column: x => x.ParishionerId,
-                        principalTable: "Parishioners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Histories_RequestTypes_RequestTypeId",
-                        column: x => x.RequestTypeId,
-                        principalTable: "RequestTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Requests",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ParishionerId = table.Column<int>(type: "int", nullable: true),
-                    RequestTypeId = table.Column<int>(type: "int", nullable: true),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Requests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Requests_Parishioners_ParishionerId",
-                        column: x => x.ParishionerId,
-                        principalTable: "Parishioners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Requests_RequestTypes_RequestTypeId",
-                        column: x => x.RequestTypeId,
-                        principalTable: "RequestTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -311,6 +271,55 @@ namespace SiPA.Web.Migrations
                         name: "FK_SacramentTypes_Parishioners_ParishionerId",
                         column: x => x.ParishionerId,
                         principalTable: "Parishioners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Identification = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PrintingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PrintedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SentBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Finished = table.Column<bool>(type: "bit", nullable: false),
+                    FinishedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CertificatesTypesId = table.Column<int>(type: "int", nullable: true),
+                    RequestTypeId = table.Column<int>(type: "int", nullable: true),
+                    ParishionerId = table.Column<int>(type: "int", nullable: true),
+                    RequestId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Requests_CertificatesTypes_CertificatesTypesId",
+                        column: x => x.CertificatesTypesId,
+                        principalTable: "CertificatesTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_Parishioners_ParishionerId",
+                        column: x => x.ParishionerId,
+                        principalTable: "Parishioners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_RequestTypes_RequestTypeId",
+                        column: x => x.RequestTypeId,
+                        principalTable: "RequestTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -429,6 +438,83 @@ namespace SiPA.Web.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Weddings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlaceOfEvent = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    BrideFatherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    BrideFatherId = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
+                    BrideMotherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    BrideMotherId = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
+                    BrideGroomFatherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    BrideGroomFatherId = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
+                    BrideGroomMotherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    BrideGroomMotherId = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
+                    GodMother = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    GodMotherId = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
+                    GodFather = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    GoFatherId = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: true),
+                    WeedingDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Comments = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    CeremonialCelebrant = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    SacramentTypeId = table.Column<int>(type: "int", nullable: true),
+                    ParishionersId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Weddings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Weddings_Parishioners_ParishionersId",
+                        column: x => x.ParishionersId,
+                        principalTable: "Parishioners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Weddings_SacramentTypes_SacramentTypeId",
+                        column: x => x.SacramentTypeId,
+                        principalTable: "SacramentTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Histories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RequestTypeId = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ParishionerId = table.Column<int>(type: "int", nullable: true),
+                    RequestId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Histories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Histories_Parishioners_ParishionerId",
+                        column: x => x.ParishionerId,
+                        principalTable: "Parishioners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Histories_Requests_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "Requests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Histories_RequestTypes_RequestTypeId",
+                        column: x => x.RequestTypeId,
+                        principalTable: "RequestTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -509,6 +595,11 @@ namespace SiPA.Web.Migrations
                 column: "ParishionerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Histories_RequestId",
+                table: "Histories",
+                column: "RequestId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Histories_RequestTypeId",
                 table: "Histories",
                 column: "RequestTypeId");
@@ -524,9 +615,19 @@ namespace SiPA.Web.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Requests_CertificatesTypesId",
+                table: "Requests",
+                column: "CertificatesTypesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Requests_ParishionerId",
                 table: "Requests",
                 column: "ParishionerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_RequestId",
+                table: "Requests",
+                column: "RequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Requests_RequestTypeId",
@@ -534,9 +635,24 @@ namespace SiPA.Web.Migrations
                 column: "RequestTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RequestTypes_CertificatesTypesId",
+                table: "RequestTypes",
+                column: "CertificatesTypesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SacramentTypes_ParishionerId",
                 table: "SacramentTypes",
                 column: "ParishionerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Weddings_ParishionersId",
+                table: "Weddings",
+                column: "ParishionersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Weddings_SacramentTypeId",
+                table: "Weddings",
+                column: "SacramentTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -575,10 +691,13 @@ namespace SiPA.Web.Migrations
                 name: "Managers");
 
             migrationBuilder.DropTable(
-                name: "Requests");
+                name: "Weddings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Requests");
 
             migrationBuilder.DropTable(
                 name: "SacramentTypes");
@@ -588,6 +707,9 @@ namespace SiPA.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "Parishioners");
+
+            migrationBuilder.DropTable(
+                name: "CertificatesTypes");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

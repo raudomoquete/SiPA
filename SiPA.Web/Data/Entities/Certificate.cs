@@ -26,5 +26,7 @@ namespace SiPA.Web.Data.Entities
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? issuedDate { get; set; }
+
+        public CertificatesTypes CertificatesTypes { get; set; }
     }
 }

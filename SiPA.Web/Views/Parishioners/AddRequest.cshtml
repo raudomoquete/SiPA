@@ -1,0 +1,44 @@
+﻿@model SiPA.Web.Models.RequestVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Solicitar</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddRequest">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ParishionerId" />
+
+            <div class="form-group">
+                <label asp-for="RequestTypeId" class="control-label"></label>
+                <select asp-for="RequestTypeId" asp-items="Model.RequestTypes" class="form-control"></select>
+                <span asp-validation-for="RequestTypeId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Identification" class="control-label"></label>
+                <input asp-for="Identification" class="form-control" />
+                <span asp-validation-for="Identification" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RequestDate" class="control-label"></label>
+                <input asp-for="RequestDate.Value.Date" class="form-control" />
+                <span asp-validation-for="RequestDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

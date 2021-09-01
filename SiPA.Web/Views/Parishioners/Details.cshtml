@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Feligrés</h2>
@@ -15,6 +16,30 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.CivilStatus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.CivilStatus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Identification)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Identification)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Nationality)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.Nationality)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User.DateOfBirth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.DateOfBirth)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.User.Email)
@@ -75,9 +100,6 @@ else
                 <th>
                     @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().ChristeningDateLocal)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Christenings.FirstOrDefault().Comments)
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -95,9 +117,6 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ChristeningDateLocal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Comments)
                     </td>
                     <td>
                         <a asp-action="EditChristening" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
@@ -128,9 +147,6 @@ else
                 <th>
                     @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().FirstCommunionDateLocal)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstCommunions.FirstOrDefault().Comments)
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -145,9 +161,6 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FirstCommunionDateLocal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Comments)
                     </td>
                     <td>
                         <a asp-action="EditFirstCommunion" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
@@ -178,9 +191,6 @@ else
                 <th>
                     @Html.DisplayNameFor(model => model.Confirmations.FirstOrDefault().ConfirmationDateLocal)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Confirmations.FirstOrDefault().Comments)
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -195,9 +205,6 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ConfirmationDateLocal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Comments)
                     </td>
                     <td>
                         <a asp-action="EditConfirmation" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
@@ -228,9 +235,6 @@ else
                 <th>
                     @Html.DisplayNameFor(model => model.Weddings.FirstOrDefault().WeedingDateLocal)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Weddings.FirstOrDefault().Comments)
-                </th>
             </tr>
         </thead>
         <tbody>
@@ -244,9 +248,6 @@ else
                 </tr>
                 <tr>
                     @Html.DisplayFor(modelItem => item.WeedingDateLocal)
-                </tr>
-                <tr>
-                    @Html.DisplayFor(modelItem => item.Comments)
                 </tr>
             }
         </tbody>

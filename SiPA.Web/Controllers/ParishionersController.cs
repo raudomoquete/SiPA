@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SiPA.Web.ActionFilter;
+//using SiPA.Web.ActionFilter;
 using SiPA.Web.Data;
 using SiPA.Web.Data.Entities;
 using SiPA.Web.Helpers;
@@ -111,7 +111,7 @@ namespace SiPA.Web.Controllers
 
                     var parishioner = new Parishioner
                     {
-                        Requests = new List<Request>(),
+                        //Requests = new List<Request>(),
                         SacramentTypes = new List<SacramentType>(),
                         User = userInDB
                     };
@@ -229,7 +229,7 @@ namespace SiPA.Web.Controllers
         }
      
         [HttpGet]
-        [RestoreModelStateFromTempData]
+        //[RestoreModelStateFromTempData]
         public async Task<IActionResult> AddChristening(int? id)
         {
             if (id == null)
@@ -265,14 +265,14 @@ namespace SiPA.Web.Controllers
         }
 
         [HttpPost]
-        [SetTempDataModelState]
+        //[SetTempDataModelState]
         public async Task<IActionResult> AddChristening(ChristeningViewModel model)
         {
-            if (model.Id > 0)
-            {
-                ModelState.AddModelError("", "Solo puede agregar un bautizo por Feligrés");
-                return RedirectToAction("Details");
-            }
+            //if (model.Id > 0)
+            //{
+            //    ModelState.AddModelError("", "Solo puede agregar un bautizo por Feligrés");
+            //    return RedirectToAction("Details");
+            //}
 
             if (ModelState.IsValid)
             {
@@ -333,7 +333,7 @@ namespace SiPA.Web.Controllers
                 .ThenInclude(o => o.User)
                 .Include(s => s.Parishioner)
                 .ThenInclude(s => s.Histories)
-                .ThenInclude(h => h.RequestType)
+                //.ThenInclude(h => h.RequestType)
                 .FirstOrDefaultAsync(o => o.Id == id.Value);
             if (christening == null)
             {
@@ -364,7 +364,7 @@ namespace SiPA.Web.Controllers
         }
 
         [HttpGet]
-        [RestoreModelStateFromTempData]
+        //[RestoreModelStateFromTempData]
         public async Task<IActionResult> AddFirstCommunion(int? id)
         {
             if (id == null)
@@ -399,7 +399,7 @@ namespace SiPA.Web.Controllers
         }
 
         [HttpPost]
-        [SetTempDataModelState]
+        //[SetTempDataModelState]
         public async Task<IActionResult> AddFirstCommunion(FirstCommunionViewModel model)
         {
             if (ModelState.IsValid)
@@ -462,7 +462,7 @@ namespace SiPA.Web.Controllers
                 .ThenInclude(p => p.User)
                 .Include(f => f.Parishioner)
                 .ThenInclude(p => p.Histories)
-                .ThenInclude(p => p.RequestType)
+                //.ThenInclude(p => p.RequestType)
                 .FirstOrDefaultAsync(p => p.Id == id.Value);
             if (firstCommunion == null)
             {
@@ -527,7 +527,7 @@ namespace SiPA.Web.Controllers
         }
 
         [HttpPost]
-        [SetTempDataModelState]
+        //[SetTempDataModelState]
         public async Task<IActionResult> AddConfirmation(ConfirmationViewModel model)
         {
             if (ModelState.IsValid)
@@ -588,7 +588,7 @@ namespace SiPA.Web.Controllers
                 .ThenInclude(c => c.User)
                 .Include(c => c.Parishioner)
                 .ThenInclude(c => c.Histories)
-                .ThenInclude(c => c.RequestType)
+                //.ThenInclude(c => c.RequestType)
                 .FirstOrDefaultAsync(p => p.Id == id.Value);
             if (confirmation == null)
             {
@@ -741,6 +741,57 @@ namespace SiPA.Web.Controllers
             _context.Weddings.Remove(wedding);
             await _context.SaveChangesAsync();
             return RedirectToAction($"{nameof(Details)}/{wedding.Parishioners.Id}");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddRequest(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var parishioner = await _context.Parishioners.FindAsync(id.Value);
+
+            if (parishioner == null)
+            {
+                return NotFound();
+            }
+
+            var model = new RequestVM
+            {
+                RequestDate = DateTime.Today,
+                ParishionerId = parishioner.Id,
+                RequestTypes = _combosHelper.GetComboRequestTypes()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddRequest(RequestVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var request = await _converterHelper.ToRequestAsync(model, true);
+                _context.Requests.Add(request);
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction($"{nameof(Index)}");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.ToString());
+                    return View(model);
+                }
+            }
+
+            model.Parishioners = _combosHelper.GetComboParishioners();
+            model.RequestTypes = _combosHelper.GetComboRequestTypes();
+            return View(model);
         }
 
 

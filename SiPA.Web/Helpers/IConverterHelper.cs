@@ -25,8 +25,11 @@ namespace SiPA.Web.Helpers
 
         WeddingVM ToWeddingVM(Wedding wedding);
 
-
         Task<History> ToHistoryAsync(HistoryViewModel model, bool isNew);
+
+        Task<Request> ToRequestAsync(RequestVM model, bool isNew);
+
+        RequestVM ToRequestVM(Request request);
 
         //HistoryViewModel ToHistoryViewModel(History history);
 
