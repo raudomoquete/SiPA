@@ -34,6 +34,22 @@
     <None Update="ChristeningDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
     </None>
+    <None Update="ReportDataSet\dsChristening.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsChristening.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="ReportDataSet\dsConfirmation.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsConfirmation.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="ReportDataSet\dsFc.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsFc.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="ReportDataSet\dsWedding.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsWedding.Designer.cs</LastGenOutput>
+    </None>
     <None Update="UDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>UDataSet.Designer.cs</LastGenOutput>
@@ -41,11 +57,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ReportDataSet\dsChristening.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsChristening.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="ReportDataSet\dsConfirmation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsConfirmation.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="ReportDataSet\dsFc.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsFc.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="ReportDataSet\dsWedding.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsWedding.xsd</DependentUpon>
+    </Compile>
     <Compile Update="UDataSet.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>UDataSet.xsd</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Report.Data\Report.Data.csproj" />
   </ItemGroup>
 
 </Project>

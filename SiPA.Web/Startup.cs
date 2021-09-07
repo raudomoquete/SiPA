@@ -70,6 +70,8 @@ namespace SiPA.Web
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddAutoMapper(typeof(Startup));
         }       
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,9 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Reports\Christening.rdlc" />
+    <Content Remove="wwwroot\Reports\Confirmation.rdlc" />
+    <Content Remove="wwwroot\Reports\FirstCommunion.rdlc" />
+    <Content Remove="wwwroot\Reports\Wedding.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Cquential.Microsoft.ReportViewer.DataVisualization" Version="10.0.40219.1" />
     <PackageReference Include="Cquential.Microsoft.ReportViewer.ProcessingObjectModel" Version="10.0.40219.1" />
+    <PackageReference Include="ExtentReports" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.9">
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
@@ -39,12 +48,44 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Reports\Christening.rdlc" />
+    <None Include="wwwroot\Reports\Confirmation.rdlc" />
+    <None Include="wwwroot\Reports\FirstCommunion.rdlc" />
+    <None Include="wwwroot\Reports\Wedding.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SiPA.Common\SiPA.Common.csproj">
       <TreatAsUsed>true</TreatAsUsed>
     </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ReportDataSet\dsChristening.Designer.cs">
+      <DependentUpon>dsChristening.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="ReportDataSet\dsConfirmation.Designer.cs">
+      <DependentUpon>dsConfirmation.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="ReportDataSet\dsFc.Designer.cs">
+      <DependentUpon>dsFc.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="ReportDataSet\dsParishioner.Designer.cs">
+      <DependentUpon>dsParishioner.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="ReportDataSet\dsWedding.Designer.cs">
+      <DependentUpon>dsWedding.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="SacramentsDataSet.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -63,6 +104,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ReportDataSet\dsChristening.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsChristening.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Update="ReportDataSet\dsConfirmation.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsConfirmation.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Update="ReportDataSet\dsFc.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsFc.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Update="ReportDataSet\dsParishioner.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsParishioner.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
+    <None Update="ReportDataSet\dsWedding.xsd">
+      <SubType>Designer</SubType>
+      <LastGenOutput>dsWedding.Designer.cs</LastGenOutput>
+      <Generator>MSDataSetGenerator</Generator>
+    </None>
     <None Update="SacramentsDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SacramentsDataSet.Designer.cs</LastGenOutput>

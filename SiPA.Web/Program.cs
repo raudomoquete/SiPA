@@ -39,6 +39,8 @@ namespace SiPA.Web
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseWebRoot("wwwroot")
                 .UseStartup<Startup>();
         }
         //public static void Main(string[] args)

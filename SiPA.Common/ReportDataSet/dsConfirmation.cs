@@ -1,0 +1,3 @@
+﻿namespace SiPA.Common.ReportDataSet
+{
+}
