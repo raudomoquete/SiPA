@@ -57,12 +57,7 @@ namespace SiPA.Web.Controllers.API
                     RequestDate = p.RequestDate,
                     Id = p.Id,
                     //RequestTypes = p.RequestTypes,
-                    Histories = p.Histories.Select(h => new HistoryResponse
-                    {
-                        Date = h.Date,
-                        Description = h.Description,
-                        Id = h.Id
-                    }).ToList()
+                 
                 }).ToList()             
             };
 

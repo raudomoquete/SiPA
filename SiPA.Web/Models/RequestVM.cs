@@ -10,16 +10,12 @@ namespace SiPA.Web.Models
 {
     public class RequestVM : Request
     {
-        [Display(Name = "Feligrés")]
+        [Display(Name = "Solicitante")]
         public int ParishionerId { get; set; }
-
         public IEnumerable<SelectListItem> Parishioners { get; set; }
 
         [Display(Name = "Tipo de Solicitud")]
         public int RequestTypeId { get; set; }
-
-        public int CertificateId { get; set; }
-
         public IEnumerable<SelectListItem> RequestTypes { get; set; }
     }
 }

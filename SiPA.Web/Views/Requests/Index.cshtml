@@ -6,200 +6,84 @@
 
 <h1 class="page-header"><i class="fa fa-exchange"></i> Solicitudes</h1>
 
+<p>
+    <a asp-action="AddRequest" class="btn btn-success"> Crear Nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Parishioner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @if (item.Parishioner != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parishioner.User.FirstName)
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
 
-<div class="row">
-    <a href="@Url.Action("Index", "Request", new { id = "Pendientes" })">
-        <div class="cambiar">
-            <div class="col-lg-3 col-md-3">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-edit fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <h3>@ViewBag.Pendientes</h3>
-                                <div>Pendientes</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-    <a href="@Url.Action("Index", "Request", new { id = "Impresas" })">
-        <div class="cambiar">
-            <div class="col-lg-3 col-md-3">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-print fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <h3>@ViewBag.Impresas</h3>
-                                <div>Impresas</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-    <a href="@Url.Action("Index", "Request", new { id = "Enviadas" })">
-        <div class="cambiar">
-            <div class="col-lg-3 col-md-3">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-send fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <h3>@ViewBag.Enviadas</h3>
-                                <div>Enviadas</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-    <a href="@Url.Action("Index", "Request", new { id = "Finalizadas" })">
-        <div class="cambiar">
-            <div class="col-lg-3 col-md-3">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-close fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <h3>@ViewBag.Finalizadas</h3>
-                                <div>Finalizadas</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-</div>
+            @if (item.RequestType != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestType.Name)
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Solicitudes @ViewBag.titulo
-                <div class="pull-right">
-                    @Html.ActionLink("Pendientes", "Index", new { id = "Pendientes" }) |@Html.ActionLink("Impresas", "Index", new { id = "Impresas" }) |@Html.ActionLink("Enviadas", "Index", new { id = "Enviadas" })
-                </div>
-            </div>
+            @if (item.RequestDate != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestDate)
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
 
-            <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover table-condensed display" id="">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>
-                                Solicitante
-                            </th>
-                            <th>
-                                Tipo
-                            </th>
-                            <th>
-                                Fecha de Solicitud
-                            </th>
-                            <th>
-                                Fecha de Impresión
-                            </th>
-                            <th>
-                                Impreso Por
-                            </th>
-                            <th>
-                                Fecha de Envío
-                            </th>
-                            <th>
-                                Enviado Por
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
-                                            <i class="fa fa-gear"></i> <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a> |
+            <button data-id="@item.Id" class="btn btn-danger deleteItem" data-toggle="modal" data-target="#deleteDialog">Borrar</button>
+        </td>
+        </tr>
+}
+    </tbody>
+</table>
 
-                                            @if (item.PrintedBy == null)
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Imprimir", "Request", new { id = item.Id }, null)"><i class="fa fa-print fa-fw"></i> Imprimir</a>
-                                                </li>
-                                                <li>
-                                                    <a href="@Url.Action("Finalizar", "Request", new { id = item.Id }, null)"><i class="fa fa-close fa-fw"></i> Finalizar</a>
-                                                </li>
-                                            }
-                                            else
-                                            {
-                                                <li>
-                                                    <a href="@Url.Action("Enviar", "Request", new { id = item.Id }, null)"><i class="fa fa-send fa-fw"></i> Enviar</a>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Parishioner.User.FirstName) @Html.DisplayFor(modelItem => item.Parishioner.User.LastName) @Html.DisplayFor(modelItem => item.Parishioner.User.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CertificatesTypes.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RequestDate)
-                                </td>
-                                @if (item.PrintedBy != null)
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PrintingDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PrintedBy)
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                    <td></td>
-                                }
-                                @if (item.SentBy != null)
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ShippingDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SentBy)
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                    <td></td>
-                                }
+<partial name="_DeleteDialog" />
 
-                                <td>
-                                    <a asp-action="DetailsRequest" asp-route-id="@item.Id" class="btn btn-info">Detalles</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+@section Scripts{ 
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var item_to_delete;
+
+            $('.deleteItem').click((e) => {
+                item_to_delete = e.currentTarget.dataset.id;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Requests/Delete/' + item_to_delete;
+            });
+        });
+    </script>
+}

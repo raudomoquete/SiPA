@@ -10,6 +10,17 @@ namespace SiPA.Web.Data.Entities
 
         public User User { get; set; }
 
+        //public string ParishionerFullName
+        //{
+        //    get { return User.FirstName + " " + User.LastName; }
+
+        //    //set
+        //    //{
+        //    //    User.FirstName = value;
+        //    //    User.LastName = value;
+        //    //}
+        //}
+
         public ICollection<Confirmation> Confirmations { get; set; }
 
         public ICollection<FirstCommunion> FirstCommunions { get; set; }

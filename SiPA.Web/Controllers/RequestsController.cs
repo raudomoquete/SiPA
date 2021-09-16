@@ -18,71 +18,67 @@ namespace SiPA.Web.Controllers
         private readonly DataContext _context;
         private readonly ICombosHelper _combos;
         private readonly IConverterHelper _converter;
+        private readonly IUserHelper _userHelper;
 
         public RequestsController(
             DataContext context,
             ICombosHelper combos,
-            IConverterHelper request
-            )
+            IConverterHelper converter,
+            IUserHelper userHelper)
         {
             _context = context;
             _combos = combos;
-            _converter = request;
+            _converter = converter;
+            _userHelper = userHelper;
         }
-        public IActionResult Index(string id)
+
+        // GET: Requests
+        public IActionResult Index()
         {
-            var request = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.PrintedBy == null);
-            switch (id)
+            return View(_context.Requests
+                .Include(r => r.Parishioner)
+                .ThenInclude(p => p.User)
+                .Include(r => r.RequestType));
+        }
+
+        [HttpGet]
+        public IActionResult AddRequest()
+        {
+            var model = new RequestVM
             {
-                case "Pendientes":
-                    request = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.PrintedBy == null && !x.Finished);
-                    break;
-                case "Impresas":
-                    request = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.PrintedBy != null && x.SentBy == null);
-                    break;
-                case "Enviadas":
-                    request = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.SentBy != null);
-                    break;
-                case "Finalizadas":
-                    request = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.Finished);
-                    break;
-                default:
-                    request = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.PrintedBy == null);
-                    break;
+                RequestTypes = _combos.GetComboRequestTypes(),
+                Parishioners = _combos.GetComboParishioners()
+            };
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddRequest(RequestVM model)
+        {
+            if (ModelState.IsValid)          {
+
+                var request = await _converter.ToRequestAsync(model, true);
+                _context.Requests.Add(request);
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.ToString());
+                    return View(model);
+                }            
             }
 
-            ViewBag.Pendientes = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.PrintedBy == null && !x.Finished).Count();
-            ViewBag.Impresas = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.PrintedBy != null && x.SentBy == null).Count();
-            ViewBag.Enviadas = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.SentBy != null).Count();
-            ViewBag.Finalizadas = _context.Requests.Include(r => r.CertificatesTypes).Where(x => x.Finished).Count();
-
-            ViewBag.title = id;
-            return View(request.ToList());               
+            return View(model);
         }
 
-        //public IActionResult Print(int id)
-        //{
-        //    Request request = _context.Requests.Find(id);
-
-        //    if (request != null)
-        //    {
-        //        request.PrintingDate = DateTime.Now;
-        //        request.PrintedBy = User.Identity.Name;
-        //        _context.Entry(request).State = EntityState.Modified;
-        //        _context.SaveChanges();
-        //    }
-        //    switch (request.CertificateId)
-        //    {
-        //        case 1:
-        //            return RedirectToAction("History", "Parishioners", new { id = request.Identification, type = request.CertificateId });
-        //        case 2:
-        //            return RedirectToAction("Certificate", "Parishioners", new { id = request.Identification, type = request.CertificateId });
-        //        default:
-        //            return RedirectToAction("Certificate", "Parishioners", new { id = request.Identification, type = request.CertificateId });
-        //    }
-        //}
-
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -91,72 +87,54 @@ namespace SiPA.Web.Controllers
 
             var request = await _context.Requests
                 .Include(r => r.Parishioner)
-                .Include(r => r.Histories)
+                .ThenInclude(p => p.User)
                 .Include(r => r.RequestType)
-                .FirstOrDefaultAsync(r => r.Id == id);
+                .FirstOrDefaultAsync(r => r.Id == id.Value);
 
             if (request == null)
             {
                 return NotFound();
             }
 
-            return View(request);
+            return View(_converter.ToRequestVM(request));
         }
 
-        //[HttpGet]
-        //public IActionResult AddRequest()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddRequest([Bind("Id,Identification,Email,RequestDate," +
-        //    "PrintingDate,PrintedBy,ShippingDate,SentBy,Finished,FinishedBy")]Request request)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Requests.Add(request);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(request);
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    var request = await _converter.ToRequestAsync(model, true);
-        //    //    _context.Requests.Add(request);
-
-        //    //    try
-        //    //    {
-        //    //        await _context.SaveChangesAsync();
-        //    //        return RedirectToAction($"{nameof(Index)}");
-        //    //    }
-        //    //    catch (Exception ex)
-        //    //    {
-        //    //        ModelState.AddModelError(string.Empty, ex.ToString());
-        //    //        return View(model);
-        //    //    }
-        //    //}
-
-        //    //model.Parishioners = _combos.GetComboParishioners();
-        //    //model.RequestTypes = _combos.GetComboRequestTypes();
-        //    //return View(model);
-        //}
-
-        public ActionResult Finish(int id)
+        [HttpPost]
+        public async Task<IActionResult> Edit(RequestVM model)
         {
-            Request request = _context.Requests.Find(id);
-
-            if (request != null)
+            if (ModelState.IsValid)
             {
-                request.Finished = true;
-                request.FinishedBy = User.Identity.Name;
-                _context.Entry(request).State = EntityState.Modified;
-                _context.SaveChanges();
+                var request = await _converter.ToRequestAsync(model, false);
+                _context.Requests.Update(request);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
 
+            return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var request = await _context.Requests
+                .Include(r => r.Parishioner)
+                .ThenInclude(p => p.User)
+                .Include(r => r.RequestType)
+                .FirstOrDefaultAsync(r => r.Id == id.Value);
+
+            if (request == null)
+            {
+                return NotFound();
+            }
+
+            _context.Requests.Remove(request);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
     }
 }
+   

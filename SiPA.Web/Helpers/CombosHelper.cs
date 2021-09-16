@@ -88,7 +88,7 @@ namespace SiPA.Web.Helpers
             var list = _dataContext.RequestTypes.Select(st => new SelectListItem
             {
                 Text = st.Name,
-                Value = $"{st.Id}"
+                Value = st.Id.ToString(),
             }).OrderBy(st => st.Text)
                .ToList();
             list.Insert(0, new SelectListItem
@@ -101,11 +101,11 @@ namespace SiPA.Web.Helpers
 
         public IEnumerable<SelectListItem> GetComboParishioners()
         {
-            var list = _dataContext.Users.Select(p => new SelectListItem
+            var list = _dataContext.Parishioners.Select(p => new SelectListItem
             {
-                Text = p.FirstName,
+                Text = p.User.ParishionerFullName,
                 Value = $"{p.Id}"
-            }).OrderBy(u => u.Text)
+            }).OrderBy(p => p.Text)
             .ToList();
             list.Insert(0, new SelectListItem
             {

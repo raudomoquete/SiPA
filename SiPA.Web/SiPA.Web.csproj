@@ -44,10 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\Reports\Christening.rdlc" />
     <None Include="wwwroot\Reports\Confirmation.rdlc" />
     <None Include="wwwroot\Reports\FirstCommunion.rdlc" />
@@ -141,6 +137,10 @@
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SiPADataSet.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

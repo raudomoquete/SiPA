@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SiPA.Web.Data.Entities
@@ -22,10 +23,10 @@ namespace SiPA.Web.Data.Entities
         {
             get { return FirstName + " " + LastName; }
 
-            set 
-            { 
-                FirstName = value; 
-                LastName = value; 
+            set
+            {
+                FirstName = value;
+                LastName = value;
             }
         }
 
@@ -48,6 +49,8 @@ namespace SiPA.Web.Data.Entities
         [MaxLength(13, ErrorMessage = "El {0} campo no puede tener mas de {1} caracteres.")]
         public string CivilStatus { get; set; }
         public string FullName => $"{FirstName} {LastName}";
+
+        public ICollection<Request> Requests { get; set; }
 
     }
 }

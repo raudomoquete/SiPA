@@ -24,9 +24,9 @@ namespace SiPA.Web.Data
             await _dataContext.Database.EnsureCreatedAsync();
             await CheckRoles();
             var manager = await CheckUserAsync("Raudo","Moquete","sanchezz1ero@gmail.com","829 305 6303","Manzana 6 #19,El Brisal","Administrator");
-            //var customer = await CheckUserAsync("Adoni", "Montero", "adonimontero20@gmail.com", "829 381 6410", "Calle Luna calle sol","Customer");
+            var customer = await CheckUserAsync("Adoni", "Montero", "adonimontero20@gmail.com", "829 381 6410", "Calle Luna calle sol","Customer");
             await CheckRequestTypesAsync();
-            //await CheckParishionersAsync(customer);
+            await CheckParishionersAsync(customer);
             await CheckManagersAsync(manager);
             await CheckSacramentsAsync();
             //await CheckRequestsAsync();

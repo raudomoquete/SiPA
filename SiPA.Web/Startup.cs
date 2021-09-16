@@ -53,7 +53,7 @@ namespace SiPA.Web
 
             //services.AddAuthentication()
             //    .AddCookie()
-            //    .AddJwtBearer(cfg => 
+            //    .AddJwtBearer(cfg =>
             //    {
             //        cfg.TokenValidationParameters = new TokenValidationParameters
             //        {
@@ -62,6 +62,7 @@ namespace SiPA.Web
             //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
             //        };
             //    });
+
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddScoped<ICombosHelper, CombosHelper>();

@@ -20,7 +20,6 @@ namespace SiPA.Web.Helpers
             _dataContext = dataContext;
             _combosHelper = combosHelper;
         }
-
        
         public async Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew)
         {
@@ -221,25 +220,15 @@ namespace SiPA.Web.Helpers
                 RequestType = await _dataContext.RequestTypes.FindAsync(model.RequestTypeId)
             };
         }
-
+      
         public async Task<Request> ToRequestAsync(RequestVM model, bool isNew)
         {
             var request = new Request
             {
-                Histories = model.Histories,
                 RequestDate = model.RequestDate,
-                Id = isNew ? 0 : model.Id,
-                Identification = model.Identification,
-                Email = model.Parishioner.User.Email,
-                PrintingDate = model.PrintingDate,
-                PrintedBy = model.Parishioner.User.FirstName,
-                ShippingDate = model.ShippingDate,
-                SentBy = model.SentBy,
-                Finished = model.Finished,
-                FinishedBy = model.Parishioner.User.FirstName,
-                CertificatesTypes = await _dataContext.CertificatesTypes.FindAsync(model.CertificateId),
+                Id = isNew ? 0 : model.Id,             
                 RequestType = await _dataContext.RequestTypes.FindAsync(model.RequestTypeId),
-                Parishioner = await _dataContext.Parishioners.FindAsync(model.Parishioner)
+                Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId)
             };
 
             return request;
@@ -250,80 +239,12 @@ namespace SiPA.Web.Helpers
             return new RequestVM
             {
                 RequestDate = request.RequestDate,
-                Histories = request.Histories,
                 Id = request.Id,
-                Identification = request.Identification,
-                Email = request.Parishioner.User.Email,
-                PrintingDate = request.PrintingDate,
-                PrintedBy = request.Parishioner.User.FirstName,
-                ShippingDate = request.ShippingDate,
-                SentBy = request.Parishioner.User.FirstName,
-                Finished = request.Finished,
-                FinishedBy = request.Parishioner.User.FirstName,
-                CertificateId = request.CertificatesTypes.Id,
                 ParishionerId = request.Parishioner.Id,
+                Parishioners = _combosHelper.GetComboParishioners(),
+                RequestTypeId = request.RequestType.Id,
                 RequestTypes = _combosHelper.GetComboRequestTypes()
             };
         }
-
-        //public HistoryViewModel ToHistoryViewModel(History history)
-        //{
-        //    return new HistoryViewModel
-        //    {
-        //        Date = history.Date,
-        //        Description = history.Description,
-        //        Id = history.Id,
-        //        SacramentId = history.Sacrament.SacramentId,
-        //        RequestTypeId = history.RequestType.Id,
-        //        RequestTypes = _combosHelper.GetComboRequestTypes()
-        //    };
-        //}
-
-        //public async Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew)
-        //{
-        //    var christening = new Christening
-        //    {
-        //        ChristeningDate = model.ChristeningDate,
-        //        Certificate = model.Certificate,
-        //        Id = isNew ? 0 : model.Id,
-        //        PlaceofEvent = model.PlaceofEvent,
-        //        FatherName = model.FatherName,
-        //        FatherId = model.FatherId,
-        //        MotherName = model.MotherName,
-        //        MotherId = model.MotherId,
-        //        GodFatherName = model.GodFatherName,
-        //        GodFatherId = model.GodFatherId,
-        //        GodMotherName = model.GodMotherName,
-        //        GodMotherId = model.GodMotherId,
-        //        Comments = model.Comments,
-        //        CeremonialCelebrant = model.CeremonialCelebrant,
-        //        Parishioner = await _dataContext.Parishioners.FindAsync(model.ParishionerId)
-        //    };
-
-        //    return christening;
-        //}
-
-        //public ChristeningViewModel ToChristeningViewModel(Christening christening)
-        //{
-        //    return new ChristeningViewModel
-        //    {
-        //        ChristeningDate = christening.ChristeningDate,
-        //        Certificate = christening.Certificate,
-        //        Id = christening.Id,
-        //        PlaceofEvent = christening.PlaceofEvent,
-        //        FatherName = christening.FatherName,
-        //        FatherId = christening.FatherId,
-        //        MotherName = christening.MotherName,
-        //        MotherId = christening.MotherId,
-        //        GodFatherName = christening.GodFatherName,
-        //        GodFatherId = christening.GodFatherId,
-        //        GodMotherName = christening.GodMotherName,
-        //        GodMotherId = christening.GodMotherId,
-        //        Comments = christening.Comments,
-        //        CeremonialCelebrant = christening.CeremonialCelebrant,
-        //        Parishioner = christening.Parishioner,
-        //        ParishionerId = christening.Parishioner.Id
-        //    };
-        //}
     }
 }
