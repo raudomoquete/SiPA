@@ -1,5 +1,6 @@
 using Android.App;
 using Android.Content;
+using Android.OS;
 using AndroidX.AppCompat.App;
 
 namespace SiPA.Prism.Droid
@@ -7,13 +8,14 @@ namespace SiPA.Prism.Droid
     [Activity(Theme = "@style/MainTheme.Splash",
               MainLauncher = true,
               NoHistory = true)]
-    public class SplashActivity : AppCompatActivity
+    public class SplashActivity : Activity
     {
         // Launches the startup task
-        protected override void OnResume()
+        protected override void OnCreate(Bundle bundle)
         {
-            base.OnResume();
-            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+            base.OnCreate(bundle);
+            System.Threading.Thread.Sleep(1); //TODO: Set 1800
+            StartActivity(typeof(MainActivity));
         }
     }
 }

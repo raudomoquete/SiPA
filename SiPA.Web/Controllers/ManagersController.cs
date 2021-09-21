@@ -22,9 +22,10 @@ namespace SiPA.Web.Controllers
         }
 
         // GET: Managers
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Managers.ToListAsync());
+            return View(_context.Managers
+                .Include(m => m.User));
         }
 
         // GET: Managers/Details/5

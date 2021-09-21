@@ -24,19 +24,22 @@ namespace SiPA.Web.Controllers
         private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
         private readonly ISacramentHelper _sacramentHelper;
+        private readonly IMailHelper _mailHelper;
 
         public ParishionersController(
             DataContext context,
             IUserHelper userHelper,
             ICombosHelper combosHelper,
             IConverterHelper converterHelper,
-            ISacramentHelper sacramentHelper)
+            ISacramentHelper sacramentHelper,
+            IMailHelper mailHelper)
         {
             _context = context;
             _userHelper = userHelper;
             _combosHelper = combosHelper;
             _converterHelper = converterHelper;
             _sacramentHelper = sacramentHelper;
+            _mailHelper = mailHelper;
         }
 
         // GET: Parishioners
@@ -108,11 +111,9 @@ namespace SiPA.Web.Controllers
                     var userInDB = await _userHelper.GetUserByEmailAsync(model.UserName);
                     await _userHelper.AddUserToRoleAsync(userInDB, "Customer");
 
-
                     var parishioner = new Parishioner
                     {
-                        //Requests = new List<Request>(),
-                        SacramentTypes = new List<SacramentType>(),
+                        Requests = new List<Request>(),
                         User = userInDB
                     };
 
@@ -121,6 +122,19 @@ namespace SiPA.Web.Controllers
                     try
                     {
                         await _context.SaveChangesAsync();
+
+                        var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                        var tokenLink = Url.Action("ConfirmEmail", "Account", new
+                        {
+                            userid = user.Id,
+                            token = myToken
+                        }, protocol: HttpContext.Request.Scheme);
+
+                        _mailHelper.SendMail(model.UserName, "Email confirmation", $"<h1>Email Confirmation</h1>" +
+                            $"To allow the user, " +
+                            $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirm Email</a>");
+
+
                         return RedirectToAction(nameof(Index));
                     }
                     catch (Exception ex)
@@ -130,13 +144,13 @@ namespace SiPA.Web.Controllers
                     }
                 }
 
-                ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
+                ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);            
+
             }
 
             return View(model);
         }
 
-        // GET: Parishioners/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -146,7 +160,7 @@ namespace SiPA.Web.Controllers
 
             var parishioner = await _context.Parishioners
                 .Include(p => p.User)
-                .FirstOrDefaultAsync(p => p.Id == id.Value);
+                .FirstOrDefaultAsync(p => p.Id == id.Value);            
             if (parishioner == null)
             {
                 return NotFound();
@@ -175,8 +189,8 @@ namespace SiPA.Web.Controllers
             if (ModelState.IsValid)
             {
                 var parishioner = await _context.Parishioners
-                .Include(p => p.User)
-                .FirstOrDefaultAsync(p => p.Id == model.Id);
+                    .Include(p => p.User)
+                    .FirstOrDefaultAsync(p => p.Id == model.Id);
 
                 parishioner.User.FirstName = model.FirstName;
                 parishioner.User.LastName = model.LastName;
@@ -244,15 +258,15 @@ namespace SiPA.Web.Controllers
                 return NotFound();
             }
 
-            var feligres = await _context.Parishioners
-                .Include(p => p.Christenings)
-                .FirstOrDefaultAsync(p => p.Id == id);
+            //var feligres = await _context.Parishioners
+            //    .Include(p => p.Christenings)
+            //    .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (feligres.Christenings.Count > 0)
-            {
-                ModelState.AddModelError("", "Solo puede agregar un bautizo por Feligrés");
-                //return RedirectToAction("Details", new { Id });
-            }
+            //if (feligres.Christenings.Count > 0)
+            //{
+            //    ModelState.AddModelError("", "Solo puede agregar un bautizo por Feligrés");
+            //    //return RedirectToAction("Details", new { Id });
+            //}
 
             var model = new ChristeningViewModel
             {
@@ -279,7 +293,7 @@ namespace SiPA.Web.Controllers
                 var christening = await _converterHelper.ToChristeningAsync(model, true);
                 _context.Christenings.Add(christening);
                 await _context.SaveChangesAsync();
-                return RedirectToAction($"{nameof(Details)}/{model.ParishionerId}");               
+                return RedirectToAction($"Details/{model.ParishionerId}");               
             }
 
             model.SacramentTypes = _combosHelper.GetChristening();
