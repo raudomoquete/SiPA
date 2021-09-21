@@ -3,6 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: rgba(0,0,0,0.05);
 }
 
 /* Wrapping element */
@@ -10,6 +11,33 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.btn-warning{
+    color: #53DDB9;
+    background-color: #FFE8D8;
+    border-color: #53DDB9;
+}
+
+.btn-warning:hover {
+    color: #FFE8DB;
+    background-color: #53DDB9;
+    border-color: #FFE8DB;
+}
+
+.btn-success {
+    color: #FFE8D8;
+    background-color: #53DDB9;
+    border-color: #FFE8D8;
+}
+
+.btn-success:hover {
+    color: #53DDB9;
+    background-color: #FFE8D8;
+    border-color: #53DDB9;
+}
+.body-content h2 {
+    color: #53DDB9;
 }
 
 /* Carousel */

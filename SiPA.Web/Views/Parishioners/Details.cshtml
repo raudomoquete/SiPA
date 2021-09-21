@@ -2,20 +2,17 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Feligrés</h2>
 
 <div>
-    <h4>Detalles</h4>
-    <hr />
     <dl class="dl-horinzontal">
         <dt>
             @Html.DisplayNameFor(model => model.User.FirstName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.User.FullName)
+            @Html.DisplayFor(model => model.User.FirstName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.User.CivilStatus)

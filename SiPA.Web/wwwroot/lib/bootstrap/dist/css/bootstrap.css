@@ -5,6 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
+  box-sizing: border-box;
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -3211,21 +3212,21 @@ fieldset[disabled] .btn-default.focus {
   background-color: #333;
 }
 .btn-primary {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+    color: #53DDB9;
+    background-color: #FFE8DB;
+    border-color: #53DDB9;
 }
-.btn-primary:focus,
-.btn-primary.focus {
-  color: #fff;
-  background-color: #286090;
-  border-color: #122b40;
-}
-.btn-primary:hover {
-  color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
-}
+    .btn-primary:focus,
+    .btn-primary.focus {
+        color: #53DDB9;
+        background-color: #FFE8DB;
+        border-color: #53DDB9;
+    }
+    .btn-primary:hover {
+        color: #FFE8DB;
+        background-color: #53DDB9;
+        border-color: #FFE8DB;
+    }
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
@@ -4667,8 +4668,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #222;
-  border-color: #080808;
+  background-color: #000000;
+  border-color: #53DDB9;
 }
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;
@@ -5537,10 +5538,11 @@ button.list-group-item-danger.active:focus {
   padding: 15px;
 }
 .panel-heading {
-  padding: 10px 15px;
-  border-bottom: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    transition: all .6s ease !important;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
@@ -6833,4 +6835,50 @@ button.close {
     display: none !important;
   }
 }
+
+.navbar-default .navbar-collapse {
+    width: 100%;
+    background-color:transparent;
+}
+.navbar-default .navbar-collapse a {
+    text-decoration: none;
+    color: #FFE75F;
+}
+
+.navbar-default .navbar-collapse li {
+    color: #FFE8DB;
+    font-size: 1.3em;
+    padding: 0px 20px;
+    text-transform: uppercase;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.panel-heading:hover {
+    background-color: #53DDB9;
+}
+
+/*.navbar-default .navbar-collapse li:hover {
+    background-color: #53DDB9;
+}*/
+
+@media only screen and (min-width:768px) {
+    .navbar-default .navbar-collapse li{
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+    .navbar-default .navbar-collapse li{
+        padding: 10px 10px;
+        display: inline-block;
+        width:auto;
+        display: inline-block;
+        text-align: center;
+        margin:16px 30px 0 80px;
+    }
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

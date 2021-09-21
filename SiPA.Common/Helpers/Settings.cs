@@ -7,10 +7,10 @@ namespace SiPA.Common.Helpers
     public static class Settings
     {
         private const string _token = "Token";
-        private const string _christening = "Christening";
-        private const string _firstCommunion = "FirstCommunion";
-        private const string _confirmation = "Confirmation";
-        private const string _wedding = "Wedding";
+        private const string _christening = "Acta Bautismal";
+        private const string _firstCommunion = "Certificado de Primera Comunión";
+        private const string _confirmation = "Certificado de Confirmación";
+        private const string _wedding = "Acta de Matrimonio";
         private const string _parishioner = "Parishioner";
         private const string _isRemembered = "IsRemembered";
         private static readonly string _stringDefault = string.Empty;
