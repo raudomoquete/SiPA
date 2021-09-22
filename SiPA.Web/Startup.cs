@@ -58,7 +58,7 @@ namespace SiPA.Web
 
             services.AddDbContext<DataContext>(cfg =>
             {
-                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                cfg.UseSqlServer(Configuration.GetConnectionString("Produc"));
             });
 
             services.AddAuthentication()
