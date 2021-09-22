@@ -13,6 +13,25 @@ body {
     padding-right: 15px;
 }
 
+@media (min-width: 468px) {
+    .body-content {
+        width: 450px;
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 992px) {
+    .body-content {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .body-content {
+        width: 1170px;
+    }
+}
+
 .btn-warning{
     color: #53DDB9;
     background-color: #FFE8D8;
