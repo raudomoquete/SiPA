@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace SiPA.Web.Controllers.API
 {
-    public class SacramentTypesController : ControllerBase
+    public class RequestTypesController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public SacramentTypesController(DataContext context)
+        public RequestTypesController(DataContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public IEnumerable<SacramentType> GetSacramentTypes()
+        public IEnumerable<RequestType> GetRequestTypes()
         {
-            return _context.SacramentTypes;
+            return _context.RequestTypes;
         }
     }
 }

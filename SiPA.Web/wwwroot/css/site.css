@@ -40,6 +40,11 @@ body {
     color: #53DDB9;
 }
 
+h4 {
+    font-size: 20px;
+    color: #ED3348;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;

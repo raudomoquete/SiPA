@@ -4668,8 +4668,9 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #000000;
-  border-color: #53DDB9;
+    background-color: #000000;
+    border-bottom-color:#53DDB9;
+    border-bottom-width:medium;
 }
 .navbar-inverse .navbar-brand {
   color: #9d9d9d;
@@ -5530,6 +5531,7 @@ button.list-group-item-danger.active:focus {
   margin-bottom: 20px;
   background-color: #fff;
   border: 1px solid transparent;
+  border-color: #ED3348;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -6843,11 +6845,12 @@ button.close {
 .navbar-default .navbar-collapse a {
     text-decoration: none;
     color: #FFE75F;
+    border-color: #ED3348;
 }
 
 .navbar-default .navbar-collapse li {
     color: #FFE8DB;
-    font-size: 1.3em;
+    font-size: 3.0em;
     padding: 0px 20px;
     text-transform: uppercase;
     text-decoration: none;

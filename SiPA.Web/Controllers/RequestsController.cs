@@ -57,7 +57,7 @@ namespace SiPA.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddRequest(RequestVM model)
         {
-            if (ModelState.IsValid)          {
+            if (ModelState.IsValid){
 
                 var request = await _converter.ToRequestAsync(model, true);
                 _context.Requests.Add(request);

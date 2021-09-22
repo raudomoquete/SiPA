@@ -757,56 +757,56 @@ namespace SiPA.Web.Controllers
             return RedirectToAction($"{nameof(Details)}/{wedding.Parishioners.Id}");
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> AddRequest(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet]
+        public async Task<IActionResult> AddRequest(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var parishioner = await _context.Parishioners.FindAsync(id.Value);
+            var parishioner = await _context.Parishioners.FindAsync(id.Value);
 
-        //    if (parishioner == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (parishioner == null)
+            {
+                return NotFound();
+            }
 
-        //    var model = new RequestVM
-        //    {
-        //        RequestDate = DateTime.Today,
-        //        UserId = parishioner.Id,
-        //        RequestTypes = _combosHelper.GetComboRequestTypes()
-        //    };
+            var model = new RequestVM
+            {
+                RequestDate = DateTime.Today,
+                ParishionerId = parishioner.Id,
+                RequestTypes = _combosHelper.GetComboRequestTypes()
+            };
 
-        //    return View(model);
-        //}
+            return View(model);
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> AddRequest(RequestVM model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var request = await _converterHelper.ToRequestAsync(model, true);
-        //        _context.Requests.Add(request);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddRequest(RequestVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var request = await _converterHelper.ToRequestAsync(model, true);
+                _context.Requests.Add(request);
 
-        //        try
-        //        {
-        //            await _context.SaveChangesAsync();
-        //            return RedirectToAction($"{nameof(Index)}");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ModelState.AddModelError(string.Empty, ex.ToString());
-        //            return View(model);
-        //        }
-        //    }
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.ToString());
+                    return View(model);
+                }
+            }
 
-        //    model.Parishioners = _combosHelper.GetComboParishioners();
-        //    model.RequestTypes = _combosHelper.GetComboRequestTypes();
-        //    return View(model);
-        //}
+            model.Parishioners = _combosHelper.GetComboParishioners();
+            model.RequestTypes = _combosHelper.GetComboRequestTypes();
+            return View(model);
+        }
 
 
         //public async Task<IActionResult> AddHistory(int? id)

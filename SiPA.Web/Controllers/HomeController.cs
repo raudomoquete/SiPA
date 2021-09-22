@@ -41,5 +41,10 @@ namespace SiPA.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Advice()
+        {
+            return View();
+        }
     }
 }

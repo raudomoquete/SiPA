@@ -13,144 +13,144 @@ namespace SiPA.Common.Services
 {
     public class ApiService : IApiService
     {
-        public async Task<Response<object>> ChangePasswordAsync(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            ChangePasswordRequest changePasswordRequest,
-            string tokenType,
-            string accessToken)
-        {
-            try
-            {
-                var request = JsonConvert.SerializeObject(changePasswordRequest);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+        //public async Task<Response<object>> ChangePasswordAsync(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    ChangePasswordRequest changePasswordRequest,
+        //    string tokenType,
+        //    string accessToken)
+        //{
+        //    try
+        //    {
+        //        var request = JsonConvert.SerializeObject(changePasswordRequest);
+        //        var content = new StringContent(request, Encoding.UTF8, "application/json");
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    tokenType,
-                    accessToken);
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
-                return obj;
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //            tokenType,
+        //            accessToken);
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.PostAsync(url, content);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+        //        return obj;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
 
-        public async Task<bool> CheckConnection(string url)
-        {
-            if (!CrossConnectivity.Current.IsConnected)
-            {
-                return false;
-            }
+        //public async Task<bool> CheckConnection(string url)
+        //{
+        //    if (!CrossConnectivity.Current.IsConnected)
+        //    {
+        //        return false;
+        //    }
 
-            return await CrossConnectivity.Current.IsRemoteReachable(url);
-        }
+        //    return await CrossConnectivity.Current.IsRemoteReachable(url);
+        //}
 
-        public async Task<Response<object>> DeleteAsync(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            int id,
-            string tokenType,
-            string accessToken)
-        {
-            try
-            {
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+        //public async Task<Response<object>> DeleteAsync(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    int id,
+        //    string tokenType,
+        //    string accessToken)
+        //{
+        //    try
+        //    {
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
-                var url = $"{servicePrefix}{controller}/{id}";
-                var response = await client.DeleteAsync(url);
-                var answer = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response<object>
-                    {
-                        IsSuccess = false,
-                        Message = answer,
-                    };
-                }
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+        //        var url = $"{servicePrefix}{controller}/{id}";
+        //        var response = await client.DeleteAsync(url);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            return new Response<object>
+        //            {
+        //                IsSuccess = false,
+        //                Message = answer,
+        //            };
+        //        }
 
-                return new Response<object>
-                {
-                    IsSuccess = true
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = true
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
 
-        public async Task<Response<object>> GetListAsync<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            string tokenType,
-            string accessToken)
-        {
-            try
-            {
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase),
-                };
+        //public async Task<Response<object>> GetListAsync<T>(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    string tokenType,
+        //    string accessToken)
+        //{
+        //    try
+        //    {
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase),
+        //        };
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    tokenType,
-                    accessToken);
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //            tokenType,
+        //            accessToken);
 
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.GetAsync(url);
-                var result = await response.Content.ReadAsStringAsync();
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.GetAsync(url);
+        //        var result = await response.Content.ReadAsStringAsync();
 
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response<object>
-                    {
-                        IsSuccess = false,
-                        Message = result,
-                    };
-                }
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            return new Response<object>
+        //            {
+        //                IsSuccess = false,
+        //                Message = result,
+        //            };
+        //        }
 
-                var list = JsonConvert.DeserializeObject<List<T>>(result);
-                return new Response<object>
-                {
-                    IsSuccess = true,
-                    Result = list
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message
-                };
-            }
-        }
+        //        var list = JsonConvert.DeserializeObject<List<T>>(result);
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = true,
+        //            Result = list
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message
+        //        };
+        //    }
+        //}
 
-        public async Task<Response<ParishionerResponse>> GetParishionerByEmailAsync(
+        public async Task<Response> GetParishionerByEmailAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -175,7 +175,7 @@ namespace SiPA.Common.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response<ParishionerResponse>
+                    return new Response
                     {
                         IsSuccess = false,
                         Message = result,
@@ -183,7 +183,7 @@ namespace SiPA.Common.Services
                 }
 
                 var owner = JsonConvert.DeserializeObject<ParishionerResponse>(result);
-                return new Response<ParishionerResponse>
+                return new Response
                 {
                     IsSuccess = true,
                     Result = owner
@@ -191,7 +191,7 @@ namespace SiPA.Common.Services
             }
             catch (Exception ex)
             {
-                return new Response<ParishionerResponse>
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -199,7 +199,7 @@ namespace SiPA.Common.Services
             }
         }
 
-        public async Task<Response<TokenResponse>> GetTokenAsync(
+        public async Task<Response> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -220,7 +220,7 @@ namespace SiPA.Common.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response<TokenResponse>
+                    return new Response
                     {
                         IsSuccess = false,
                         Message = result,
@@ -228,7 +228,7 @@ namespace SiPA.Common.Services
                 }
 
                 var token = JsonConvert.DeserializeObject<TokenResponse>(result);
-                return new Response<TokenResponse>
+                return new Response
                 {
                     IsSuccess = true,
                     Result = token
@@ -236,7 +236,7 @@ namespace SiPA.Common.Services
             }
             catch (Exception ex)
             {
-                return new Response<TokenResponse>
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -244,214 +244,214 @@ namespace SiPA.Common.Services
             }
         }
 
-        public async Task<Response<object>> PostAsync<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            T model,
-            string tokenType,
-            string accessToken)
-        {
-            try
-            {
-                var request = JsonConvert.SerializeObject(model);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+        //public async Task<Response<object>> PostAsync<T>(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    T model,
+        //    string tokenType,
+        //    string accessToken)
+        //{
+        //    try
+        //    {
+        //        var request = JsonConvert.SerializeObject(model);
+        //        var content = new StringContent(request, Encoding.UTF8, "application/json");
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    tokenType,
-                    accessToken);
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PutAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response<object>
-                    {
-                        IsSuccess = false,
-                        Message = answer,
-                    };
-                }
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //            tokenType,
+        //            accessToken);
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.PutAsync(url, content);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            return new Response<object>
+        //            {
+        //                IsSuccess = false,
+        //                Message = answer,
+        //            };
+        //        }
 
-                var obj = JsonConvert.DeserializeObject<T>(answer);
-                return new Response<object>
-                {
-                    IsSuccess = true,
-                    Result = obj,
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
+        //        var obj = JsonConvert.DeserializeObject<T>(answer);
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = true,
+        //            Result = obj,
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
 
-        public async Task<Response<object>> PutAsync<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            T model,
-            string tokenType,
-            string accessToken)
-        {
-            try
-            {
-                var request = JsonConvert.SerializeObject(model);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+        //public async Task<Response<object>> PutAsync<T>(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    T model,
+        //    string tokenType,
+        //    string accessToken)
+        //{
+        //    try
+        //    {
+        //        var request = JsonConvert.SerializeObject(model);
+        //        var content = new StringContent(request, Encoding.UTF8, "application/json");
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    tokenType,
-                    accessToken);
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PutAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response<object>
-                    {
-                        IsSuccess = false,
-                        Message = answer,
-                    };
-                }
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //            tokenType,
+        //            accessToken);
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.PutAsync(url, content);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            return new Response<object>
+        //            {
+        //                IsSuccess = false,
+        //                Message = answer,
+        //            };
+        //        }
 
-                var obj = JsonConvert.DeserializeObject<T>(answer);
-                return new Response<object>
-                {
-                    IsSuccess = true,
-                    Result = obj,
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
+        //        var obj = JsonConvert.DeserializeObject<T>(answer);
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = true,
+        //            Result = obj,
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
 
-        public async Task<Response<object>> PutAsync<T>(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            int id,
-            T model,
-            string tokenType,
-            string accessToken)
-        {
-            try
-            {
-                var request = JsonConvert.SerializeObject(model);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+        //public async Task<Response<object>> PutAsync<T>(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    int id,
+        //    T model,
+        //    string tokenType,
+        //    string accessToken)
+        //{
+        //    try
+        //    {
+        //        var request = JsonConvert.SerializeObject(model);
+        //        var content = new StringContent(request, Encoding.UTF8, "application/json");
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    tokenType,
-                    accessToken);
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PutAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                if (!response.IsSuccessStatusCode)
-                {
-                    return new Response<object>
-                    {
-                        IsSuccess = false,
-                        Message = answer,
-                    };
-                }
+        //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+        //            tokenType,
+        //            accessToken);
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.PutAsync(url, content);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            return new Response<object>
+        //            {
+        //                IsSuccess = false,
+        //                Message = answer,
+        //            };
+        //        }
 
-                var obj = JsonConvert.DeserializeObject<T>(answer);
-                return new Response<object>
-                {
-                    IsSuccess = true,
-                    Result = obj,
-                };
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
+        //        var obj = JsonConvert.DeserializeObject<T>(answer);
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = true,
+        //            Result = obj,
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
 
-        public async Task<Response<object>> RecoverPasswordAsync(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            EmailRequest emailRequest)
-        {
-            try
-            {
-                var request = JsonConvert.SerializeObject(emailRequest);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+        //public async Task<Response<object>> RecoverPasswordAsync(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    EmailRequest emailRequest)
+        //{
+        //    try
+        //    {
+        //        var request = JsonConvert.SerializeObject(emailRequest);
+        //        var content = new StringContent(request, Encoding.UTF8, "application/json");
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
 
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
-                return obj;
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.PostAsync(url, content);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+        //        return obj;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
 
-        public async Task<Response<object>> RegisterUserAsync(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            UserRequest userRequest)
-        {
-            try
-            {
-                var request = JsonConvert.SerializeObject(userRequest);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+        //public async Task<Response<object>> RegisterUserAsync(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    UserRequest userRequest)
+        //{
+        //    try
+        //    {
+        //        var request = JsonConvert.SerializeObject(userRequest);
+        //        var content = new StringContent(request, Encoding.UTF8, "application/json");
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
 
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
-                return obj;
-            }
-            catch (Exception ex)
-            {
-                return new Response<object>
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
-        }
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.PostAsync(url, content);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        var obj = JsonConvert.DeserializeObject<Response<object>>(answer);
+        //        return obj;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<object>
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
     }
 }
