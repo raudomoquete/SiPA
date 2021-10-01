@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="SiPA.Prism.Views.RequestPage"
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <AbsoluteLayout>
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="Fecha"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Placeholder="Fecha..."
+                        Text="{Binding RequestDate, StringFormat='{0:yyyy/MM/dd}'}"/>
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="Tipo de Solicitud"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Placeholder="Elige el Tipo..."
+                        Text="{Binding RequestType}"/>
+                    <Button
+                    Command="{Binding RegisterCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Text="Solicitar"
+                    VerticalOptions="EndAndExpand"/>
+                </Grid>                
+            </StackLayout>
+        </AbsoluteLayout>
+    </ScrollView>
+
+   
+  
+</ContentPage>

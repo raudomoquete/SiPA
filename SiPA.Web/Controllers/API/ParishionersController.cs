@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SiPA.Common.Models;
+using SiPA.Prism.Models;
 using SiPA.Web.Data;
 using System;
 using System.Collections.Generic;

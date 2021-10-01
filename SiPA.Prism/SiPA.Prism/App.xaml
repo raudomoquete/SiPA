@@ -4,9 +4,10 @@
              xmlns:prism="http://prismlibrary.com"
              x:Class="SiPA.Prism.App">
   <Application.Resources>
-       
-
-    <!-- Application resource dictionary -->
+      
+        <ResourceDictionary>
+            <x:String x:Key="UriAPI">https://siparroquial.azurewebsites.net</x:String>
+        </ResourceDictionary>    
 
   </Application.Resources>
 </prism:PrismApplication>

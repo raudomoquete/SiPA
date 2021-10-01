@@ -1,5 +1,6 @@
 using Prism;
 using Prism.Ioc;
+using SiPA.Prism.Services;
 using SiPA.Prism.ViewModels;
 using SiPA.Prism.Views;
 using Xamarin.Essentials.Implementation;
@@ -24,10 +25,10 @@ namespace SiPA.Prism
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
+            containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<RequestsPage, RequestsPageViewModel>();
         }
     }
 }

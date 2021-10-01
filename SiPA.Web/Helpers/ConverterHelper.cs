@@ -1,4 +1,5 @@
-﻿using SiPA.Web.Data;
+﻿using SiPA.Prism.Models;
+using SiPA.Web.Data;
 using SiPA.Web.Data.Entities;
 using SiPA.Web.Models;
 using System;
@@ -244,6 +245,21 @@ namespace SiPA.Web.Helpers
                 Parishioners = _combosHelper.GetComboParishioners(),
                 RequestTypeId = request.RequestType.Id,
                 RequestTypes = _combosHelper.GetComboRequestTypes()
+            };
+        }
+
+        public RequestResponse ToRequestResponse(Request request)
+        {
+            if (request == null)
+            {
+                return null;
+            }
+
+            return new RequestResponse
+            {
+                RequestDate = request.RequestDate,
+                Id = request.Id,
+                RequestType = request.RequestType.Name
             };
         }
     }

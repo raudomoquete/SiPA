@@ -2,7 +2,7 @@
 using Plugin.Settings.Abstractions;
 
 
-namespace SiPA.Common.Helpers
+namespace SiPA.Prism.Helpers
 {
     public static class Settings
     {

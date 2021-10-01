@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
-namespace SiPA.Common.Models
+namespace SiPA.Prism.Models
 {
     public class UserRequest
     {

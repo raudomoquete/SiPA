@@ -1,4 +1,5 @@
-﻿using SiPA.Web.Data.Entities;
+﻿using SiPA.Prism.Models;
+using SiPA.Web.Data.Entities;
 using SiPA.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -31,8 +32,7 @@ namespace SiPA.Web.Helpers
 
         RequestVM ToRequestVM(Request request);
 
-        //HistoryViewModel ToHistoryViewModel(History history);
-
+        RequestResponse ToRequestResponse(Request request);
         //Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew);
 
         //ChristeningViewModel ToChristeningViewModel(Christening christening);

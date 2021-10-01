@@ -2,7 +2,7 @@
 using System.Net.Mail;
 
 
-namespace SiPA.Common.Helpers
+namespace SiPA.Prism.Helpers
 {
     public static class RegexHelper
     {
