@@ -28,7 +28,8 @@ namespace SiPA.Prism
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
-            containerRegistry.RegisterForNavigation<RequestsPage, RequestsPageViewModel>();
+            containerRegistry.RegisterForNavigation<ServicesPage, ServicesPageViewModel>();
+            //containerRegistry.RegisterForNavigation<RequestsPage, RequestsPageViewModel>();
         }
     }
 }

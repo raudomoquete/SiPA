@@ -5,7 +5,7 @@ namespace SiPA.Prism.Services
 {
     public interface IApiService
     {
-        Task<Response> GetParishionerByEmailAsync(
+        Task<Response<ParishionerResponse>> GetParishionerByEmailAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -13,16 +13,18 @@ namespace SiPA.Prism.Services
             string accessToken,
             string email);
 
-        Task<Response> GetTokenAsync(
+        Task<Response<TokenResponse>> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,
             TokenRequest request);
 
-        Task<Response> AddRequestAsync(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            RequestResponse requestResponse);
+        Task<bool> CheckConnection(string url);
+
+        //Task<Response> AddRequestAsync(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    RequestResponse requestResponse);
     }
 }

@@ -1,19 +1,19 @@
 using Android.App;
-using Android.Content;
-using AndroidX.AppCompat.App;
+using Android.OS;
 
 namespace SiPA.Prism.Droid
 {
-    [Activity(Theme = "@style/MainTheme.Splash",
-              MainLauncher = true,
-              NoHistory = true)]
-    public class SplashActivity : AppCompatActivity
+    [Activity(
+        Theme = "@style/MainTheme.Splash",
+        MainLauncher = true,
+        NoHistory = true)]
+    public class SplashActivity : Activity
     {
-        // Launches the startup task
-        protected override void OnResume()
+        protected override void OnCreate(Bundle bundle)
         {
-            base.OnResume();
-            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+            base.OnCreate(bundle);
+            System.Threading.Thread.Sleep(1); //TODO: Set 1800
+            StartActivity(typeof(MainActivity));
         }
     }
 }

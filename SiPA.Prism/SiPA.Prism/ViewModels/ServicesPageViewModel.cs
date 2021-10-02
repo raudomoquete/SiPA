@@ -9,33 +9,33 @@ using System.Linq;
 
 namespace SiPA.Prism.ViewModels
 {
-    public class RequestsPageViewModel : ViewModelBase
+    public class ServicesPageViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
+        private TokenResponse _token;
         private ParishionerResponse _parishioner;
-        private ObservableCollection<RequestResponse> _request; //Observable por si hacemos un cambio en la lista se refleje en el otro lado
 
 
-        public RequestsPageViewModel(
-            INavigationService navigationService) : base(navigationService)
+        public ServicesPageViewModel(INavigationService navigationService) 
+            : base(navigationService)
         {
+            _navigationService = navigationService;
             Title = "Solicitudes";
-        }
-
-        public ObservableCollection<RequestResponse> Requests
-        {
-            get => _request;
-            set => SetProperty(ref _request, value);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
+            if (parameters.ContainsKey("token"))
+            {
+                _token = parameters.GetValue<TokenResponse>("token");              
+            }
+            
             if (parameters.ContainsKey("parishioner"))
             {
                 _parishioner = parameters.GetValue<ParishionerResponse>("parishioner");
-                Title = $"Solicitudes de: {_parishioner.FullName}";
-                Requests = new ObservableCollection<RequestResponse>(_parishioner.Requests);
+                Title = _parishioner.FullName;
             }
         }
     }

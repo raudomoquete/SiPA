@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SiPA.Prism.Models;
 using SiPA.Web.Data;
 using SiPA.Web.Data.Entities;
@@ -11,28 +13,29 @@ using System.Threading.Tasks;
 
 namespace SiPA.Web.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("api/[Controller]")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
     public class RequestsController : Controller
     {
         private readonly DataContext _context;
-        private readonly ICombosHelper _combosHelper;
-        private readonly IConverterHelper _converterHelper;
-
+        //private readonly ICombosHelper _combosHelper;
+        //private readonly IConverterHelper _converterHelper;
 
 
         public RequestsController(
-            DataContext context,
-            ICombosHelper combosHelper,
-            IConverterHelper converterHelper)
+            DataContext context
+            //ICombosHelper combosHelper,
+            //IConverterHelper converterHelper
+            )
         {
             _context = context;
-            _combosHelper = combosHelper;
-            _converterHelper = converterHelper;
+           // _combosHelper = combosHelper;
+           // _converterHelper = converterHelper;
         }
-        
+
+        [HttpPost]        
         public async Task<IActionResult> PostRequest([FromBody] CertificateRequest request)
         {
             if (!ModelState.IsValid)
@@ -61,9 +64,7 @@ namespace SiPA.Web.Controllers.API
 
             _context.Requests.Add(req);
             await _context.SaveChangesAsync();
-            return Ok(_converterHelper.ToRequestResponse(req));
-
-
+            return Ok(req);
         }
     }
 }

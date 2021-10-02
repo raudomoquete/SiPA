@@ -15,6 +15,7 @@ namespace SiPA.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private DelegateCommand _loginCommand;
+
         public LoginPageViewModel(
             INavigationService navigationService,
             IApiService apiService) : base(navigationService)
@@ -23,7 +24,6 @@ namespace SiPA.Prism.ViewModels
             _apiService = apiService;
             Title = "SiPA - Login";
             IsEnabled = true;
-
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
@@ -45,20 +45,29 @@ namespace SiPA.Prism.ViewModels
         }
         private async void Login()
         {
-            if (
-          string.IsNullOrEmpty(Email))
+            if (string.IsNullOrEmpty(Email))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter an email.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "Debe colocar un email.", "Accept");
                 return;
             }
             if (string.IsNullOrEmpty(Password))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a password.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "Debe colocar un password.", "Accept");
                 return;
             }
 
             IsRunning = true;
             IsEnabled = false;
+
+            var url = App.Current.Resources["UrlAPI"].ToString();
+            var connection = await _apiService.CheckConnection(url);
+            if (!connection)
+            {
+                IsEnabled = true;
+                IsRunning = false;
+                await App.Current.MainPage.DisplayAlert("Error", "Verifica la conexión a internet", "Accept");
+                return;
+            }
 
             var request = new TokenRequest
             {
@@ -66,7 +75,7 @@ namespace SiPA.Prism.ViewModels
                 UserName = Email
             };
 
-            var url = App.Current.Resources["UrlAPI"].ToString();
+            //var url = App.Current.Resources["UrlAPI"].ToString();
             var response = await _apiService.GetTokenAsync(url, "Account", "/CreateToken", request);
 
             if (!response.IsSuccess)
@@ -78,29 +87,38 @@ namespace SiPA.Prism.ViewModels
                 return;
             }
 
-            var token = (TokenResponse)response.Result;
-            var response2 = await _apiService.GetParishionerByEmailAsync(url, "api", "/Parishioners/GetParishionerByEmailAsync", "bearer", token.Token, Email);
+            var token = response.Result;
+            var response2 = await _apiService.GetParishionerByEmailAsync(
+            url,
+            "api",
+            "/Parishioners/GetParishionerByEmailAsync",
+            "bearer", token.Token, Email);
 
-            if (!response2.IsSuccess)
-            {
-                IsRunning = false;
-                IsEnabled = true;
-                await App.Current.MainPage.DisplayAlert("Error", "hay problemas, llama a soporte.", "Accept");
-                return;
-            }
+            //if (!response2.IsSuccess)
+            //{
+            //    IsRunning = false;
+            //    IsEnabled = true;
+            //    await App.Current.MainPage.DisplayAlert("Error", "hay problemas, llama a soporte.", "Accept");
+            //    return;
+            //}
 
-            var parishioner = (ParishionerResponse)response2.Result;
+            var parishioner = response2.Result;
             var parameters = new NavigationParameters
             {
+                { "token", token },
                 { "parishioner", parishioner }
             };
-            //parameters.Add("parishioner", parishioner); queda mejor como se puso en la linea 95
+            ////parameters.Add("parishioner", parishioner); queda mejor como se puso en la linea 95
 
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync("RequestPage", parameters);
-            Password = string.Empty;
+            await _navigationService.NavigateAsync("ServicesPage", parameters);
+            
+            //await App.Current.MainPage.DisplayAlert("Ok", "We are making progress!", "Accept");
+
+            //await _navigationService.NavigateAsync("ServicesPage", parameters);
+            //Password = string.Empty;
         }
     }
 }

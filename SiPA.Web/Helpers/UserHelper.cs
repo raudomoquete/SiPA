@@ -98,5 +98,10 @@ namespace SiPA.Web.Helpers
         {
             return await _userManager.FindByIdAsync(userId);
         }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(User user)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(user);
+        }
     }
 }

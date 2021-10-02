@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Plugin.Connectivity;
 using SiPA.Prism.Models;
 using System;
 using System.Net.Http;
@@ -10,7 +11,7 @@ namespace SiPA.Prism.Services
 {
     public class ApiService : IApiService
     {
-        public async Task<Response> GetTokenAsync(
+        public async Task<Response<TokenResponse>> GetTokenAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -31,7 +32,7 @@ namespace SiPA.Prism.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<TokenResponse>
                     {
                         IsSuccess = false,
                         Message = result,
@@ -39,7 +40,7 @@ namespace SiPA.Prism.Services
                 }
 
                 var token = JsonConvert.DeserializeObject<TokenResponse>(result);
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = true,
                     Result = token
@@ -47,7 +48,7 @@ namespace SiPA.Prism.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<TokenResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -55,7 +56,7 @@ namespace SiPA.Prism.Services
             }
         }
 
-        public async Task<Response> GetParishionerByEmailAsync(
+        public async Task<Response<ParishionerResponse>> GetParishionerByEmailAsync(
             string urlBase,
             string servicePrefix,
             string controller,
@@ -80,7 +81,7 @@ namespace SiPA.Prism.Services
 
                 if (!response.IsSuccessStatusCode)
                 {
-                    return new Response
+                    return new Response<ParishionerResponse>
                     {
                         IsSuccess = false,
                         Message = result,
@@ -88,7 +89,7 @@ namespace SiPA.Prism.Services
                 }
 
                 var parishioner = JsonConvert.DeserializeObject<ParishionerResponse>(result);
-                return new Response
+                return new Response<ParishionerResponse>
                 {
                     IsSuccess = true,
                     Result = parishioner
@@ -96,7 +97,7 @@ namespace SiPA.Prism.Services
             }
             catch (Exception ex)
             {
-                return new Response
+                return new Response<ParishionerResponse>
                 {
                     IsSuccess = false,
                     Message = ex.Message
@@ -104,35 +105,45 @@ namespace SiPA.Prism.Services
             }
         }
 
-        public async Task<Response> AddRequestAsync(
-            string urlBase,
-            string servicePrefix,
-            string controller,
-            RequestResponse requestResponse)
+        public async Task<bool> CheckConnection(string url)
         {
-            try
+            if (!CrossConnectivity.Current.IsConnected)
             {
-                var request = JsonConvert.SerializeObject(requestResponse);
-                var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
+                return false;
+            }
 
-                var url = $"{servicePrefix}{controller}";
-                var response = await client.PostAsync(url, content);
-                var answer = await response.Content.ReadAsStringAsync();
-                var obj = JsonConvert.DeserializeObject<Response>(answer);
-                return obj;
-            }
-            catch (Exception ex)
-            {
-                return new Response
-                {
-                    IsSuccess = false,
-                    Message = ex.Message,
-                };
-            }
+            return await CrossConnectivity.Current.IsRemoteReachable(url);
         }
+
+        //public async Task<Response> AddRequestAsync(
+        //    string urlBase,
+        //    string servicePrefix,
+        //    string controller,
+        //    RequestResponse requestResponse)
+        //{
+        //    try
+        //    {
+        //        var request = JsonConvert.SerializeObject(requestResponse);
+        //        var content = new StringContent(request, Encoding.UTF8, "application/json");
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri(urlBase)
+        //        };
+
+        //        var url = $"{servicePrefix}{controller}";
+        //        var response = await client.PostAsync(url, content);
+        //        var answer = await response.Content.ReadAsStringAsync();
+        //        var obj = JsonConvert.DeserializeObject<Response>(answer);
+        //        return obj;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response
+        //        {
+        //            IsSuccess = false,
+        //            Message = ex.Message,
+        //        };
+        //    }
+        //}
     }
 }
