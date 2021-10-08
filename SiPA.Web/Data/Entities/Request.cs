@@ -14,11 +14,11 @@ namespace SiPA.Web.Data.Entities
         [Display(Name = "Fecha de la Solicitud")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public DateTime? RequestDate { get; set; }
+        public DateTime RequestDate { get; set; }
 
         [Display(Name = "Fecha de la Solicitud")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime? RequestDateLocal => RequestDate?.ToLocalTime();
+        public DateTime RequestDateLocal => RequestDate.ToLocalTime();
 
         [Display(Name = "Tipo de Solicitud")]
         public RequestType RequestType { get; set; }

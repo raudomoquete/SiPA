@@ -12,10 +12,38 @@ namespace SiPA.Prism.ViewModels
         protected INavigationService NavigationService { get; private set; }
 
         private string _title;
+        private string _title2;
+        private string _title3;
+        private string _title4;
+        private string _title5;
+
+
+
+
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
+        }
+        public string Title2
+        {
+            get { return _title2; }
+            set { SetProperty(ref _title2, value); }
+        }
+        public string Title3
+        {
+            get { return _title3; }
+            set { SetProperty(ref _title3, value); }
+        }
+        public string Title4
+        {
+            get { return _title4; }
+            set { SetProperty(ref _title4, value); }
+        }
+        public string Title5
+        {
+            get { return _title5; }
+            set { SetProperty(ref _title5, value); }
         }
 
         public ViewModelBase(INavigationService navigationService)

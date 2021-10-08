@@ -6,47 +6,59 @@
              x:Class="SiPA.Prism.Views.RequestPage"
              Title="{Binding Title}">
 
-    <ScrollView>
-        <AbsoluteLayout>
-            <StackLayout
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_action_add_circle" Command="{Binding AddRequestCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout
+        Padding="10">
+        <ScrollView>
+            <AbsoluteLayout>
+                <StackLayout
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All"
                 Padding="10">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label
+                        <Label
                         Grid.Row="0"
                         Grid.Column="0"
                         Text="Fecha"
                         VerticalOptions="Center"/>
-                    <Entry
+                        <Entry
                         Grid.Row="0"
                         Grid.Column="1"
                         Placeholder="Fecha..."
                         Text="{Binding RequestDate, StringFormat='{0:yyyy/MM/dd}'}"/>
-                    <Label
+                        <Label
                         Grid.Row="1"
                         Grid.Column="0"
                         Text="Tipo de Solicitud"
                         VerticalOptions="Center"/>
-                    <Entry
+                        <Picker
                         Grid.Row="1"
                         Grid.Column="1"
-                        Placeholder="Elige el Tipo..."
-                        Text="{Binding RequestType}"/>
-                    <Button
-                    Command="{Binding RegisterCommand}"
-                    IsEnabled="{Binding IsEnabled}"
-                    Text="Solicitar"
-                    VerticalOptions="EndAndExpand"/>
-                </Grid>                
-            </StackLayout>
-        </AbsoluteLayout>
-    </ScrollView>
+                        ItemsSource="{Binding RequestTypes}"
+                        SelectedItem="{Binding RequestType}"/>
+
+                    </Grid>
+                </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
+        <StackLayout
+            Orientation="Horizontal"
+            VerticalOptions="EndAndExpand">
+
+            <Button
+                Command="{Binding SaveCommand}"
+                IsEnabled="{Binding IsEnabled}"
+                Text="Guardar"/>
+        </StackLayout>
+    </StackLayout>
 
    
   

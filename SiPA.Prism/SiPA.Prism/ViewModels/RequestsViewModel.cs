@@ -11,18 +11,19 @@ using System.Threading.Tasks;
 
 namespace SiPA.Prism.ViewModels
 {
-    public class RequestPageViewModel : ViewModelBase
+    public class RequestsViewModel : ViewModelBase
     {
+
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
         private ParishionerResponse _parishioner;
         private ObservableCollection<RequestItemViewModel> _requests;
         private DelegateCommand _addRequestCommand;
-        private static RequestPageViewModel _instance;
+        private static RequestsViewModel _instance;
 
-        public RequestPageViewModel(
+        public RequestsViewModel(
             INavigationService navigationService,
-            IApiService apiService) : base(navigationService)
+            IApiService apiService): base(navigationService)
         {
             _instance = this;
             _navigationService = navigationService;
@@ -39,7 +40,7 @@ namespace SiPA.Prism.ViewModels
             set => SetProperty(ref _requests, value);
         }
 
-        public static RequestPageViewModel GetInstance()
+        public static RequestsViewModel GetInstance()
         {
             return _instance;
         }
@@ -80,6 +81,6 @@ namespace SiPA.Prism.ViewModels
         private async void AddRequest()
         {
             await _navigationService.NavigateAsync("EditRequestPage");
-        }      
+        }
     }
 }

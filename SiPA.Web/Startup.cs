@@ -68,7 +68,7 @@ namespace SiPA.Web
                     cfg.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidIssuer = Configuration["Tokens:Issuer"],
-                        ValidAudience = Configuration["Token:Audience"],
+                        ValidAudience = Configuration["Tokens:Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
                     };
                 });

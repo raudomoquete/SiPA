@@ -20,7 +20,7 @@ namespace SiPA.Prism
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -28,8 +28,10 @@ namespace SiPA.Prism
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
-            containerRegistry.RegisterForNavigation<ServicesPage, ServicesPageViewModel>();
-            //containerRegistry.RegisterForNavigation<RequestsPage, RequestsPageViewModel>();
+            containerRegistry.RegisterForNavigation<RequestPage, RequestPageViewModel>();
+            containerRegistry.RegisterForNavigation<RequestTabbedPage, RequestTabbedPageViewModel>();
+            containerRegistry.RegisterForNavigation<EditRequestPage, EditRequestPageViewModel>();
+            containerRegistry.RegisterForNavigation<Requests, RequestsViewModel>();
         }
     }
 }

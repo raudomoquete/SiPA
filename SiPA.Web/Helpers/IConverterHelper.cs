@@ -33,6 +33,8 @@ namespace SiPA.Web.Helpers
         RequestVM ToRequestVM(Request request);
 
         RequestResponse ToRequestResponse(Request request);
+
+        ParishionerResponse ToParishionerResponse(Parishioner parishioner);
         //Task<Christening> ToChristeningAsync(ChristeningViewModel model, bool isNew);
 
         //ChristeningViewModel ToChristeningViewModel(Christening christening);

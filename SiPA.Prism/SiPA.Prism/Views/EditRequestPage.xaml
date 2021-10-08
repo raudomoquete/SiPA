@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="SiPA.Prism.Views.EditRequestPage"
+             Title="{Binding Title}">
+
+    <StackLayout
+        Padding="10">
+        <ScrollView>
+            <AbsoluteLayout>
+                <StackLayout
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Text="Fecha"
+                            VerticalOptions="Center"/>
+                        <DatePicker
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Date="{Binding Request.RequestDate}"/>
+
+                        <Label
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Text="Tipo de Acta"/>
+
+                        <Picker
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding RequestTypes}"
+                            SelectedItem="{Binding RequestType}"/>
+                    </Grid>
+                    
+                </StackLayout>
+            </AbsoluteLayout>
+        </ScrollView>
+        <StackLayout
+            Orientation="Horizontal"
+            VerticalOptions="EndAndExpand">
+
+            <Button
+                Command="{Binding SaveCommand}"
+                IsEnabled="{Binding IsEnabled}"
+                Text="Solicitar"/>
+            
+        </StackLayout>
+    </StackLayout>
+
+
+</ContentPage>

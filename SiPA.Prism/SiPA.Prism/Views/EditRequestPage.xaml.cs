@@ -2,9 +2,9 @@
 
 namespace SiPA.Prism.Views
 {
-    public partial class ServicesPage : ContentPage
+    public partial class EditRequestPage : ContentPage
     {
-        public ServicesPage()
+        public EditRequestPage()
         {
             InitializeComponent();
         }

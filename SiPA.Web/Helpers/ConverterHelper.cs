@@ -257,9 +257,26 @@ namespace SiPA.Web.Helpers
 
             return new RequestResponse
             {
-                RequestDate = request.RequestDate,
+                RequestDate = (DateTime)request.RequestDate,
                 Id = request.Id,
                 RequestType = request.RequestType.Name
+            };
+        }
+
+        public ParishionerResponse ToParishionerResponse(Parishioner parishioner)
+        {
+            if (parishioner == null)
+            {
+                return null;
+            }
+
+            return new ParishionerResponse
+            {
+                FirstName = parishioner.User.FirstName,
+                LastName = parishioner.User.LastName,
+                Email = parishioner.User.Email,
+                Address = parishioner.User.Address,
+                PhoneNumber = parishioner.User.PhoneNumber
             };
         }
     }

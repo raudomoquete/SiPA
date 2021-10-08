@@ -9,7 +9,7 @@ namespace SiPA.Prism.Models
     {
         public int Id { get; set; }
 
-        public DateTime? RequestDate { get; set; }
+        public DateTime RequestDate { get; set; }
 
         public int RequestTypeId { get; set; }
 

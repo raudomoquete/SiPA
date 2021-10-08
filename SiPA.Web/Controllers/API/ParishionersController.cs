@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SiPA.Prism.Models;
 using SiPA.Web.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +11,7 @@ namespace SiPA.Web.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ParishionersController : ControllerBase
     {
         private readonly DataContext _context;
@@ -34,14 +32,14 @@ namespace SiPA.Web.Controllers.API
 
             var parishioner = await _context.Parishioners
                 .Include(p => p.User)
-                .Include(p => p.Christenings)
-                .Include(p => p.FirstCommunions)
-                .Include(p => p.Confirmations)
-                .Include(p => p.Weddings)
-                .Include(p => p.Histories)
+                //.Include(p => p.Christenings)
+                //.Include(p => p.FirstCommunions)
+                //.Include(p => p.Confirmations)
+                //.Include(p => p.Weddings)
+                //.Include(p => p.Histories)
                 .Include(p => p.Requests)
                 .ThenInclude(r => r.RequestType)
-                .Include(p => p.Certificates)
+                //.Include(p => p.Certificates)
                 .FirstOrDefaultAsync(p => p.User.UserName.ToLower() == emailRequest.Email.ToLower());
 
             var response = new ParishionerResponse
@@ -52,13 +50,12 @@ namespace SiPA.Web.Controllers.API
                 Address = parishioner.User.Address,
                 Email = parishioner.User.Email,
                 PhoneNumber = parishioner.User.PhoneNumber,
-                Requests = (ICollection<RequestResponse>)parishioner.Requests.Select(p => new RequestResponse
+                Requests = parishioner.Requests.Select(p => new RequestResponse
                 {
                     RequestDate = p.RequestDate,
                     Id = p.Id,
-                    //RequestTypes = p.RequestTypes,
-                 
-                }).ToList()             
+                    RequestType = p.RequestType.Name
+                }).ToList()
             };
 
             return Ok(response);
