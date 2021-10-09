@@ -4,7 +4,7 @@ using Android.OS;
 namespace SiPA.Prism.Droid
 {
     [Activity(
-        Theme = "@style/MainTheme.Splash",
+        Theme = "@style/Theme.Splash",
         MainLauncher = true,
         NoHistory = true)]
     public class SplashActivity : Activity
@@ -12,7 +12,7 @@ namespace SiPA.Prism.Droid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            System.Threading.Thread.Sleep(1); //TODO: Set 1800
+            System.Threading.Thread.Sleep(1800);
             StartActivity(typeof(MainActivity));
         }
     }

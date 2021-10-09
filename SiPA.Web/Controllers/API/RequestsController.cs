@@ -92,26 +92,5 @@ namespace SiPA.Web.Controllers.API
             await _context.SaveChangesAsync();
             return Ok(_converterHelper.ToRequestResponse(oldRequest));
         }
-
-        [HttpDelete("{id")]
-        public async Task<IActionResult> DeleteRequest([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            var request = await _context.Requests
-                .Include(r => r.Parishioner)
-                .FirstOrDefaultAsync(r => r.Id == id);
-            if (request == null)
-            {
-                return NotFound();
-            }
-
-            _context.Requests.Remove(request);
-            await _context.SaveChangesAsync();
-            return Ok("Solicitud Borrada");
-        }
     }
 }

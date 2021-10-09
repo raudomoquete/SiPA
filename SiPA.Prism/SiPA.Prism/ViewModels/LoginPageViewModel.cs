@@ -17,6 +17,7 @@ namespace SiPA.Prism.ViewModels
         private bool _isRunning;
         private bool _isEnabled;
         private DelegateCommand _loginCommand;
+        private DelegateCommand _registerCommand;
 
         public LoginPageViewModel(
             INavigationService navigationService,
@@ -27,12 +28,15 @@ namespace SiPA.Prism.ViewModels
 
             Title = "SiPA - Login";
             IsEnabled = true;
+            IsRemember = true;
 
             Email = "sanchezz09@hotmail.com";
             Password = "123456";
         }
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
+
+        public bool IsRemember { get; set; }
         public string Email { get; set; }
         public string Password
         {
@@ -106,11 +110,15 @@ namespace SiPA.Prism.ViewModels
 
             Settings.Parishioner = JsonConvert.SerializeObject(parishioner);
             Settings.Token = JsonConvert.SerializeObject(token);
+            Settings.IsRemembered = IsRemember;
 
             IsRunning = false;
             IsEnabled = true;
 
-            await _navigationService.NavigateAsync("Requests");
+            await _navigationService.NavigateAsync("/SiPAMasterDetailPage/NavigationPage/Requests");
+            Password = string.Empty;
         }
+
+        
     }
 }
