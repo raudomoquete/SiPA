@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SiPA.Prism.Models;
 using SiPA.Web.Data;
 using SiPA.Web.Data.Entities;
 using SiPA.Web.Helpers;
-using SiPA.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SiPA.Web.Controllers.API
@@ -17,24 +14,21 @@ namespace SiPA.Web.Controllers.API
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
-    public class RequestsController : Controller
+    public class RequestsController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
 
+
         public RequestsController(
-            DataContext context,
-            ICombosHelper combosHelper,
-            IConverterHelper converterHelper
-            )
+            DataContext dataContext,
+            IConverterHelper converterHelper)
         {
-            _context = context;
-            _combosHelper = combosHelper;
+            _context = dataContext;
             _converterHelper = converterHelper;
         }
 
-        [HttpPost]        
+        [HttpPost]
         public async Task<IActionResult> PostRequest([FromBody] CertificateRequest request)
         {
             if (!ModelState.IsValid)
@@ -48,7 +42,7 @@ namespace SiPA.Web.Controllers.API
                 return BadRequest("No es un usuario valido.");
             }
 
-            var requestType = _combosHelper.GetComboRequestTypes();
+            var requestType = await _context.RequestTypes.FindAsync(request.RequestTypeId);
             if (requestType == null)
             {
                 return BadRequest("No es un requerimiento valido.");
@@ -56,8 +50,8 @@ namespace SiPA.Web.Controllers.API
 
             var req = new Request
             {
-                RequestDate = DateTime.Today,
-                RequestType = (RequestType)requestType,
+                RequestDate = request.RequestDate.ToUniversalTime(),
+                RequestType = requestType,
                 Parishioner = parishioner
             };
 
@@ -85,18 +79,39 @@ namespace SiPA.Web.Controllers.API
                 return BadRequest("Requerimiento no existe.");
             }
 
-            var requestType = _combosHelper.GetComboRequestTypes();
+            var requestType = await _context.RequestTypes.FindAsync(request.RequestTypeId);
             if (requestType == null)
             {
-                return BadRequest("No es un tipo de Requerimiento valido.");
+                return BadRequest("No es un tipo de requerimiento valido");
             }
 
-            oldRequest.RequestDate = DateTime.Today;
-            oldRequest.RequestType = (RequestType)requestType;
+            oldRequest.RequestDate = request.RequestDate.ToUniversalTime();
+            oldRequest.RequestType = requestType;
 
             _context.Requests.Update(oldRequest);
             await _context.SaveChangesAsync();
             return Ok(_converterHelper.ToRequestResponse(oldRequest));
+        }
+
+        [HttpDelete("{id")]
+        public async Task<IActionResult> DeleteRequest([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var request = await _context.Requests
+                .Include(r => r.Parishioner)
+                .FirstOrDefaultAsync(r => r.Id == id);
+            if (request == null)
+            {
+                return NotFound();
+            }
+
+            _context.Requests.Remove(request);
+            await _context.SaveChangesAsync();
+            return Ok("Solicitud Borrada");
         }
     }
 }

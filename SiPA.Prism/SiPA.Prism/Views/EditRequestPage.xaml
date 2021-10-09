@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+             xmlns:viewmodels="clr-namespace:SiPA.Prism.ViewModels" x:DataType="viewmodels:EditRequestPageViewModel"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SiPA.Prism.Views.EditRequestPage"
              Title="{Binding Title}">
@@ -60,10 +61,8 @@
             <Button
                 Command="{Binding SaveCommand}"
                 IsEnabled="{Binding IsEnabled}"
-                Text="Solicitar"/>
-            
+                Text="Solicitar"/>            
         </StackLayout>
     </StackLayout>
-
 
 </ContentPage>

@@ -143,11 +143,12 @@ namespace SiPA.Prism.ViewModels
 
         private async void SaveAsync()
         {
-            var isValid = await ValidateData();
+            var isValid = await ValidateDataAsync();
             if (!isValid)
             {
                 return;
             }
+
             IsRunning = true;
             IsEnabled = false;
 
@@ -187,20 +188,26 @@ namespace SiPA.Prism.ViewModels
                 return;
             }
 
-            await RequestPageViewModel.GetInstance().UpdateParishionerAsync();
+            await App.Current.MainPage.DisplayAlert(
+                "Aceptar",
+                ".",
+                IsEdit ? "La Solicitud ha sido editada" : "La Solicitud ha sido agregada",
+                "Aceptar");
+
+            await RequestsViewModel.GetInstance().UpdateParishionerAsync();
 
             await _navigationService.GoBackToRootAsync();
         }
 
-        private async Task<bool> ValidateData()
+        private async Task<bool> ValidateDataAsync()
         {
-            if (string.IsNullOrEmpty(Request.RequestType))
+            if (string.IsNullOrEmpty(RequestType.Name))
             {
                 await App.Current.MainPage.DisplayAlert("Error", "Esto esta mal", "Aceptar");
                 return false;
             }
 
-            if (RequestType == null)
+            if (Request == null)
             {
                 await App.Current.MainPage.DisplayAlert("Error", "No encuentro el tipo de requerimiento", "Aceptar");
                 return false;

@@ -14,72 +14,38 @@ namespace SiPA.Prism.ViewModels
     public class RequestPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private readonly IApiService _apiService;
-        private ParishionerResponse _parishioner;
-        private ObservableCollection<RequestItemViewModel> _requests;
-        private DelegateCommand _addRequestCommand;
-        private static RequestPageViewModel _instance;
+        private RequestResponse _request;
+        private DelegateCommand _editRequestCommand;
 
         public RequestPageViewModel(
-            INavigationService navigationService,
-            IApiService apiService) : base(navigationService)
+            INavigationService navigationService) : base(navigationService)
         {
-            _instance = this;
             _navigationService = navigationService;
-            _apiService = apiService;
-            Title = "Solicitudes";
-            LoadParishioner();
+            Title = "Detalles";
         }
 
-        public DelegateCommand AddRequestCommand => _addRequestCommand ?? (_addRequestCommand = new DelegateCommand(AddRequest));
+        public DelegateCommand EditRequestCommand => _editRequestCommand ?? (_editRequestCommand = new DelegateCommand(EditRequestAsync));
 
-        public ObservableCollection<RequestItemViewModel> Requests
+        public RequestResponse Request
         {
-            get => _requests;
-            set => SetProperty(ref _requests, value);
+            get => _request;
+            set => SetProperty(ref _request, value);
         }
 
-        public static RequestPageViewModel GetInstance()
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            return _instance;
+            base.OnNavigatedTo(parameters);
+            Request = JsonConvert.DeserializeObject<RequestResponse>(Settings.Request);
         }
 
-        public async Task UpdateParishionerAsync()
+        private async void EditRequestAsync()
         {
-            var url = App.Current.Resources["UrlAPI"].ToString();
-            var token = JsonConvert.DeserializeObject<TokenResponse>(Settings.Token);
-
-            var response = await _apiService.GetParishionerByEmailAsync(
-                url,
-                "/api",
-                "/Parishioners/GetParishionerByEmail",
-                "bearer",
-                token.Token,
-                _parishioner.Email);
-
-            if (response.IsSuccess)
+            var parameters = new NavigationParameters
             {
-                var parishioner = (ParishionerResponse)response.Result;
-                Settings.Parishioner = JsonConvert.SerializeObject(parishioner);
-                _parishioner = parishioner;
-                LoadParishioner();
-            }
-        }
+                {"request", Request }
+            };
 
-        private void LoadParishioner()
-        {
-            _parishioner = JsonConvert.DeserializeObject<ParishionerResponse>(Settings.Parishioner);
-            Title = $"Solicitudes de: {_parishioner.FullName}";
-            Requests = new ObservableCollection<RequestItemViewModel>(_parishioner.Requests.Select(p => new RequestItemViewModel(_navigationService)
-            {
-                RequestDate = p.RequestDate,
-                RequestType = p.RequestType
-            }).ToList());
-        }
-
-        private async void AddRequest()
-        {
-            await _navigationService.NavigateAsync("EditRequestPage");
+            await _navigationService.NavigateAsync("EditRequestPage", parameters);
         }      
     }
 }

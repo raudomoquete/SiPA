@@ -257,7 +257,7 @@ namespace SiPA.Web.Helpers
 
             return new RequestResponse
             {
-                RequestDate = (DateTime)request.RequestDate,
+                RequestDate = request.RequestDate,
                 Id = request.Id,
                 RequestType = request.RequestType.Name
             };
