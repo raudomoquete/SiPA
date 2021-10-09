@@ -4,6 +4,7 @@
             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" xmlns:Local="clr-namespace:SiPA.Prism.Views"
             prism:ViewModelLocator.AutowireViewModel="True"
             x:Class="SiPA.Prism.Views.RequestTabbedPage"
+            BackgroundColor="{StaticResource colorBackgroud}"
             Title="{Binding Title}">
 
     <TabbedPage.Children>

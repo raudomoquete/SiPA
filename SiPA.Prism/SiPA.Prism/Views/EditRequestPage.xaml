@@ -5,6 +5,7 @@
              xmlns:viewmodels="clr-namespace:SiPA.Prism.ViewModels" x:DataType="viewmodels:EditRequestPageViewModel"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SiPA.Prism.Views.EditRequestPage"
+             BackgroundColor="{StaticResource colorBackgroud}"
              Title="{Binding Title}">
 
     <StackLayout

@@ -58,5 +58,11 @@ namespace SiPA.Prism.Services
         string controller,
         string tokenType,
         string accessToken);
+
+        Task<Response<object>> RegisterUserAsync(
+           string urlBase,
+           string servicePrefix,
+           string controller,
+           UserRequest userRequest);
     }
 }
