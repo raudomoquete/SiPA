@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SiPA.Prism.Views.LoginPage"
+             BackgroundColor="{StaticResource colorBackgroud}"
              Title="{Binding Title}">
     <ScrollView>
         <AbsoluteLayout>
@@ -34,12 +35,12 @@
             
             <Button
                 BorderRadius="23"
-                BackgroundColor="Navy"
+                BackgroundColor="{StaticResource colorPrimary}"
                 Command="{Binding LoginCommand}"
                 IsEnabled="{Binding IsEnabled}"
                 HeightRequest="46"
                 Text="Login"
-                TextColor="White"/>
+                TextColor="{StaticResource colorFont}"/>
             </StackLayout>
         </AbsoluteLayout>
     </ScrollView>

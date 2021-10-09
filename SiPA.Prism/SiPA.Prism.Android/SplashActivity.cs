@@ -5,7 +5,7 @@ namespace SiPA.Prism.Droid
 {
     [Activity(
         Theme = "@style/Theme.Splash",
-        MainLauncher = true,
+       // MainLauncher = true,
         NoHistory = true)]
     public class SplashActivity : Activity
     {

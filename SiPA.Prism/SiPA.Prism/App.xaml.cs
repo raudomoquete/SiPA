@@ -31,7 +31,8 @@ namespace SiPA.Prism
             containerRegistry.RegisterForNavigation<EditRequestPage, EditRequestPageViewModel>();
             containerRegistry.RegisterForNavigation<Requests, RequestsViewModel>();
             containerRegistry.RegisterForNavigation<SiPAMasterDetailPage, SiPAMasterDetailPageViewModel>();
-            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();        
+            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
+            containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
         }
     }
 }
