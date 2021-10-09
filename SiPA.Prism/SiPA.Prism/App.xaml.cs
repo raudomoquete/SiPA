@@ -3,8 +3,6 @@ using Prism.Ioc;
 using SiPA.Prism.Services;
 using SiPA.Prism.ViewModels;
 using SiPA.Prism.Views;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 
 namespace SiPA.Prism
@@ -32,6 +30,8 @@ namespace SiPA.Prism
             containerRegistry.RegisterForNavigation<RequestTabbedPage, RequestTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<EditRequestPage, EditRequestPageViewModel>();
             containerRegistry.RegisterForNavigation<Requests, RequestsViewModel>();
+            containerRegistry.RegisterForNavigation<SiPAMasterDetailPage, SiPAMasterDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();        
         }
     }
 }
