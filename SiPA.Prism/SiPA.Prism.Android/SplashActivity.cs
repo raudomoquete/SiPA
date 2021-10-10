@@ -4,8 +4,8 @@ using Android.OS;
 namespace SiPA.Prism.Droid
 {
     [Activity(
-        Theme = "@style/Theme.Splash",
-       // MainLauncher = true,
+        Theme = "@style/MainTheme.Splash",
+        MainLauncher = true,
         NoHistory = true)]
     public class SplashActivity : Activity
     {
