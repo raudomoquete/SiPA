@@ -33,6 +33,7 @@ namespace SiPA.Prism
             containerRegistry.RegisterForNavigation<SiPAMasterDetailPage, SiPAMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<RegisterPage, RegisterPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
         }
     }
 }

@@ -22,94 +22,83 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
-                        Text="Document"
+                        Text="Nombre"
                         VerticalOptions="Center"/>
                     <Entry
                         Grid.Row="0"
                         Grid.Column="1"
-                        Placeholder="Enter your document..."
-                        Text="{Binding Document}"/>
-
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="First Name"
-                        VerticalOptions="Center"/>
-                    <Entry
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Placeholder="Enter your firstname..."
+                        Placeholder="Escribe tu nombre..."
                         Text="{Binding FirstName}"/>
 
                     <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="Apellido"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Placeholder="Escribe tu apellido..."
+                        Text="{Binding LastName}"/>
+
+                    <Label
                         Grid.Row="2"
                         Grid.Column="0"
-                        Text="LastName"
+                        Text="Dirección"
                         VerticalOptions="Center"/>
                     <Entry
                         Grid.Row="2"
                         Grid.Column="1"
-                        Placeholder="Enter your last name..."
-                        Text="{Binding LastName}"/>
+                        Placeholder="Escribe tu dirección..."
+                        Text="{Binding Address}"/>
 
                     <Label
                         Grid.Row="3"
                         Grid.Column="0"
-                        Text="Address"
+                        Text="Email"
                         VerticalOptions="Center"/>
                     <Entry
                         Grid.Row="3"
                         Grid.Column="1"
-                        Placeholder="Enter your address..."
-                        Text="{Binding Address}"/>
+                        Placeholder="Escribe tu email..."
+                        Text="{Binding Email}"/>
 
                     <Label
                         Grid.Row="4"
                         Grid.Column="0"
-                        Text="Email"
+                        Text="Teléfono"
                         VerticalOptions="Center"/>
                     <Entry
                         Grid.Row="4"
                         Grid.Column="1"
                         Keyboard="Email"
-                        Placeholder="Enter your email..."
-                        Text="{Binding Email}"/>
+                        Placeholder="Escribe tu teléfono..."
+                        Text="{Binding PhoneNumber}"/>
 
                     <Label
                         Grid.Row="5"
-                        Grid.Column="0"
-                        Text="Phone"
-                        VerticalOptions="Center"/>
-                    <Entry
-                        Grid.Row="5"
-                        Grid.Column="1"
-                        Keyboard="Telephone"
-                        Placeholder="Enter your phonenumber..."
-                        Text="{Binding Phone}"/>
-
-                    <Label
-                        Grid.Row="6"
                         Grid.Column="0"
                         Text="Password"
                         VerticalOptions="Center"/>
                     <Entry
-                        Grid.Row="6"
+                        Grid.Row="5"
                         Grid.Column="1"
-                        IsPassword="True"
-                        Placeholder="Enter your password..."
+                        Keyboard="Password"
+                        Placeholder="Escribe el password..."
                         Text="{Binding Password}"/>
 
                     <Label
-                        Grid.Row="7"
+                        Grid.Row="6"
                         Grid.Column="0"
-                        Text="Password Confirm"
+                        Text="Confirmar Password"
                         VerticalOptions="Center"/>
                     <Entry
-                        Grid.Row="7"
+                        Grid.Row="6"
                         Grid.Column="1"
                         IsPassword="True"
-                        Placeholder="Enter the password confirm"
+                        Placeholder="Confirma tu password..."
                         Text="{Binding PasswordConfirm}"/>
+
                 </Grid>
                 <Button
                     Command="{Binding RegisterCommand}"

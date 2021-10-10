@@ -1,10 +1,87 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" xmlns:viewmodels="clr-namespace:SiPA.Prism.ViewModels" x:DataType="viewmodels:ProfilePageViewModel"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SiPA.Prism.Views.ProfilePage"
              BackgroundColor="{StaticResource colorBackgroud}"
              Title="{Binding Title}">
+
+    <ScrollView>
+        <AbsoluteLayout>
+            <StackLayout
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+        	    Padding="10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="Primer Nombre"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Placeholder="Escribe tu nombre..."
+                        Text="{Binding Parishioner.FirstName}"/>
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Text="Apellido"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Placeholder="Escribe tu apellido"
+                        Text="{Binding Parishioner.LastName}"/>
+
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Text="Dirección"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Placeholder="Escribe tu dirección"
+                        Text="{Binding Parishioner.Address}"/>
+
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Text="Número Telefónico"
+                        VerticalOptions="Center"/>
+                    <Entry
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Placeholder="Escribe tu número telefónico"
+                        Text="{Binding Parishioner.PhoneNumber}"/>
+                </Grid>
+
+                <StackLayout
+                    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
+                    <Button
+                        Command="{Binding SaveCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Guardar"/>
+
+                    <Button
+                        Command="{Binding ChangePasswordCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        IsEnabled="{Binding IsEnabled}"
+                        Text="Cambiar Password"/>
+                </StackLayout>
+                                
+            </StackLayout>
+        </AbsoluteLayout>
+    </ScrollView>
 
 </ContentPage>

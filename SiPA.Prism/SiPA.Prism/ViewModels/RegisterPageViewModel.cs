@@ -25,7 +25,7 @@ namespace SiPA.Prism.ViewModels
             _navigationService = navigationService;
             _apiService = apiService;
 
-            Title = "Registrar nuevo Feligrés";
+            Title = "Registrate como un nuevo Feligrés";
             IsEnabled = true;
         }
 
@@ -110,49 +110,49 @@ namespace SiPA.Prism.ViewModels
 
             if (string.IsNullOrEmpty(FirstName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a firstname.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "Debes escribir tu nombre.", "Aceptar");
                 return false;
             }
 
             if (string.IsNullOrEmpty(LastName))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a lastname.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "Debes escribir tu apellido.", "Aceptar");
                 return false;
             }
 
             if (string.IsNullOrEmpty(Address))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter an address.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "Debes escribir tu dirección.", "Aceptar");
                 return false;
             }
 
             if (string.IsNullOrEmpty(Email) || !RegexHelper.IsValidEmail(Email))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a valid email.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "debes colocar un email valido.", "Aceptar");
                 return false;
             }
 
             if (string.IsNullOrEmpty(PhoneNumber))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a phone.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "debes escribir tu teléfono.", "Aceptar");
                 return false;
             }
 
             if (string.IsNullOrEmpty(Password) || Password.Length < 6)
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a password at least 6 character.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "El password debe contener al menos 6 catacteres.", "Aceptar");
                 return false;
             }
 
             if (string.IsNullOrEmpty(PasswordConfirm))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "You must enter a password confirm.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "Debes confirmar el password.", "Aceptar");
                 return false;
             }
 
             if (!Password.Equals(PasswordConfirm))
             {
-                await App.Current.MainPage.DisplayAlert("Error", "The password and confirm does not match.", "Accept");
+                await App.Current.MainPage.DisplayAlert("Error", "El password y password confirmado no son iguales.", "Aceptar");
                 return false;
             }
 

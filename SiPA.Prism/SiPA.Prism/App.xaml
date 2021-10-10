@@ -8,13 +8,14 @@
         <ResourceDictionary>
             <x:String x:Key="UrlAPI">https://siparroquial.azurewebsites.net</x:String>
             
+            <!--
             <Color x:Key="colorBackgroud">#F2F2F2</Color>
             <Color x:Key="colorPrimary">#53DDB9</Color>
             <Color x:Key="colorSecondary">#FFE8DB</Color>
             <Color x:Key="colorDanger">#ED3348</Color>
             <Color x:Key="colorAccent">#FFE75F</Color>
             <Color x:Key="colorFont">#000000</Color>
-            <Color x:Key="colorFont">#F2F2F2</Color>
+            <Color x:Key="colorFont">#F2F2F2</Color> -->
         </ResourceDictionary>    
 
   </Application.Resources>
