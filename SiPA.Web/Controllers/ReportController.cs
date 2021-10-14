@@ -46,6 +46,8 @@ namespace SiPA.Web.Controllers
 
         string contr = "Server=(localdb)\\MSSQLLocalDB;Database=SiPA;Trusted_Connection=True;MultipleActiveResultSets=true";
 
+            //"Server=tcp:elneneserver.database.windows.net,1433;Initial Catalog=SiPA.Web_db;Persist Security Info=False;User ID=ElneneKarate;Password=GraduacionPronto0924;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
         public DataTable GetParishionerInfo()
         {
             var dt = new DataTable();
@@ -53,7 +55,7 @@ namespace SiPA.Web.Controllers
             {
                 con.Open();
 
-                SqlCommand cmd = new SqlCommand("spChristening", con);
+                SqlCommand cmd = new SqlCommand("SpChristening", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
@@ -86,7 +88,7 @@ namespace SiPA.Web.Controllers
             {
                 con.Open();
 
-                SqlCommand cmd = new SqlCommand("spFirstCommunion", con);
+                SqlCommand cmd = new SqlCommand("SpFirstCommunion", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
@@ -119,7 +121,7 @@ namespace SiPA.Web.Controllers
             {
                 con.Open();
 
-                SqlCommand cmd = new SqlCommand("spConfirmation", con);
+                SqlCommand cmd = new SqlCommand("SpConfirmation", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
@@ -152,7 +154,7 @@ namespace SiPA.Web.Controllers
             {
                 con.Open();
 
-                SqlCommand cmd = new SqlCommand("spWedding", con);
+                SqlCommand cmd = new SqlCommand("SpWedding", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(dt);
