@@ -24,7 +24,7 @@ namespace SiPA.Common.ReportDataSet {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class dsChristening : global::System.Data.DataSet {
         
-        private spChristeningDataTable tablespChristening;
+        private SpChristeningDataTable tableSpChristening;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +54,8 @@ namespace SiPA.Common.ReportDataSet {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["spChristening"] != null)) {
-                    base.Tables.Add(new spChristeningDataTable(ds.Tables["spChristening"]));
+                if ((ds.Tables["SpChristening"] != null)) {
+                    base.Tables.Add(new SpChristeningDataTable(ds.Tables["SpChristening"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SiPA.Common.ReportDataSet {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public spChristeningDataTable spChristening {
+        public SpChristeningDataTable SpChristening {
             get {
-                return this.tablespChristening;
+                return this.tableSpChristening;
             }
         }
         
@@ -152,8 +152,8 @@ namespace SiPA.Common.ReportDataSet {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["spChristening"] != null)) {
-                    base.Tables.Add(new spChristeningDataTable(ds.Tables["spChristening"]));
+                if ((ds.Tables["SpChristening"] != null)) {
+                    base.Tables.Add(new SpChristeningDataTable(ds.Tables["SpChristening"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SiPA.Common.ReportDataSet {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tablespChristening = ((spChristeningDataTable)(base.Tables["spChristening"]));
+            this.tableSpChristening = ((SpChristeningDataTable)(base.Tables["SpChristening"]));
             if ((initTable == true)) {
-                if ((this.tablespChristening != null)) {
-                    this.tablespChristening.InitVars();
+                if ((this.tableSpChristening != null)) {
+                    this.tableSpChristening.InitVars();
                 }
             }
         }
@@ -204,13 +204,13 @@ namespace SiPA.Common.ReportDataSet {
             this.Namespace = "http://tempuri.org/dsChristening.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tablespChristening = new spChristeningDataTable();
-            base.Tables.Add(this.tablespChristening);
+            this.tableSpChristening = new SpChristeningDataTable();
+            base.Tables.Add(this.tableSpChristening);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializespChristening() {
+        private bool ShouldSerializeSpChristening() {
             return false;
         }
         
@@ -270,14 +270,14 @@ namespace SiPA.Common.ReportDataSet {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void spChristeningRowChangeEventHandler(object sender, spChristeningRowChangeEvent e);
+        public delegate void SpChristeningRowChangeEventHandler(object sender, SpChristeningRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class spChristeningDataTable : global::System.Data.TypedTableBase<spChristeningRow> {
+        public partial class SpChristeningDataTable : global::System.Data.TypedTableBase<SpChristeningRow> {
             
             private global::System.Data.DataColumn columnParishionerFullName;
             
@@ -289,8 +289,8 @@ namespace SiPA.Common.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public spChristeningDataTable() {
-                this.TableName = "spChristening";
+            public SpChristeningDataTable() {
+                this.TableName = "SpChristening";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -298,7 +298,7 @@ namespace SiPA.Common.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal spChristeningDataTable(global::System.Data.DataTable table) {
+            internal SpChristeningDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -315,7 +315,7 @@ namespace SiPA.Common.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected spChristeningDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected SpChristeningDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -363,48 +363,48 @@ namespace SiPA.Common.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public spChristeningRow this[int index] {
+            public SpChristeningRow this[int index] {
                 get {
-                    return ((spChristeningRow)(this.Rows[index]));
+                    return ((SpChristeningRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event spChristeningRowChangeEventHandler spChristeningRowChanging;
+            public event SpChristeningRowChangeEventHandler SpChristeningRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event spChristeningRowChangeEventHandler spChristeningRowChanged;
+            public event SpChristeningRowChangeEventHandler SpChristeningRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event spChristeningRowChangeEventHandler spChristeningRowDeleting;
+            public event SpChristeningRowChangeEventHandler SpChristeningRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event spChristeningRowChangeEventHandler spChristeningRowDeleted;
+            public event SpChristeningRowChangeEventHandler SpChristeningRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddspChristeningRow(spChristeningRow row) {
+            public void AddSpChristeningRow(SpChristeningRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public spChristeningRow AddspChristeningRow(string ParishionerFullName, string PlaceofEvent, string CeremonialCelebrant, System.DateTime ChristeningDate) {
-                spChristeningRow rowspChristeningRow = ((spChristeningRow)(this.NewRow()));
+            public SpChristeningRow AddSpChristeningRow(string ParishionerFullName, string PlaceofEvent, string CeremonialCelebrant, System.DateTime ChristeningDate) {
+                SpChristeningRow rowSpChristeningRow = ((SpChristeningRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ParishionerFullName,
                         PlaceofEvent,
                         CeremonialCelebrant,
                         ChristeningDate};
-                rowspChristeningRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowspChristeningRow);
-                return rowspChristeningRow;
+                rowSpChristeningRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSpChristeningRow);
+                return rowSpChristeningRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                spChristeningDataTable cln = ((spChristeningDataTable)(base.Clone()));
+                SpChristeningDataTable cln = ((SpChristeningDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -412,7 +412,7 @@ namespace SiPA.Common.ReportDataSet {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new spChristeningDataTable();
+                return new SpChristeningDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -442,28 +442,28 @@ namespace SiPA.Common.ReportDataSet {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public spChristeningRow NewspChristeningRow() {
-                return ((spChristeningRow)(this.NewRow()));
+            public SpChristeningRow NewSpChristeningRow() {
+                return ((SpChristeningRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new spChristeningRow(builder);
+                return new SpChristeningRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(spChristeningRow);
+                return typeof(SpChristeningRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.spChristeningRowChanged != null)) {
-                    this.spChristeningRowChanged(this, new spChristeningRowChangeEvent(((spChristeningRow)(e.Row)), e.Action));
+                if ((this.SpChristeningRowChanged != null)) {
+                    this.SpChristeningRowChanged(this, new SpChristeningRowChangeEvent(((SpChristeningRow)(e.Row)), e.Action));
                 }
             }
             
@@ -471,8 +471,8 @@ namespace SiPA.Common.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.spChristeningRowChanging != null)) {
-                    this.spChristeningRowChanging(this, new spChristeningRowChangeEvent(((spChristeningRow)(e.Row)), e.Action));
+                if ((this.SpChristeningRowChanging != null)) {
+                    this.SpChristeningRowChanging(this, new SpChristeningRowChangeEvent(((SpChristeningRow)(e.Row)), e.Action));
                 }
             }
             
@@ -480,8 +480,8 @@ namespace SiPA.Common.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.spChristeningRowDeleted != null)) {
-                    this.spChristeningRowDeleted(this, new spChristeningRowChangeEvent(((spChristeningRow)(e.Row)), e.Action));
+                if ((this.SpChristeningRowDeleted != null)) {
+                    this.SpChristeningRowDeleted(this, new SpChristeningRowChangeEvent(((SpChristeningRow)(e.Row)), e.Action));
                 }
             }
             
@@ -489,14 +489,14 @@ namespace SiPA.Common.ReportDataSet {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.spChristeningRowDeleting != null)) {
-                    this.spChristeningRowDeleting(this, new spChristeningRowChangeEvent(((spChristeningRow)(e.Row)), e.Action));
+                if ((this.SpChristeningRowDeleting != null)) {
+                    this.SpChristeningRowDeleting(this, new SpChristeningRowChangeEvent(((SpChristeningRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovespChristeningRow(spChristeningRow row) {
+            public void RemoveSpChristeningRow(SpChristeningRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -523,7 +523,7 @@ namespace SiPA.Common.ReportDataSet {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "spChristeningDataTable";
+                attribute2.FixedValue = "SpChristeningDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -567,15 +567,15 @@ namespace SiPA.Common.ReportDataSet {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class spChristeningRow : global::System.Data.DataRow {
+        public partial class SpChristeningRow : global::System.Data.DataRow {
             
-            private spChristeningDataTable tablespChristening;
+            private SpChristeningDataTable tableSpChristening;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal spChristeningRow(global::System.Data.DataRowBuilder rb) : 
+            internal SpChristeningRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tablespChristening = ((spChristeningDataTable)(this.Table));
+                this.tableSpChristening = ((SpChristeningDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -583,14 +583,14 @@ namespace SiPA.Common.ReportDataSet {
             public string ParishionerFullName {
                 get {
                     try {
-                        return ((string)(this[this.tablespChristening.ParishionerFullNameColumn]));
+                        return ((string)(this[this.tableSpChristening.ParishionerFullNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ParishionerFullName\' in table \'spChristening\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ParishionerFullName\' in table \'SpChristening\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespChristening.ParishionerFullNameColumn] = value;
+                    this[this.tableSpChristening.ParishionerFullNameColumn] = value;
                 }
             }
             
@@ -599,14 +599,14 @@ namespace SiPA.Common.ReportDataSet {
             public string PlaceofEvent {
                 get {
                     try {
-                        return ((string)(this[this.tablespChristening.PlaceofEventColumn]));
+                        return ((string)(this[this.tableSpChristening.PlaceofEventColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PlaceofEvent\' in table \'spChristening\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'PlaceofEvent\' in table \'SpChristening\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespChristening.PlaceofEventColumn] = value;
+                    this[this.tableSpChristening.PlaceofEventColumn] = value;
                 }
             }
             
@@ -615,14 +615,14 @@ namespace SiPA.Common.ReportDataSet {
             public string CeremonialCelebrant {
                 get {
                     try {
-                        return ((string)(this[this.tablespChristening.CeremonialCelebrantColumn]));
+                        return ((string)(this[this.tableSpChristening.CeremonialCelebrantColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CeremonialCelebrant\' in table \'spChristening\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CeremonialCelebrant\' in table \'SpChristening\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespChristening.CeremonialCelebrantColumn] = value;
+                    this[this.tableSpChristening.CeremonialCelebrantColumn] = value;
                 }
             }
             
@@ -631,63 +631,63 @@ namespace SiPA.Common.ReportDataSet {
             public System.DateTime ChristeningDate {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tablespChristening.ChristeningDateColumn]));
+                        return ((global::System.DateTime)(this[this.tableSpChristening.ChristeningDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChristeningDate\' in table \'spChristening\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChristeningDate\' in table \'SpChristening\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablespChristening.ChristeningDateColumn] = value;
+                    this[this.tableSpChristening.ChristeningDateColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsParishionerFullNameNull() {
-                return this.IsNull(this.tablespChristening.ParishionerFullNameColumn);
+                return this.IsNull(this.tableSpChristening.ParishionerFullNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetParishionerFullNameNull() {
-                this[this.tablespChristening.ParishionerFullNameColumn] = global::System.Convert.DBNull;
+                this[this.tableSpChristening.ParishionerFullNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsPlaceofEventNull() {
-                return this.IsNull(this.tablespChristening.PlaceofEventColumn);
+                return this.IsNull(this.tableSpChristening.PlaceofEventColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetPlaceofEventNull() {
-                this[this.tablespChristening.PlaceofEventColumn] = global::System.Convert.DBNull;
+                this[this.tableSpChristening.PlaceofEventColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsCeremonialCelebrantNull() {
-                return this.IsNull(this.tablespChristening.CeremonialCelebrantColumn);
+                return this.IsNull(this.tableSpChristening.CeremonialCelebrantColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetCeremonialCelebrantNull() {
-                this[this.tablespChristening.CeremonialCelebrantColumn] = global::System.Convert.DBNull;
+                this[this.tableSpChristening.CeremonialCelebrantColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsChristeningDateNull() {
-                return this.IsNull(this.tablespChristening.ChristeningDateColumn);
+                return this.IsNull(this.tableSpChristening.ChristeningDateColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetChristeningDateNull() {
-                this[this.tablespChristening.ChristeningDateColumn] = global::System.Convert.DBNull;
+                this[this.tableSpChristening.ChristeningDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -695,22 +695,22 @@ namespace SiPA.Common.ReportDataSet {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class spChristeningRowChangeEvent : global::System.EventArgs {
+        public class SpChristeningRowChangeEvent : global::System.EventArgs {
             
-            private spChristeningRow eventRow;
+            private SpChristeningRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public spChristeningRowChangeEvent(spChristeningRow row, global::System.Data.DataRowAction action) {
+            public SpChristeningRowChangeEvent(SpChristeningRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public spChristeningRow Row {
+            public SpChristeningRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -738,7 +738,7 @@ namespace SiPA.Common.ReportDataSet.dsChristeningTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class spChristeningTableAdapter : global::System.ComponentModel.Component {
+    public partial class SpChristeningTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -752,7 +752,7 @@ namespace SiPA.Common.ReportDataSet.dsChristeningTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public spChristeningTableAdapter() {
+        public SpChristeningTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -849,7 +849,7 @@ namespace SiPA.Common.ReportDataSet.dsChristeningTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "spChristening";
+            tableMapping.DataSetTable = "SpChristening";
             tableMapping.ColumnMappings.Add("ParishionerFullName", "ParishionerFullName");
             tableMapping.ColumnMappings.Add("PlaceofEvent", "PlaceofEvent");
             tableMapping.ColumnMappings.Add("CeremonialCelebrant", "CeremonialCelebrant");
@@ -879,7 +879,7 @@ namespace SiPA.Common.ReportDataSet.dsChristeningTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(dsChristening.spChristeningDataTable dataTable) {
+        public virtual int Fill(dsChristening.SpChristeningDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -892,9 +892,9 @@ namespace SiPA.Common.ReportDataSet.dsChristeningTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual dsChristening.spChristeningDataTable GetData() {
+        public virtual dsChristening.SpChristeningDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            dsChristening.spChristeningDataTable dataTable = new dsChristening.spChristeningDataTable();
+            dsChristening.SpChristeningDataTable dataTable = new dsChristening.SpChristeningDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

@@ -7,7 +7,7 @@
           <Connection ConnectionStringObject="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SiPA;Integrated Security=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="desktop-aso5ai9\localdb#bec4aa51.SiPA.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
-          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="spChristeningTableAdapter" GeneratorDataComponentClassName="spChristeningTableAdapter" Name="spChristening" UserDataComponentName="spChristeningTableAdapter">
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SpChristeningTableAdapter" GeneratorDataComponentClassName="SpChristeningTableAdapter" Name="SpChristening" UserDataComponentName="SpChristeningTableAdapter">
             <MainSource>
               <DbSource ConnectionRef="desktop-aso5ai9\localdb#bec4aa51.SiPA.dbo" DbObjectName="SiPA.dbo.SpChristening" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
@@ -36,7 +36,7 @@
   <xs:element name="dsChristening" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsChristening" msprop:Generator_UserDSName="dsChristening">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="spChristening" msprop:Generator_TableClassName="spChristeningDataTable" msprop:Generator_TableVarName="tablespChristening" msprop:Generator_RowChangedName="spChristeningRowChanged" msprop:Generator_TablePropName="spChristening" msprop:Generator_RowDeletingName="spChristeningRowDeleting" msprop:Generator_RowChangingName="spChristeningRowChanging" msprop:Generator_RowEvHandlerName="spChristeningRowChangeEventHandler" msprop:Generator_RowDeletedName="spChristeningRowDeleted" msprop:Generator_RowClassName="spChristeningRow" msprop:Generator_UserTableName="spChristening" msprop:Generator_RowEvArgName="spChristeningRowChangeEvent">
+        <xs:element name="SpChristening" msprop:Generator_TableClassName="SpChristeningDataTable" msprop:Generator_TableVarName="tableSpChristening" msprop:Generator_TablePropName="SpChristening" msprop:Generator_RowDeletingName="SpChristeningRowDeleting" msprop:Generator_RowChangingName="SpChristeningRowChanging" msprop:Generator_RowEvHandlerName="SpChristeningRowChangeEventHandler" msprop:Generator_RowDeletedName="SpChristeningRowDeleted" msprop:Generator_UserTableName="SpChristening" msprop:Generator_RowChangedName="SpChristeningRowChanged" msprop:Generator_RowEvArgName="SpChristeningRowChangeEvent" msprop:Generator_RowClassName="SpChristeningRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ParishionerFullName" msprop:Generator_ColumnVarNameInTable="columnParishionerFullName" msprop:Generator_ColumnPropNameInRow="ParishionerFullName" msprop:Generator_ColumnPropNameInTable="ParishionerFullNameColumn" msprop:Generator_UserColumnName="ParishionerFullName" minOccurs="0">

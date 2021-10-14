@@ -986,7 +986,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="Christening">
+    <DataSet Name="dsChristening">
       <Query>
         <DataSourceName>dsChristening</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
@@ -1012,10 +1012,10 @@
       <rd:DataSetInfo>
         <rd:DataSetName>dsChristening</rd:DataSetName>
         <rd:SchemaPath>C:\Users\sanch\source\repos\SiPA\SiPA.Common\ReportDataSet\dsChristening.xsd</rd:SchemaPath>
-        <rd:TableName>spChristening</rd:TableName>
+        <rd:TableName>SpChristening</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>spChristeningTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>SpChristeningTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
